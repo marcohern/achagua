@@ -7,6 +7,7 @@ import { MapComponent } from './map/map.component';
   imports: [
     CommonModule
   ],
-  declarations: [AddFormComponent, MapComponent]
+  declarations: [AddFormComponent, MapComponent],
+  exports:[ AddFormComponent, MapComponent ]
 })
 export class IncidentModule { }
