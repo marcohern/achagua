@@ -5,8 +5,10 @@ import { MapComponent } from './map/map.component';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { GeocodeService } from './geocode.service';
 
 import { environment } from '../../../environments/environment'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { environment } from '../../../environments/environment'
     })
   ],
   declarations: [AddFormComponent, MapComponent],
-  exports:[ AddFormComponent, MapComponent ]
+  exports:[ AddFormComponent, MapComponent ],
+  providers:[ GeocodeService ]
 })
 export class IncidentModule { }

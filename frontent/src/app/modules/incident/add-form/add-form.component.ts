@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { GeocodeService } from '../geocode.service'
+import { LocationComponents } from '../location-components';
+
 
 @Component({
   selector: 'incident-add-form',
@@ -9,44 +10,57 @@ import { environment } from '../../../../environments/environment';
 })
 export class AddFormComponent implements OnInit {
 
-  geocode:string = "https://maps.googleapis.com/maps/api/geocode/json";
   olat: number = 3.441816;
   olng: number = -76.516484;
   lat: number;
   lng: number;
-  constructor(private http:HttpClient) { }
+  loc:LocationComponents = { country:'', state:'', city:'', area:'', zip:'' };
+
+  race:string = 'N';
+  gender:string = 'F';
+  relation:string = '';
+
+  lw_children:boolean = false;
+  lw_spouse:boolean = false;
+  lw_father:boolean = false;
+  lw_mother:boolean = false;
+  lw_siblings:boolean = false;
+  lw_other:boolean = false;
+
+  constructor(private gs:GeocodeService) { }
 
   ngOnInit() {
     this.lat = this.olat;
     this.lng = this.olng;
+    this.loc = { country:'', state:'', city:'', area:'', zip:'' };
+    this.gs.getReverse(this.lat, this.lng).subscribe($info => this.setLocation($info));
   }
 
   onClickMap($event) {
     //console.log("map",$event);
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
-    var url = this.geocode + '?latlng=' + this.lat + ',' + this.lng + '&key=' + environment.apikey;
-    this.http.get(url).subscribe(this.onGetLocationInfo);
+    this.loc = { country:'', state:'', city:'', area:'', zip:'' };
+    this.gs.getReverse(this.lat, this.lng).subscribe($info => this.setLocation($info));
   }
 
-  onGetLocationInfo($info) {
-    console.log("info",$info);
+  private setLocation($info) {
     var acs = $info.results[0].address_components;
-    console.log("INFO");
     for (let ac of acs) {
       var idx = -1;
       idx = ac.types.indexOf('country');//Pais
-      if (idx > -1) console.log("Country",ac.long_name);
+      if (idx > -1) this.loc.country = ac.long_name;
       idx = ac.types.indexOf('administrative_area_level_1');//Depto
-      if (idx > -1) console.log("Area 1",ac.long_name);
-      idx = ac.types.indexOf('administrative_area_level_2');//Depto
-      if (idx > -1) console.log("Area 2",ac.long_name);
+      if (idx > -1) this.loc.state = ac.long_name;
+      //idx = ac.types.indexOf('administrative_area_level_2');//Depto
+      //if (idx > -1) console.log("Area 2",ac.long_name);
       idx = ac.types.indexOf('locality');//Ciodad
-      if (idx > -1) console.log("Local",ac.long_name);
+      if (idx > -1) this.loc.city = ac.long_name;
       idx = ac.types.indexOf('neighborhood');//Barrio
-      if (idx > -1) console.log("Barrio",ac.long_name);
-      
+      if (idx > -1) this.loc.area = ac.long_name;
+      idx = ac.types.indexOf('postal_code');//Codigo Postal
+      if (idx > -1) this.loc.zip = ac.long_name;
     }
+    console.log("loc", this.loc);
   }
-
 }

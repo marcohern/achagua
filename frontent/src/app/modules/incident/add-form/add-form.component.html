@@ -1,5 +1,6 @@
 <div class="container">
   <form>
+    <h3>Informacion de la Victima</h3>
     <div class="row">
       <div class="col-md-12">
         <agm-map [latitude]="olat" [longitude]="olng" (mapClick)="onClickMap($event)">
@@ -10,19 +11,152 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="lat">Latitude</label>
+          <label for="lat">latitud</label>
           <input type="text" class="form-control" id="lat" aria-describedby="latHelp" [value]="lat" readonly>
-          <small id="latHelp" class="form-text text-muted">Displays selected latitude value.</small>
+          <small id="latHelp" class="form-text text-muted">Despliega valor latitud.</small>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="lng">Longitud</label>
-          <input type="text" class="form-control" id="lng" aria-describedby="lnhHelp" [value]="lng" readonly>
-          <small id="lngHelp" class="form-text text-muted">Displays selected longitude value.</small>
+          <input type="text" class="form-control" id="lng" aria-describedby="lngHelp" [value]="lng" readonly>
+          <small id="lngHelp" class="form-text text-muted">Despliega valor longitud.</small>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="country">País</label>
+          <input type="text" class="form-control" id="country" aria-describedby="countryHelp" [value]="loc.country" readonly>
+          <small id="countryHelp" class="form-text text-muted">Nombre de Country.</small>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="state">Depto</label>
+          <input type="text" class="form-control" id="state" aria-describedby="stateHelp" [value]="loc.state" readonly>
+          <small id="stateHelp" class="form-text text-muted">Nombre de State.</small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="city">Ciudad</label>
+          <input type="text" class="form-control" id="city" aria-describedby="cityHelp" [value]="loc.city" readonly>
+          <small id="cityHelp" class="form-text text-muted">Nombre de City.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="barrio">Barrio</label>
+          <input type="text" class="form-control" id="barrio" aria-describedby="barrioHelp" [value]="loc.area" readonly>
+          <small id="barrioHelp" class="form-text text-muted">Nombre de Barrio.</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="zip">Codigo Postal</label>
+          <input type="text" class="form-control" id="zip" aria-describedby="zipHelp" [value]="loc.zip" readonly>
+          <small id="zipHelp" class="form-text text-muted">Postal Code.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label for="gender">Género</label>
+        <select class="form-control" id="gender" aria-describedby="genderHelp" [value]="gender">
+          <option value="F">Femenino</option>
+          <option value="M">Masculino</option>
+          <option value="X">No Especificado</option>
+        </select>
+        
+        <small id="genderHelp" class="form-text text-muted">Género.</small>
+      </div>
+      <div class="col-md-4">
+        <label for="race">Ethnic Race</label>
+        <select class="form-control" id="race" aria-describedby="raceHelp" [value]="race">
+          <option value="N">Afrocolombiano (a)</option>
+          <option value="I">Indigena</option>
+          <option value="M">Meztizo (a)</option>
+          <option value="B">Blanco (a)</option>
+        </select>
+        
+        <small id="raceHelp" class="form-text text-muted">Raza Etnica.</small>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="relation">Relación con Victima</label>
+          <input type="text" class="form-control" id="relation" aria-describedby="relationHelp" [value]="relation">
+          <small id="relationHelp" class="form-text text-muted">Relacion con Victima.</small>
+        </div>
+      </div>  
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label><strong>La Victima vive con</strong></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_children" [checked]="lw_children">
+          <label class="form-check-label" for="lw_children">Hijos(as)</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_spouse" [checked]="lw_spouse">
+          <label class="form-check-label" for="lw_spouse">Esposo(a)</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_father" [checked]="lw_father">
+          <label class="form-check-label" for="lw_father">Padre</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_mother" [checked]="lw_mother">
+          <label class="form-check-label" for="lw_mother">Madre</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_siblings" [checked]="lw_siblings">
+          <label class="form-check-label" for="lw_siblings">Hermanos(as)</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_grandfather" [checked]="lw_grandfather">
+          <label class="form-check-label" for="lw_grandfather">Abuelo</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_grandmother" [checked]="lw_grandmother">
+          <label class="form-check-label" for="lw_grandmother">Abuela</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="lw_other" [checked]="lw_other">
+          <label class="form-check-label" for="lw_other">Otros</label>
+        </div>
+      </div>
+    </div>
+
+    <h3>Información del Incidente</h3>
+
+<!--
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -36,6 +170,7 @@
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+-->
+    <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>
