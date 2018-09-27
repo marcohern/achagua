@@ -2,7 +2,7 @@
   <form>
     <div class="row">
       <div class="col-md-12">
-        <agm-map [latitude]="lat" [longitude]="lng">
+        <agm-map [latitude]="olat" [longitude]="olng" (mapClick)="onClickMap($event)">
           <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
         </agm-map>
       </div>
@@ -11,14 +11,14 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="lat">Latitude</label>
-          <input type="text" class="form-control" id="lat" aria-describedby="latHelp" placeholder="1.23456789" readonly>
+          <input type="text" class="form-control" id="lat" aria-describedby="latHelp" [value]="lat" readonly>
           <small id="latHelp" class="form-text text-muted">Displays selected latitude value.</small>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="lng">Longitud</label>
-          <input type="text" class="form-control" id="lng" aria-describedby="lnhHelp" placeholder="1.23456789" readonly>
+          <input type="text" class="form-control" id="lng" aria-describedby="lnhHelp" [value]="lng" readonly>
           <small id="lngHelp" class="form-text text-muted">Displays selected longitude value.</small>
         </div>
       </div>
