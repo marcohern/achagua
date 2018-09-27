@@ -1,3 +1,3 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+  <agm-circle *ngFor="let c of circles" [latitude]="c.lat" [longitude]="c.lng" [radius]="c.radius" fillColor="#FF0000" [fillOpacity]="c.opacity"></agm-circle>
 </agm-map>
