@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { AddFormComponent } from './add-form/add-form.component';
 import { MapComponent } from './map/map.component';
 
+import {HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 
+import { environment } from '../../../environments/environment'
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBV-6ds73oQP_OTbVylTpvhz3rY6RHpOF8'
+      apiKey: environment.apikey
     })
   ],
   declarations: [AddFormComponent, MapComponent],
