@@ -30,7 +30,7 @@ export class AddFormComponent implements OnInit {
   }
 
   onGetLocationInfo($info) {
-    //console.log("info",$info);
+    console.log("info",$info);
     var acs = $info.results[0].address_components;
     console.log("INFO");
     for (let ac of acs) {
@@ -38,11 +38,13 @@ export class AddFormComponent implements OnInit {
       idx = ac.types.indexOf('country');//Pais
       if (idx > -1) console.log("Country",ac.long_name);
       idx = ac.types.indexOf('administrative_area_level_1');//Depto
-      if (idx > -1) console.log("Depto",ac.long_name);
+      if (idx > -1) console.log("Area 1",ac.long_name);
       idx = ac.types.indexOf('administrative_area_level_2');//Depto
-      if (idx > -1) console.log("City",ac.long_name);
+      if (idx > -1) console.log("Area 2",ac.long_name);
       idx = ac.types.indexOf('locality');//Ciodad
-      if (idx > -1) console.log("Area",ac.long_name);
+      if (idx > -1) console.log("Local",ac.long_name);
+      idx = ac.types.indexOf('neighborhood');//Barrio
+      if (idx > -1) console.log("Barrio",ac.long_name);
       
     }
   }
