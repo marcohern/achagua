@@ -37,7 +37,7 @@ export class AddFormComponent implements OnInit {
   lw_siblings:boolean = false;
   lw_other:boolean = false;
 
-  gvt:string = 'V';
+  gvt:string = 'VS';
   date_type:string = '';
   date_year:string = '';
   date_month:string = '';
