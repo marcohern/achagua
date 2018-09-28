@@ -76,12 +76,10 @@
         <small id="genderHelp" class="form-text text-muted">Género.</small>
       </div>
       <div class="col-md-4">
-        <label for="race">Ethnic Race</label>
-        <select class="form-control" id="race" aria-describedby="raceHelp" [value]="race">
-          <option value="N">Afrocolombiano (a)</option>
-          <option value="I">Indigena</option>
-          <option value="M">Meztizo (a)</option>
-          <option value="B">Blanco (a)</option>
+        <label for="race">Etnia {{race.name}}</label>
+        <select class="form-control" name="race" aria-describedby="raceHelp" [(ngModel)]="race">
+          <option *ngFor="let r of races" [ngValue]="r">{{r.name}}</option>
+          
         </select>
         
         <small id="raceHelp" class="form-text text-muted">Raza Etnica.</small>
@@ -103,13 +101,13 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_children" [checked]="lw_children">
+          <input type="checkbox" class="form-check-input" id="lw_children" [checked]="lw_children" (change)="lw_children=!lw_children">
           <label class="form-check-label" for="lw_children">Hijos(as)</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_spouse" [checked]="lw_spouse">
+          <input type="checkbox" class="form-check-input" id="lw_spouse" [checked]="lw_spouse" (change)="lw_spouse=!lw_spouse">
           <label class="form-check-label" for="lw_spouse">Esposo(a)</label>
         </div>
       </div>
@@ -155,8 +153,77 @@
     </div>
 
     <h3>Información del Incidente</h3>
-
-<!--
+    <div class="row">
+      <div class="col-md-4">
+        <label for="gvt">Tipo de Violencia de Tipo Genero</label>
+        <select class="form-control" id="gvt" aria-describedby="gvtHelp" ([ngModel])="gvt">
+          <option value="V">VGB</option>
+        </select>
+        <small id="gvtHelp" class="form-text text-muted">Tipo de Violencia de Tipo Genero</small>
+      </div>
+      <div class="col-md-4">
+        <label for="date_type">Tipo de Fecha</label>
+        <select class="form-control" name="date_type" aria-describedby="date_typeHelp" [(ngModel)]="date_type">
+          <option value="">-- Selecciona --</option>
+          <option value="A">Año</option>
+          <option value="M">Mes</option>
+          <option value="D">Dia</option>
+          <option value="R">Rango de Fechas</option>
+        </select>
+        <small id="date_typeHelp" class="form-text text-muted">Si es una fecha exacta o un rango</small>
+      </div>
+      <div class="col-md-4" *ngIf="date_type == 'A'">
+        <label for="date_year">Año</label>
+        <input type="number" name="date_year" class="form-control" [(ngModel)]="date_year">
+      </div>
+      <div class="col-md-4" *ngIf="date_type == 'M'">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="date_year">Año</label>
+            <input type="number" name="date_year" class="form-control" [(ngModel)]="date_year">
+          </div>
+          <div class="col-md-6">
+            <label for="date_month">Mes</label>
+            <input type="number" name="date_month" class="form-control" [(ngModel)]="date_month">
+          </div>
+        </div>
+        <small id="date_monthHelp" class="form-text text-muted">Seleccione Mes</small>
+      </div>
+      <div class="col-md-4" *ngIf="date_type == 'D'">
+        <label for="date">Dia (Fecha Exacta)</label>
+        <input type="text"
+              placeholder=""
+              name="date"
+              class="form-control"
+              bsDatepicker
+              [(ngModel)]="date">
+        <small id="date_typeHelp" class="form-text text-muted">Seleccione la fecha en que ocurrio el incidente</small>
+      </div>
+      <div class="col-md-4" *ngIf="date_type == 'R'">
+        <label for="date_range">Rango de Fechas</label>
+        <input type="text"
+              placeholder=""
+              name="date_range"
+              class="form-control"
+              bsDaterangepicker>
+        <small id="date_rangeHelp" class="form-text text-muted">Seleccione el rango de fechas</small>
+      </div>
+    </div>
+    <!--
+    <div class="row">
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+        <input type="text"
+               placeholder="Datepicker"
+               class="form-control"
+               bsDatepicker>
+      </div>
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+        <input type="text"
+               placeholder="Daterangepicker"
+               class="form-control"
+               bsDaterangepicker>
+      </div>
+    </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

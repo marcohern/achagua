@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { GeocodeService } from '../geocode.service'
+import { Race } from '../race';
 import { LocationComponents } from '../location-components';
 
 
@@ -16,7 +17,14 @@ export class AddFormComponent implements OnInit {
   lng: number;
   loc:LocationComponents = { country:'', state:'', city:'', area:'', zip:'' };
 
-  race:string = 'N';
+  races:Race[] = [
+    {id:'N', name:'Afrocolombiano(a)'},
+    {id:'I', name:'Indígena'},
+    {id:'M', name:'Mestizo(a)'},
+    {id:'B', name:'Blanco(a)'},
+  ];
+
+  race:Race = null;
   gender:string = 'F';
   relation:string = '';
 
@@ -27,9 +35,17 @@ export class AddFormComponent implements OnInit {
   lw_siblings:boolean = false;
   lw_other:boolean = false;
 
+  gvt:string = 'V';
+  date_type:string = '';
+  date_year:string = '';
+  date_month:string = '';
+  date_start:string = '';
+  date_end:string = '';
+
   constructor(private gs:GeocodeService) { }
 
   ngOnInit() {
+    this.race = this.races[0];
     this.lat = this.olat;
     this.lng = this.olng;
     this.loc = { country:'', state:'', city:'', area:'', zip:'' };
