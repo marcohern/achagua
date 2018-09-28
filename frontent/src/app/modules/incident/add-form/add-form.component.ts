@@ -32,6 +32,8 @@ export class AddFormComponent implements OnInit {
   lw_spouse:boolean = false;
   lw_father:boolean = false;
   lw_mother:boolean = false;
+  lw_grandfather:boolean = false;
+  lw_grandmother:boolean = false;
   lw_siblings:boolean = false;
   lw_other:boolean = false;
 
