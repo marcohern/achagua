@@ -11,15 +11,15 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="lat">latitud</label>
-          <input type="text" class="form-control" id="lat" aria-describedby="latHelp" [value]="lat" readonly>
+          <label for="lat">Latitud</label>
+          <input type="text" class="form-control" name="lat" aria-describedby="latHelp" [(ngModel)]="lat" readonly>
           <small id="latHelp" class="form-text text-muted">Despliega valor latitud.</small>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="lng">Longitud</label>
-          <input type="text" class="form-control" id="lng" aria-describedby="lngHelp" [value]="lng" readonly>
+          <input type="text" class="form-control" name="lng" aria-describedby="lngHelp" [(ngModel)]="lng" readonly>
           <small id="lngHelp" class="form-text text-muted">Despliega valor longitud.</small>
         </div>
       </div>
@@ -28,14 +28,14 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="country">País</label>
-          <input type="text" class="form-control" id="country" aria-describedby="countryHelp" [value]="loc.country" readonly>
+          <input type="text" class="form-control" name="country" aria-describedby="countryHelp" [(ngModel)]="loc.country" readonly>
           <small id="countryHelp" class="form-text text-muted">Nombre de Country.</small>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="state">Depto</label>
-          <input type="text" class="form-control" id="state" aria-describedby="stateHelp" [value]="loc.state" readonly>
+          <input type="text" class="form-control" name="state" aria-describedby="stateHelp" [(ngModel)]="loc.state" readonly>
           <small id="stateHelp" class="form-text text-muted">Nombre de State.</small>
         </div>
       </div>
@@ -44,21 +44,21 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="city">Ciudad</label>
-          <input type="text" class="form-control" id="city" aria-describedby="cityHelp" [value]="loc.city" readonly>
+          <input type="text" class="form-control" name="city" aria-describedby="cityHelp" [(ngModel)]="loc.city" readonly>
           <small id="cityHelp" class="form-text text-muted">Nombre de City.</small>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="barrio">Barrio</label>
-          <input type="text" class="form-control" id="barrio" aria-describedby="barrioHelp" [value]="loc.area" readonly>
+          <input type="text" class="form-control" name="barrio" aria-describedby="barrioHelp" [(ngModel)]="loc.area" readonly>
           <small id="barrioHelp" class="form-text text-muted">Nombre de Barrio.</small>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="zip">Codigo Postal</label>
-          <input type="text" class="form-control" id="zip" aria-describedby="zipHelp" [value]="loc.zip" readonly>
+          <input type="text" class="form-control" name="zip" aria-describedby="zipHelp" [(ngModel)]="loc.zip" readonly>
           <small id="zipHelp" class="form-text text-muted">Código Postal.</small>
         </div>
       </div>
@@ -67,7 +67,7 @@
     <div class="row">
       <div class="col-md-4">
         <label for="gender">Género</label>
-        <select class="form-control" id="gender" aria-describedby="genderHelp" [value]="gender">
+        <select class="form-control" name="gender" aria-describedby="genderHelp" [(ngModel)]="gender">
           <option value="F">Femenino</option>
           <option value="M">Masculino</option>
           <option value="X">No Especificado</option>
@@ -87,7 +87,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="relation">Relación con Victimario</label>
-          <input type="text" class="form-control" id="relation" aria-describedby="relationHelp" [value]="relation">
+          <input type="text" class="form-control" name="relation" aria-describedby="relationHelp" [(ngModel)]="relation">
           <small id="relationHelp" class="form-text text-muted">Que relacion tiene la victima y el victimario.</small>
         </div>
       </div>  
@@ -101,25 +101,25 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_children" [checked]="lw_children" (change)="lw_children=!lw_children">
+          <input type="checkbox" class="form-check-input" name="lw_children" [(ngModel)]="lw_children">
           <label class="form-check-label" for="lw_children">Hijos(as)</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_spouse" [checked]="lw_spouse" (change)="lw_spouse=!lw_spouse">
+          <input type="checkbox" class="form-check-input" name="lw_spouse" [(ngModel)]="lw_spouse">
           <label class="form-check-label" for="lw_spouse">Esposo(a)</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_father" [checked]="lw_father">
+          <input type="checkbox" class="form-check-input" name="lw_father" [(ngModel)]="lw_father">
           <label class="form-check-label" for="lw_father">Padre</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_mother" [checked]="lw_mother">
+          <input type="checkbox" class="form-check-input" name="lw_mother" [(ngModel)]="lw_mother">
           <label class="form-check-label" for="lw_mother">Madre</label>
         </div>
       </div>
@@ -128,25 +128,25 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_siblings" [checked]="lw_siblings">
+          <input type="checkbox" class="form-check-input" name="lw_siblings" [(ngModel)]="lw_siblings">
           <label class="form-check-label" for="lw_siblings">Hermanos(as)</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_grandfather" [checked]="lw_grandfather">
+          <input type="checkbox" class="form-check-input" name="lw_grandfather" [(ngModel)]="lw_grandfather">
           <label class="form-check-label" for="lw_grandfather">Abuelo</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_grandmother" [checked]="lw_grandmother">
+          <input type="checkbox" class="form-check-input" name="lw_grandmother" [(ngModel)]="lw_grandmother">
           <label class="form-check-label" for="lw_grandmother">Abuela</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="lw_other" [checked]="lw_other">
+          <input type="checkbox" class="form-check-input" name="lw_other" [(ngModel)]="lw_other">
           <label class="form-check-label" for="lw_other">Otros</label>
         </div>
       </div>
@@ -156,7 +156,7 @@
     <div class="row">
       <div class="col-md-4">
         <label for="gvt">Tipo de Violencia de Tipo Genero</label>
-        <select class="form-control" id="gvt" aria-describedby="gvtHelp" ([ngModel])="gvt">
+        <select class="form-control" name="gvt" aria-describedby="gvtHelp" ([ngModel])="gvt">
           <option value="V">VGB</option>
         </select>
         <small id="gvtHelp" class="form-text text-muted">Tipo de Violencia de Tipo Genero</small>
@@ -165,16 +165,17 @@
         <label for="date_type">Tipo de Fecha</label>
         <select class="form-control" name="date_type" aria-describedby="date_typeHelp" [(ngModel)]="date_type">
           <option value="">-- Selecciona --</option>
-          <option value="A">Año</option>
-          <option value="M">Mes</option>
-          <option value="D">Dia</option>
-          <option value="R">Rango de Fechas</option>
+          <option value="A">Año (YYYY)</option>
+          <option value="M">Mes (YYYY/MM)</option>
+          <option value="D">Dia (YYYY/MM/DD)</option>
+          <option value="R">Rango (YYYY/MM/DD - YYYY/MM/DD)</option>
         </select>
         <small id="date_typeHelp" class="form-text text-muted">Si es una fecha exacta o un rango</small>
       </div>
       <div class="col-md-4" *ngIf="date_type == 'A'">
         <label for="date_year">Año</label>
         <input type="number" name="date_year" class="form-control" [(ngModel)]="date_year">
+        <small id="date_yearHelp" class="form-text text-muted">Seleccione Año</small>
       </div>
       <div class="col-md-4" *ngIf="date_type == 'M'">
         <div class="row">
