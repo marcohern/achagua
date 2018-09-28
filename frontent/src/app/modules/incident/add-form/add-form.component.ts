@@ -54,13 +54,15 @@ export class AddFormComponent implements OnInit {
       if (idx > -1) this.loc.state = ac.long_name;
       //idx = ac.types.indexOf('administrative_area_level_2');//Depto
       //if (idx > -1) console.log("Area 2",ac.long_name);
-      idx = ac.types.indexOf('locality');//Ciodad
+      idx = ac.types.indexOf('locality');//Ciudad
       if (idx > -1) this.loc.city = ac.long_name;
+      idx = ac.types.indexOf('administrative_area_level_2');//Ciudad
+      if (idx > -1 && this.loc.city == '') this.loc.city = ac.long_name;
       idx = ac.types.indexOf('neighborhood');//Barrio
       if (idx > -1) this.loc.area = ac.long_name;
       idx = ac.types.indexOf('postal_code');//Codigo Postal
       if (idx > -1) this.loc.zip = ac.long_name;
     }
-    console.log("loc", this.loc);
+    console.log("loc", this.loc, acs);
   }
 }
