@@ -32,15 +32,46 @@ export class AddFormComponent implements OnInit {
   lw_spouse:boolean = false;
   lw_father:boolean = false;
   lw_mother:boolean = false;
+  lw_grandfather:boolean = false;
+  lw_grandmother:boolean = false;
   lw_siblings:boolean = false;
   lw_other:boolean = false;
 
-  gvt:string = 'V';
+  gvt:string = 'VS';
   date_type:string = '';
   date_year:string = '';
   date_month:string = '';
   date_start:string = '';
   date_end:string = '';
+
+  place:string = '';
+  duration:number = 1;
+  weapons:boolean;
+  what_weapons:string = '';
+  sex_violence:boolean;
+  who_was_there:string = '';
+  how_many:number = 1;
+  afiliations:string = '';
+  circumstances:string = '';
+  consequences:string = '';
+  repercussions:string = '';
+  attention:boolean;
+  what_attention:string = '';
+  threatened:boolean;
+  what_threats:string = '';
+  when_how_threats:string = '';
+  reported:boolean;
+  after_reported:string = '';
+  police_arrived:boolean = false;
+  police_reactions:string = '';
+  police_assisted:boolean = false;
+
+  who_perpetrators:string = '';
+  perp_motives:string = '';
+  why_perp_motives: string = '';
+  perps_said_did:string = '';
+  perps_took_orders:string = '';
+  perps_gave_orders:string = '';
 
   constructor(private gs:GeocodeService) { }
 

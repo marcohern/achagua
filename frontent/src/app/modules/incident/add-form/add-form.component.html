@@ -29,60 +29,51 @@
         <div class="form-group">
           <label for="country">País</label>
           <input type="text" class="form-control" name="country" aria-describedby="countryHelp" [(ngModel)]="loc.country" readonly>
-          <small id="countryHelp" class="form-text text-muted">Nombre de Country.</small>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="state">Depto</label>
           <input type="text" class="form-control" name="state" aria-describedby="stateHelp" [(ngModel)]="loc.state" readonly>
-          <small id="stateHelp" class="form-text text-muted">Nombre de State.</small>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <label for="city">Ciudad</label>
+          <label for="city">Ciudad o Municipio</label>
           <input type="text" class="form-control" name="city" aria-describedby="cityHelp" [(ngModel)]="loc.city" readonly>
-          <small id="cityHelp" class="form-text text-muted">Nombre de City.</small>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="barrio">Barrio</label>
+          <label for="barrio">Barrio, Vereda o Corregimiento</label>
           <input type="text" class="form-control" name="barrio" aria-describedby="barrioHelp" [(ngModel)]="loc.area" readonly>
-          <small id="barrioHelp" class="form-text text-muted">Nombre de Barrio.</small>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="zip">Codigo Postal</label>
           <input type="text" class="form-control" name="zip" aria-describedby="zipHelp" [(ngModel)]="loc.zip" readonly>
-          <small id="zipHelp" class="form-text text-muted">Código Postal.</small>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        <label for="gender">Género</label>
+        <label for="gender">Género/Identidad sexual</label>
         <select class="form-control" name="gender" aria-describedby="genderHelp" [(ngModel)]="gender">
           <option value="F">Femenino</option>
           <option value="M">Masculino</option>
           <option value="X">No Especificado</option>
         </select>
-        
-        <small id="genderHelp" class="form-text text-muted">Género.</small>
       </div>
       <div class="col-md-4">
-        <label for="race">Etnia {{race.name}}</label>
+        <label for="race">Raza/Origen Étnico</label>
         <select class="form-control" name="race" aria-describedby="raceHelp" [(ngModel)]="race">
           <option *ngFor="let r of races" [ngValue]="r">{{r.name}}</option>
           
         </select>
-        
-        <small id="raceHelp" class="form-text text-muted">Raza Etnica.</small>
       </div>
       <div class="col-md-4">
         <div class="form-group">
@@ -92,7 +83,7 @@
         </div>
       </div>  
     </div>
-
+    <hr>
     <div class="row">
       <div class="col-md-12">
         <label><strong>La Victima vive con</strong></label>
@@ -151,13 +142,18 @@
         </div>
       </div>
     </div>
-
+    <hr>
     <h3>Información del Incidente</h3>
     <div class="row">
       <div class="col-md-4">
         <label for="gvt">Tipo de Violencia de Tipo Genero</label>
-        <select class="form-control" name="gvt" aria-describedby="gvtHelp" ([ngModel])="gvt">
-          <option value="V">VGB</option>
+        <select class="form-control" name="gvt" aria-describedby="gvtHelp" [(ngModel)]="gvt">
+          <option value="VS">Violación y violencia sexual</option>
+          <option value="VD">Violencia doméstica o violencia de pareja íntima</option>
+          <option value="TS">Trabajo sexual forzado / trata de personas</option>
+          <option value="DR">Violaciones de los derechos reproductivos</option>
+          <option value="NS">Niños y niñas solados</option>
+          <option value="DH">Violencia contra las defensoras de los derechos humanos</option>
         </select>
         <small id="gvtHelp" class="form-text text-muted">Tipo de Violencia de Tipo Genero</small>
       </div>
@@ -213,111 +209,204 @@
     <div class="row">
       <div class="col-md-12">
         <label for="where">Lugar en donde ocurrio el incidente</label>
-        <textarea class="form-control" rows="5"></textarea>
+        <textarea class="form-control" rows="5" name="place" [(ngModel)]="place"></textarea>
       </div>
     </div>
     <div class="row">
         <div class="col-md-4">
           <label>Duracion (horas)</label>
-          <input type="number" class="form-control">
-        </div>
-        <div class="col-md-4">
-          <label>Se usaron armas?</label>
-          <select class="form-control">
-            <option [value]="true">Si</option>
-            <option [value]="false">No</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label>Hubo violencia sexual?</label>
-          <select class="form-control">
-            <option [value]="true">Si</option>
-            <option [value]="false">No</option>
-          </select>
+          <input type="number" class="form-control" [value]="duration" min="1">
         </div>
     </div>
+    <hr>
     <div class="row">
       <div class="col-md-12">
-          <label>Quienes estuvieron presentes durante el incidente</label>
-          <textarea class="form-control" rows="5"></textarea>
+        <label>Se usaron armas?</label>
+        &nbsp;<input type="radio" name="armas" [value]="true" [(ngModel)]="weapons"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="armas" [value]="false" [(ngModel)]="weapons"> <label class="b">No</label>
       </div>
     </div>
+    <div class="row" *ngIf="weapons">
+        <div class="col-md-12">
+            <label>Que tipo de armas?</label>
+            <textarea class="form-control" rows="5" name="what_weapons" [(ngModel)]="what_weapons"></textarea>
+        </div>
+    </div>
+    <hr>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-12">
+        <label>Hubo violencia sexual?</label>
+        &nbsp;<input type="radio" name="sex_violence" [value]="true" [(ngModel)]="sex_violence"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="sex_violence" [value]="false" [(ngModel)]="sex_violence"> <label class="b">No</label>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+          <label>Quienes estuvieron presentes durante el incidente?</label>
+          <textarea class="form-control" rows="5" name="who_was_there" [(ngModel)]="who_was_there"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
         <label>Cuanta gente?</label>
-        <input type="number" class="form-control">
+        <input type="number" class="form-control" name="how_many" [(ngModel)]="how_many">
       </div>
-      <div class="col-md-9">
+      <div class="col-md-10">
         <label>Cuales fueron sus afiliaciones</label>
-        <textarea class="form-control" rows="2"></textarea>
+        <textarea class="form-control" rows="1" name="afiliations" [(ngModel)]="afiliations"></textarea>
       </div>
     </div>
+    <hr>
     <div class="row">
-      <div class="col-md-6">
-        <label>Describa las circunstancias relevantes</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div class="col-md-6">
-        <label>Consecuencias del acto sobre las victimas</label>
-        <textarea class="form-control" rows="4"></textarea>
+      <div class="col-md-12">
+        <label>Describa las circunstancias relevantes antes y después del incidente.</label>
+        <textarea class="form-control" rows="4" name="circumstances" [(ngModel)]="circumstances"
+          placeholder="ej. Llegó un grupo armado previamente, presencia del ejército, actividad económica ilegal, movilización, etc.">
+        </textarea>
       </div>
     </div>
+    <hr>
     <div class="row">
-      <div class="col-md-6">
-        <label>Que repercuciones tuvo la accion sobre la familia?</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div class="col-md-6">
-        <label>Recibio algun tipo de atencion despues?</label>
-        <textarea class="form-control" rows="4"></textarea>
+      <div class="col-md-12">
+        <label>¿Cuáles fueron las consecuencias del acto sobre las víctimas?</label>
+        <textarea class="form-control" rows="4" name="consequences" [(ngModel)]="consequences"></textarea>
       </div>
     </div>
+    <hr>
     <div class="row">
-      <div class="col-md-6">
-        <label>La persona fue amenazada antes o despues del incidente?</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div class="col-md-6">
-        <label>Cuales fueron esas amenazas</label>
-        <textarea class="form-control" rows="4"></textarea>
+      <div class="col-md-12">
+        <label>¿Qué repercusiones tuvo la acción o se pueden percibir en la familia, comunidad y el territorio de la víctima? (si las hubiese).</label>
+        <textarea class="form-control" rows="4" name="repercussions" [(ngModel)]="repercussions"></textarea>
       </div>
     </div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Recibió algún tipo de atención después?</label>
+        &nbsp;<input type="radio" name="attention" [value]="true" [(ngModel)]="attention"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="attention" [value]="false" [(ngModel)]="attention"> <label class="b">No</label>
+      </div>
+    </div>
+    <div class="row" *ngIf="attention">
+      <div class="col-md-12">
+        <label>Mas informacion sobre la atencion prestada</label>
+        <textarea class="form-control" rows="4" name="what_attention" [(ngModel)]="what_attention"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿La víctima siente que fue amenazada por una persona o personas específicas antes o después del incidente? </label>
+        &nbsp;<input type="radio" name="threatened" [value]="true" [(ngModel)]="threatened"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="threatened" [value]="false" [(ngModel)]="threatened"> <label class="b">No</label>
+      </div>
+    </div>
+    <div class="row" *ngIf="threatened">
+      <div class="col-md-12">
+        <label>¿Cuáles son estas amenazas? </label>
+        <textarea class="form-control" rows="4" name="what_threats" [(ngModel)]="what_threats"></textarea>
+      </div>
+    </div>
+    <div class="row" *ngIf="threatened">
+      <div class="col-md-12">
+        <label>¿Cómo y cuándo fueron recibidos?</label>
+        <textarea class="form-control" rows="4" name="when_how_threats" [(ngModel)]="when_how_threats"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Han sido documentadas y reportadas a las autoridades?</label>
+        &nbsp;<input type="radio" name="reported" [value]="true" [(ngModel)]="reported"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="reported" [value]="false" [(ngModel)]="reported"> <label class="b">No</label>
+      </div>
+    </div>
+    <div class="row" *ngIf="reported">
+      <div class="col-md-12">
+        <label>¿Qué pasó después de que se presentaron los informes?</label>
+        <textarea class="form-control" rows="4" 
+          name="after_reported" [(ngModel)]="after_reported"
+          placeholder="Si hay denuncias o documentación, en lo posible obtener copias."></textarea>
+      </div>
+    </div>
+    <div class="row" *ngIf="reported">
+      <div class="col-md-12">
+        <hr>
+        <label>¿Vinieron la policía u otras autoridades o se informó el incidente a la policía u otras autoridades estatales?</label>
+        &nbsp;<input type="radio" name="police_arrived" [value]="true" [(ngModel)]="police_arrived"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="police_arrived" [value]="false" [(ngModel)]="police_arrived"> <label class="b">No</label>
+      </div>
+    </div>
+    <div class="row" *ngIf="reported">
+      <div class="col-md-12">
+        <hr>
+        <label>¿Cuál fue la reacción de las autoridades estatales?</label>
+        <textarea class="form-control" rows="4" 
+          name="police_reactions" [(ngModel)]="police_reactions"></textarea>
+      </div>
+    </div>
+    <div class="row" *ngIf="reported">
+      <div class="col-md-12">
+        <hr>
+        <label>¿Han proporcionado alguna asistencia a la víctima?</label>
+        &nbsp;<input type="radio" name="police_assisted" [value]="true" [(ngModel)]="police_assisted"> <label class="b">Si</label>
+        &nbsp;<input type="radio" name="police_assisted" [value]="false" [(ngModel)]="police_assisted"> <label class="b">No</label>
+      </div>
+    </div>
+    <hr>
+    
+    <h3>Información sobre el/los perpetrador(es)</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Quiénes fueron los perpetradores?</label>
+        <textarea class="form-control" rows="4" 
+          name="who_perpetrators" [(ngModel)]="who_perpetrators"
+          placeholder="nombres y apodos, número de perpetradores, lo que dijeron, características distintivas (estimación de edad, etnia, acento, vestimenta, marcas), motivos y afiliaciones)."></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Cuáles cree que fueron los motivos detrás de las violaciones de los derechos humanos?</label>
+        <textarea class="form-control" rows="4" 
+          name="perp_motives" [(ngModel)]="perp_motives" placeholder=""></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Qué te hace creer que estos son los motivos?</label>
+        <textarea class="form-control" rows="4" 
+          name="why_perp_motives" [(ngModel)]="why_perp_motives" placeholder=""></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Los perpetradores dijeron / hicieron algo específico?</label>
+        <textarea class="form-control" rows="4" 
+          name="perps_said_did" [(ngModel)]="perps_said_did" placeholder=""></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Algún perpetrador recibió órdenes?</label>
+        <textarea class="form-control" rows="4" 
+          name="perps_took_orders" [(ngModel)]="perps_took_orders" placeholder=""></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <label>¿Algunos perpetradores estaba dando órdenes?</label>
+        <textarea class="form-control" rows="4" 
+          name="perps_gave_orders" [(ngModel)]="perps_gave_orders" placeholder=""></textarea>
+      </div>
+    </div>
 <!--
-Ciudad, lugar dónde ocurrieron los incidentes (descripción detallada de la ubicación física).
-¿Por cuánto tiempo tuvo lugar la incidencia?
-¿Se usaron armas?
-¿Los ataques incluyeron violencia sexual?
-¿Quien estuvo presente en el lugar del incidente?
-¿Cuánta gente?
-¿Cuáles fueron sus afiliaciones?
-Describa las circunstancias relevantes antes y después del incidente: (ej. Llegó un grupo armado previamente, presencia del ejército, actividad económica ilegal, movilización, etc.)
-¿Cuáles fueron las consecuencias del acto sobre las víctimas?
-¿Qué repercusiones tuvo la acción o se pueden percibir en la familia, comunidad y el territorio de la víctima? (si las hubiese).
-¿Recibió algún tipo de atención después? 
-¿La víctima siente que fue amenazada por una persona o personas específicas antes o después del incidente? 
-¿Cuáles son estas amenazas? 
-¿Cómo y cuándo fueron recibidos? 
-¿Han sido documentadas y reportadas a las autoridades?
-¿Qué pasó después de que se presentaron los informes? (Si hay denuncias o documentación, en lo posible obtener copias).
-¿Vinieron la policía u otras autoridades o se informó el incidente a la policía u otras autoridades estatales? 
-¿Cuál fue la reacción de las autoridades estatales? 
-¿Han proporcionado alguna asistencia a la víctima?
-
 
 ¿Quiénes fueron los perpetradores (nombres y apodos, número de perpetradores, lo que dijeron, características distintivas (estimación de edad, etnia, acento, vestimenta, marcas), motivos y afiliaciones))? 
 ¿Cuáles cree que fueron los motivos detrás de las violaciones de los derechos humanos?
@@ -357,6 +446,7 @@ Describa las circunstancias relevantes antes y después del incidente: (ej. Lleg
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
 -->
+    <hr>
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>

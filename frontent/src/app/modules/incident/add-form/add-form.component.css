@@ -1,3 +1,11 @@
 agm-map {
     height: 400px;
 }
+
+label {
+    font-weight: normal;
+}
+
+label.b {
+    font-weight: bold;
+}
