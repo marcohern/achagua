@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { GeocodeService } from '../geocode.service'
 import { Race } from '../race';
 import { LocationComponents } from '../location-components';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,9 +14,8 @@ export class AddFormComponent implements OnInit {
 
   olat: number = 3.441816;
   olng: number = -76.516484;
-  lat: number;
-  lng: number;
-  loc:LocationComponents = { country:'', state:'', city:'', area:'', zip:'' };
+  lat:number;
+  lng:number;
 
   races:Race[] = [
     {id:'N', name:'Afrocolombiano(a)'},
@@ -24,92 +24,121 @@ export class AddFormComponent implements OnInit {
     {id:'B', name:'Blanco(a)'},
   ];
 
-  race:Race = null;
-  gender:string = 'F';
-  relation:string = '';
+  incidentForm:FormGroup = new FormGroup({
+    lat: new FormControl('',[Validators.required],[]),
+    lng: new FormControl('',[Validators.required],[]),
+    homeLocation: new FormGroup({
+      country: new FormControl('',[Validators.required],[]),
+      state:   new FormControl('',[Validators.required],[]),
+      city:    new FormControl('',[Validators.required],[]),
+      area:    new FormControl('',[],[]),
+      zip:     new FormControl('',[],[])
+    }),
+    /*
+    incidentLocation: new FormGroup({
+      country: new FormControl('',[Validators.required],[]),
+      state:   new FormControl('',[Validators.required],[]),
+      city:    new FormControl('',[Validators.required],[]),
+      area:    new FormControl('',[],[]),
+      zip:     new FormControl('',[],[])
+    }),*/
+    race:     new FormControl('',[Validators.required],[]),
+    gender:   new FormControl('',[Validators.required],[]),
+    relation: new FormControl('',[Validators.required],[]),
+    
+    livingWith: new FormGroup({
+      children: new FormControl('',[],[]),
+      spouse  : new FormControl('',[],[]),
+      father  : new FormControl('',[],[]),
+      mother  : new FormControl('',[],[]),
+      grandfather: new FormControl('',[],[]),
+      grandmother: new FormControl('',[],[]),
+      siblings   : new FormControl('',[],[]),
+      other      : new FormControl('',[],[])
+    }),
 
-  lw_children:boolean = false;
-  lw_spouse:boolean = false;
-  lw_father:boolean = false;
-  lw_mother:boolean = false;
-  lw_grandfather:boolean = false;
-  lw_grandmother:boolean = false;
-  lw_siblings:boolean = false;
-  lw_other:boolean = false;
+    gvt        : new FormControl('',[],[]),
+    date_type  : new FormControl('',[],[]),
+    date_year  : new FormControl('',[],[]),
+    date_month : new FormControl('',[],[]),
+    date_single: new FormControl('',[],[]),
+    date_range : new FormControl('',[],[]),
+    
+    place: new FormControl('',[],[]),
+    duration: new FormControl('',[],[]),
+    weapons: new FormControl('',[],[]),
+    what_weapons: new FormControl('',[],[]),
+    sex_violence: new FormControl('',[],[]),
+    who_was_there: new FormControl('',[],[]),
+    how_many: new FormControl('',[],[]),
+    afiliations: new FormControl('',[],[]),
+    circumstances: new FormControl('',[],[]),
+    consequences: new FormControl('',[],[]),
+    repercussions: new FormControl('',[],[]),
+    attention: new FormControl('',[],[]),
+    what_attention: new FormControl('',[],[]),
+    threatened: new FormControl('',[],[]),
+    what_threats: new FormControl('',[],[]),
+    when_how_threats: new FormControl('',[],[]),
+    reported: new FormControl('',[],[]),
+    after_reported: new FormControl('',[],[]),
+    police_arrived: new FormControl('',[],[]),
+    police_reactions: new FormControl('',[],[]),
+    police_assisted: new FormControl('',[],[]),
+    
+    who_perpetrators: new FormControl('',[],[]),
+    perp_motives: new FormControl('',[],[]),
+    why_perp_motives: new FormControl('',[],[]),
+    perps_said_did: new FormControl('',[],[]),
+    perps_took_orders: new FormControl('',[],[]),
+    perps_gave_orders: new FormControl('',[],[]),
+  });
 
-  gvt:string = 'VS';
   date_type:string = '';
-  date_year:string = '';
-  date_month:string = '';
-  date_start:string = '';
-  date_end:string = '';
-
-  place:string = '';
-  duration:number = 1;
   weapons:boolean;
-  what_weapons:string = '';
-  sex_violence:boolean;
-  who_was_there:string = '';
-  how_many:number = 1;
-  afiliations:string = '';
-  circumstances:string = '';
-  consequences:string = '';
-  repercussions:string = '';
   attention:boolean;
-  what_attention:string = '';
   threatened:boolean;
-  what_threats:string = '';
-  when_how_threats:string = '';
   reported:boolean;
-  after_reported:string = '';
-  police_arrived:boolean = false;
-  police_reactions:string = '';
-  police_assisted:boolean = false;
+  police_arrived:boolean;
 
-  who_perpetrators:string = '';
-  perp_motives:string = '';
-  why_perp_motives: string = '';
-  perps_said_did:string = '';
-  perps_took_orders:string = '';
-  perps_gave_orders:string = '';
-
-  constructor(private gs:GeocodeService) { }
+  constructor(private gs:GeocodeService, private fb:FormBuilder) { }
 
   ngOnInit() {
-    this.race = this.races[0];
+    //this.incidentForm.race.value = this.races[0];
+    this.incidentForm.get('lat').setValue(this.olat);
+    this.incidentForm.get('lng').setValue(this.olng);
     this.lat = this.olat;
     this.lng = this.olng;
-    this.loc = { country:'', state:'', city:'', area:'', zip:'' };
-    this.gs.getReverse(this.lat, this.lng).subscribe($info => this.setLocation($info));
   }
 
   onClickMap($event) {
-    //console.log("map",$event);
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
-    this.loc = { country:'', state:'', city:'', area:'', zip:'' };
+    
+    this.incidentForm.get('lat').setValue($event.coords.lat);
+    this.incidentForm.get('lng').setValue($event.coords.lng);
     this.gs.getReverse(this.lat, this.lng).subscribe($info => this.setLocation($info));
   }
 
   private setLocation($info) {
     var acs = $info.results[0].address_components;
+    var grp = this.incidentForm.get('homeLocation');
     for (let ac of acs) {
       var idx = -1;
       idx = ac.types.indexOf('country');//Pais
-      if (idx > -1) this.loc.country = ac.long_name;
+      if (idx > -1) grp.get('country').setValue(ac.long_name);
       idx = ac.types.indexOf('administrative_area_level_1');//Depto
-      if (idx > -1) this.loc.state = ac.long_name;
+      if (idx > -1) grp.get('state').setValue(ac.long_name);
       //idx = ac.types.indexOf('administrative_area_level_2');//Depto
       //if (idx > -1) console.log("Area 2",ac.long_name);
       idx = ac.types.indexOf('locality');//Ciudad
-      if (idx > -1) this.loc.city = ac.long_name;
+      if (idx > -1) grp.get('city').setValue(ac.long_name);
       idx = ac.types.indexOf('administrative_area_level_2');//Ciudad
-      if (idx > -1 && this.loc.city == '') this.loc.city = ac.long_name;
+      if (idx > -1 && grp.get('city').value == '') grp.get('city').setValue(ac.long_name);
       idx = ac.types.indexOf('neighborhood');//Barrio
-      if (idx > -1) this.loc.area = ac.long_name;
+      if (idx > -1) grp.get('area').setValue(ac.long_name);
       idx = ac.types.indexOf('postal_code');//Codigo Postal
-      if (idx > -1) this.loc.zip = ac.long_name;
+      if (idx > -1) grp.get('zip').setValue(ac.long_name);
     }
-    console.log("loc", this.loc, acs);
   }
 }

@@ -4,7 +4,7 @@ import { AddFormComponent } from './add-form/add-form.component';
 import { MapComponent } from './map/map.component';
 
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { GeocodeService } from './geocode.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -16,6 +16,7 @@ import { environment } from '../../../environments/environment'
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.apikey

@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form [formGroup]="incidentForm">
     <h3>Informacion de la Victima</h3>
     <div class="row">
       <div class="col-md-12">
@@ -12,49 +12,50 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="lat">Latitud</label>
-          <input type="text" class="form-control" name="lat" aria-describedby="latHelp" [(ngModel)]="lat" readonly>
-          <small id="latHelp" class="form-text text-muted">Despliega valor latitud.</small>
+          <input type="text" class="form-control" formControlName="lat" readonly>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="lng">Longitud</label>
-          <input type="text" class="form-control" name="lng" aria-describedby="lngHelp" [(ngModel)]="lng" readonly>
-          <small id="lngHelp" class="form-text text-muted">Despliega valor longitud.</small>
+          <input type="text" class="form-control" formControlName="lng" readonly>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="country">País</label>
-          <input type="text" class="form-control" name="country" aria-describedby="countryHelp" [(ngModel)]="loc.country" readonly>
+    
+    <div formGroupName="homeLocation">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="country">País</label>
+            <input type="text" class="form-control" formControlName="country" readonly>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="state">Depto</label>
+            <input type="text" class="form-control" formControlName="state" readonly>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="state">Depto</label>
-          <input type="text" class="form-control" name="state" aria-describedby="stateHelp" [(ngModel)]="loc.state" readonly>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="city">Ciudad o Municipio</label>
+            <input type="text" class="form-control" formControlName="city" readonly>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="city">Ciudad o Municipio</label>
-          <input type="text" class="form-control" name="city" aria-describedby="cityHelp" [(ngModel)]="loc.city" readonly>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="barrio">Barrio, Vereda o Corregimiento</label>
+            <input type="text" class="form-control" formControlName="area" readonly>
+          </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="barrio">Barrio, Vereda o Corregimiento</label>
-          <input type="text" class="form-control" name="barrio" aria-describedby="barrioHelp" [(ngModel)]="loc.area" readonly>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="zip">Codigo Postal</label>
-          <input type="text" class="form-control" name="zip" aria-describedby="zipHelp" [(ngModel)]="loc.zip" readonly>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="zip">Codigo Postal</label>
+            <input type="text" class="form-control" formControlName="zip" readonly>
+          </div>
         </div>
       </div>
     </div>
@@ -62,7 +63,7 @@
     <div class="row">
       <div class="col-md-4">
         <label for="gender">Género/Identidad sexual</label>
-        <select class="form-control" name="gender" aria-describedby="genderHelp" [(ngModel)]="gender">
+        <select class="form-control" formControlName="gender">
           <option value="F">Femenino</option>
           <option value="M">Masculino</option>
           <option value="X">No Especificado</option>
@@ -70,7 +71,7 @@
       </div>
       <div class="col-md-4">
         <label for="race">Raza/Origen Étnico</label>
-        <select class="form-control" name="race" aria-describedby="raceHelp" [(ngModel)]="race">
+        <select class="form-control" formControlName="race">
           <option *ngFor="let r of races" [ngValue]="r">{{r.name}}</option>
           
         </select>
@@ -78,76 +79,78 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="relation">Relación con Victimario</label>
-          <input type="text" class="form-control" name="relation" aria-describedby="relationHelp" [(ngModel)]="relation">
-          <small id="relationHelp" class="form-text text-muted">Que relacion tiene la victima y el victimario.</small>
+          <input type="text" class="form-control" formControlName="relation">
         </div>
       </div>  
     </div>
     <hr>
-    <div class="row">
-      <div class="col-md-12">
-        <label><strong>La Victima vive con</strong></label>
+    <div formGroupName="livingWith">
+      <div class="row">
+        <div class="col-md-12">
+          <label><strong>La Victima vive con</strong></label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="children">
+            <label class="form-check-label">Hijos(as)</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="spouse">
+            <label class="form-check-label">Esposo(a)</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="father">
+            <label class="form-check-label">Padre</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="mother">
+            <label class="form-check-label">Madre</label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="siblings">
+            <label class="form-check-label">Hermanos(as)</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="grandfather">
+            <label class="form-check-label">Abuelo</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="grandmother">
+            <label class="form-check-label">Abuela</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="other">
+            <label class="form-check-label">Otros</label>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_children" [(ngModel)]="lw_children">
-          <label class="form-check-label" for="lw_children">Hijos(as)</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_spouse" [(ngModel)]="lw_spouse">
-          <label class="form-check-label" for="lw_spouse">Esposo(a)</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_father" [(ngModel)]="lw_father">
-          <label class="form-check-label" for="lw_father">Padre</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_mother" [(ngModel)]="lw_mother">
-          <label class="form-check-label" for="lw_mother">Madre</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_siblings" [(ngModel)]="lw_siblings">
-          <label class="form-check-label" for="lw_siblings">Hermanos(as)</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_grandfather" [(ngModel)]="lw_grandfather">
-          <label class="form-check-label" for="lw_grandfather">Abuelo</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_grandmother" [(ngModel)]="lw_grandmother">
-          <label class="form-check-label" for="lw_grandmother">Abuela</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="lw_other" [(ngModel)]="lw_other">
-          <label class="form-check-label" for="lw_other">Otros</label>
-        </div>
-      </div>
-    </div>
+    
     <hr>
     <h3>Información del Incidente</h3>
     <div class="row">
       <div class="col-md-4">
-        <label for="gvt">Tipo de Violencia de Tipo Genero</label>
-        <select class="form-control" name="gvt" aria-describedby="gvtHelp" ([ngModel])="gvt">
+        <label>Tipo de Violencia de Tipo Genero</label>
+        <select class="form-control" formControlName="gvt">
           <option value="VS">Violencia doméstica o violencia sexual</option>
           <option value="PI">Violencia doméstica o violencia de pareja íntima</option>
           <option value="FS">Trabajo sexual forzado / trata de personas</option>
@@ -155,115 +158,100 @@
           <option value="NS">Niños y niñas solados</option>
           <option value="DD">Violencia contra las defensoras de los derechos humanos</option>
         </select>
-        <small id="gvtHelp" class="form-text text-muted">Tipo de Violencia de Tipo Genero</small>
       </div>
       <div class="col-md-4">
-        <label for="date_type">Tipo de Fecha</label>
-        <select class="form-control" name="date_type" aria-describedby="date_typeHelp" [(ngModel)]="date_type">
+        <label>Tipo de Fecha</label>
+        <select class="form-control" formControlName="date_type" [(ngModel)]="date_type">
           <option value="">-- Selecciona --</option>
           <option value="A">Año (YYYY)</option>
           <option value="M">Mes (YYYY/MM)</option>
           <option value="D">Dia (YYYY/MM/DD)</option>
           <option value="R">Rango (YYYY/MM/DD - YYYY/MM/DD)</option>
         </select>
-        <small id="date_typeHelp" class="form-text text-muted">Si es una fecha exacta o un rango</small>
       </div>
       <div class="col-md-4" *ngIf="date_type == 'A'">
-        <label for="date_year">Año</label>
-        <input type="number" name="date_year" class="form-control" [(ngModel)]="date_year">
-        <small id="date_yearHelp" class="form-text text-muted">Seleccione Año</small>
+        <label>Año</label>
+        <input type="number" class="form-control" formControlName="date_year">
       </div>
       <div class="col-md-4" *ngIf="date_type == 'M'">
         <div class="row">
           <div class="col-md-6">
-            <label for="date_year">Año</label>
-            <input type="number" name="date_year" class="form-control" [(ngModel)]="date_year">
+            <label>Año</label>
+            <input type="number" class="form-control" formControlName="date_year">
           </div>
           <div class="col-md-6">
-            <label for="date_month">Mes</label>
-            <input type="number" name="date_month" class="form-control" [(ngModel)]="date_month">
+            <label>Mes</label>
+            <input type="number" class="form-control" formControlName="date_month">
           </div>
         </div>
-        <small id="date_monthHelp" class="form-text text-muted">Seleccione Mes</small>
       </div>
       <div class="col-md-4" *ngIf="date_type == 'D'">
-        <label for="date">Dia (Fecha Exacta)</label>
-        <input type="text"
-              placeholder=""
-              name="date"
-              class="form-control"
-              bsDatepicker
-              [(ngModel)]="date">
-        <small id="date_typeHelp" class="form-text text-muted">Seleccione la fecha en que ocurrio el incidente</small>
+        <label>Dia (Fecha Exacta)</label>
+        <input type="text" class="form-control" formControlName="date_single" bsDatepicker>
       </div>
       <div class="col-md-4" *ngIf="date_type == 'R'">
-        <label for="date_range">Rango de Fechas</label>
-        <input type="text"
-              placeholder=""
-              name="date_range"
-              class="form-control"
-              bsDaterangepicker>
-        <small id="date_rangeHelp" class="form-text text-muted">Seleccione el rango de fechas</small>
+        <label>Rango de Fechas</label>
+        <input type="text" placeholder="" class="form-control" formControlName="date_range" bsDaterangepicker>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <label for="where">Lugar en donde ocurrio el incidente</label>
-        <textarea class="form-control" rows="5" name="place" [(ngModel)]="place"></textarea>
+        <label>Lugar en donde ocurrio el incidente</label>
+        <textarea class="form-control" rows="5" formControlName="place"></textarea>
       </div>
     </div>
     <div class="row">
         <div class="col-md-4">
           <label>Duracion (horas)</label>
-          <input type="number" class="form-control" [value]="duration" min="1">
+          <input type="number" class="form-control" min="1" formControlName="duration">
         </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>Se usaron armas?</label>
-        &nbsp;<input type="radio" name="armas" [value]="true" [(ngModel)]="weapons"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="armas" [value]="false" [(ngModel)]="weapons"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="weapons" name="weapons" [value]="true"  [(ngModel)]="weapons"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="weapons" name="weapons" [value]="false" [(ngModel)]="weapons"> <label class="b">No</label>
       </div>
     </div>
     <div class="row" *ngIf="weapons">
         <div class="col-md-12">
             <label>Que tipo de armas?</label>
-            <textarea class="form-control" rows="5" name="what_weapons" [(ngModel)]="what_weapons"></textarea>
+            <textarea class="form-control" rows="5" formControlName="what_weapons"></textarea>
         </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>Hubo violencia sexual?</label>
-        &nbsp;<input type="radio" name="sex_violence" [value]="true" [(ngModel)]="sex_violence"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="sex_violence" [value]="false" [(ngModel)]="sex_violence"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="sex_violence" name="sex_violence" [value]="true" > <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="sex_violence" name="sex_violence" [value]="false"> <label class="b">No</label>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
           <label>Quienes estuvieron presentes durante el incidente?</label>
-          <textarea class="form-control" rows="5" name="who_was_there" [(ngModel)]="who_was_there"></textarea>
+          <textarea class="form-control" rows="5" formControlName="who_was_there"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-2">
         <label>Cuanta gente?</label>
-        <input type="number" class="form-control" name="how_many" [(ngModel)]="how_many">
+        <input type="number" class="form-control" formControlName="how_many">
       </div>
       <div class="col-md-10">
         <label>Cuales fueron sus afiliaciones</label>
-        <textarea class="form-control" rows="1" name="afiliations" [(ngModel)]="afiliations"></textarea>
+        <textarea class="form-control" rows="1" formControlName="afiliations"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>Describa las circunstancias relevantes antes y después del incidente.</label>
-        <textarea class="form-control" rows="4" name="circumstances" [(ngModel)]="circumstances"
-          placeholder="ej. Llegó un grupo armado previamente, presencia del ejército, actividad económica ilegal, movilización, etc.">
+        <textarea class="form-control"  formControlName="circumstances"
+        rows="4" placeholder="ej. Llegó un grupo armado previamente, presencia del ejército, actividad económica ilegal, movilización, etc.">
         </textarea>
       </div>
     </div>
@@ -271,88 +259,85 @@
     <div class="row">
       <div class="col-md-12">
         <label>¿Cuáles fueron las consecuencias del acto sobre las víctimas?</label>
-        <textarea class="form-control" rows="4" name="consequences" [(ngModel)]="consequences"></textarea>
+        <textarea class="form-control" rows="4" formControlName="consequences"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Qué repercusiones tuvo la acción o se pueden percibir en la familia, comunidad y el territorio de la víctima? (si las hubiese).</label>
-        <textarea class="form-control" rows="4" name="repercussions" [(ngModel)]="repercussions"></textarea>
+        <textarea class="form-control" rows="4" formControlName="repercussions"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Recibió algún tipo de atención después?</label>
-        &nbsp;<input type="radio" name="attention" [value]="true" [(ngModel)]="attention"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="attention" [value]="false" [(ngModel)]="attention"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="attention" name="attention" [value]="true"  [(ngModel)]="attention"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="attention" name="attention" [value]="false" [(ngModel)]="attention"> <label class="b">No</label>
       </div>
     </div>
     <div class="row" *ngIf="attention">
       <div class="col-md-12">
         <label>Mas informacion sobre la atencion prestada</label>
-        <textarea class="form-control" rows="4" name="what_attention" [(ngModel)]="what_attention"></textarea>
+        <textarea class="form-control" rows="4" formControlName="what_attention"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿La víctima siente que fue amenazada por una persona o personas específicas antes o después del incidente? </label>
-        &nbsp;<input type="radio" name="threatened" [value]="true" [(ngModel)]="threatened"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="threatened" [value]="false" [(ngModel)]="threatened"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="threatened" name="threatened" [value]="true"  [(ngModel)]="threatened"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="threatened" name="threatened" [value]="false" [(ngModel)]="threatened"> <label class="b">No</label>
       </div>
     </div>
     <div class="row" *ngIf="threatened">
       <div class="col-md-12">
         <label>¿Cuáles son estas amenazas? </label>
-        <textarea class="form-control" rows="4" name="what_threats" [(ngModel)]="what_threats"></textarea>
+        <textarea class="form-control" rows="4" formControlName="what_threats"></textarea>
       </div>
     </div>
     <div class="row" *ngIf="threatened">
       <div class="col-md-12">
         <label>¿Cómo y cuándo fueron recibidos?</label>
-        <textarea class="form-control" rows="4" name="when_how_threats" [(ngModel)]="when_how_threats"></textarea>
+        <textarea class="form-control" rows="4" formControlName="when_how_threats"></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Han sido documentadas y reportadas a las autoridades?</label>
-        &nbsp;<input type="radio" name="reported" [value]="true" [(ngModel)]="reported"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="reported" [value]="false" [(ngModel)]="reported"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="reported" name="reported" [value]="true"  [(ngModel)]="reported"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="reported" name="reported" [value]="false" [(ngModel)]="reported"> <label class="b">No</label>
       </div>
     </div>
     <div class="row" *ngIf="reported">
       <div class="col-md-12">
         <label>¿Qué pasó después de que se presentaron los informes?</label>
-        <textarea class="form-control" rows="4" 
-          name="after_reported" [(ngModel)]="after_reported"
-          placeholder="Si hay denuncias o documentación, en lo posible obtener copias."></textarea>
+        <textarea class="form-control" formControlName="after_reported"
+          rows="4" placeholder="Si hay denuncias o documentación, en lo posible obtener copias."></textarea>
       </div>
     </div>
     <div class="row" *ngIf="reported">
       <div class="col-md-12">
         <hr>
         <label>¿Vinieron la policía u otras autoridades o se informó el incidente a la policía u otras autoridades estatales?</label>
-        &nbsp;<input type="radio" name="police_arrived" [value]="true" [(ngModel)]="police_arrived"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="police_arrived" [value]="false" [(ngModel)]="police_arrived"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="police_arrived" name="police_arrived" [value]="true"  [(ngModel)]="police_arrived"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="police_arrived" name="police_arrived" [value]="false" [(ngModel)]="police_arrived"> <label class="b">No</label>
       </div>
     </div>
-    <div class="row" *ngIf="reported">
+    <div class="row" *ngIf="police_arrived">
       <div class="col-md-12">
-        <hr>
         <label>¿Cuál fue la reacción de las autoridades estatales?</label>
-        <textarea class="form-control" rows="4" 
-          name="police_reactions" [(ngModel)]="police_reactions"></textarea>
+        <textarea class="form-control" rows="4" formControlName="police_reactions"></textarea>
       </div>
     </div>
     <div class="row" *ngIf="reported">
       <div class="col-md-12">
         <hr>
         <label>¿Han proporcionado alguna asistencia a la víctima?</label>
-        &nbsp;<input type="radio" name="police_assisted" [value]="true" [(ngModel)]="police_assisted"> <label class="b">Si</label>
-        &nbsp;<input type="radio" name="police_assisted" [value]="false" [(ngModel)]="police_assisted"> <label class="b">No</label>
+        &nbsp;<input type="radio" formControlName="police_assisted" name="police_assisted" [value]="true"> <label class="b">Si</label>
+        &nbsp;<input type="radio" formControlName="police_assisted" name="police_assisted" [value]="false"> <label class="b">No</label>
       </div>
     </div>
     <hr>
@@ -361,49 +346,48 @@
     <div class="row">
       <div class="col-md-12">
         <label>¿Quiénes fueron los perpetradores?</label>
-        <textarea class="form-control" rows="4" 
-          name="who_perpetrators" [(ngModel)]="who_perpetrators"
-          placeholder="nombres y apodos, número de perpetradores, lo que dijeron, características distintivas (estimación de edad, etnia, acento, vestimenta, marcas), motivos y afiliaciones)."></textarea>
+        <textarea class="form-control" formControlName="who_perpetrators"
+        ºrows="4" placeholder="nombres y apodos, número de perpetradores, lo que dijeron, características distintivas (estimación de edad, etnia, acento, vestimenta, marcas), motivos y afiliaciones)."></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Cuáles cree que fueron los motivos detrás de las violaciones de los derechos humanos?</label>
-        <textarea class="form-control" rows="4" 
-          name="perp_motives" [(ngModel)]="perp_motives" placeholder=""></textarea>
+        <textarea class="form-control" formControlName="perp_motives"
+          rows="4" placeholder=""></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Qué te hace creer que estos son los motivos?</label>
-        <textarea class="form-control" rows="4" 
-          name="why_perp_motives" [(ngModel)]="why_perp_motives" placeholder=""></textarea>
+        <textarea class="form-control" formControlName="why_perp_motives"
+          rows="4" placeholder=""></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Los perpetradores dijeron / hicieron algo específico?</label>
-        <textarea class="form-control" rows="4" 
-          name="perps_said_did" [(ngModel)]="perps_said_did" placeholder=""></textarea>
+        <textarea class="form-control" formControlName="perps_said_did"
+          rows="4" placeholder=""></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Algún perpetrador recibió órdenes?</label>
-        <textarea class="form-control" rows="4" 
-          name="perps_took_orders" [(ngModel)]="perps_took_orders" placeholder=""></textarea>
+        <textarea class="form-control" formControlName="perps_took_orders"
+          rows="4" placeholder=""></textarea>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-12">
         <label>¿Algunos perpetradores estaba dando órdenes?</label>
-        <textarea class="form-control" rows="4" 
-          name="perps_gave_orders" [(ngModel)]="perps_gave_orders" placeholder=""></textarea>
+        <textarea class="form-control" formControlName="perps_gave_orders"
+          rows="4" placeholder=""></textarea>
       </div>
     </div>
 
