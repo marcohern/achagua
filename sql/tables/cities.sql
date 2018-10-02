@@ -1,0 +1,9 @@
+
+DROP TABLE IF EXISTS cities;
+
+CREATE TABLE cities (
+    id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    state_id INT NOT NULL
+);
+
