@@ -1,0 +1,1 @@
+copy frontend/dist/*.* wp-plugin/achagua/app/

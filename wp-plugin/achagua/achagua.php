@@ -20,7 +20,17 @@ if ( !function_exists( 'add_action' ) ) {
 	exit;
 }
 
+define('ACHAGUA_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
+
 class Achagua {
+
+    public function __construct() {
+        add_action('init', [$this, 'addCustomPostType']);
+    }
+
+    public function addCustomPostType() {
+        register_post_type('achagua',['public' => true, 'label' => 'Achagua']);
+    }
 
     public function activate() {
         flush_rewrite_rules();
@@ -29,10 +39,14 @@ class Achagua {
     public function deactivate() {
         flush_rewrite_rules();
     }
+
+
 }
 
 $achagua = new Achagua();
 
 register_activation_hook  (__FILE__, [$achagua, 'activate'  ]);
 register_deactivation_hook(__FILE__, [$achagua, 'deactivate']);
+
+//wp_enqueue_style('achagua-styles','https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css');
 
