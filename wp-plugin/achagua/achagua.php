@@ -29,7 +29,7 @@ class Achagua {
     }
 
     public function addCustomPostType() {
-        register_post_type('achagua',['public' => true, 'label' => 'Achagua']);
+        //register_post_type('achagua',['public' => true, 'label' => 'Achagua']);
     }
 
     public function activate() {
@@ -42,6 +42,9 @@ class Achagua {
 
 
 }
+
+//require_once( ACHAGUA_PLUGIN_DIR . 'achagua-widget.php' );
+require_once( ACHAGUA_PLUGIN_DIR . 'achagua-shortcode.php' );
 
 $achagua = new Achagua();
 
