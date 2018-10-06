@@ -9,7 +9,10 @@ import { AgmCoreModule } from '@agm/core';
 import { GeocodeService } from './geocode.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
+import { AddFormVictimInfoComponent } from './add-form-victim-info/add-form-victim-info.component';
+import { AddFormIncidentInfoComponent } from './add-form-incident-info/add-form-incident-info.component';
+import { AddFormPerpsInfoComponent } from './add-form-perps-info/add-form-perps-info.component'
 
 @NgModule({
   imports: [
@@ -22,7 +25,7 @@ import { environment } from '../../../environments/environment'
       apiKey: environment.apikey
     })
   ],
-  declarations: [AddFormComponent, MapComponent],
+  declarations: [AddFormComponent, MapComponent, AddFormVictimInfoComponent, AddFormIncidentInfoComponent, AddFormPerpsInfoComponent],
   exports:[ AddFormComponent, MapComponent ],
   providers:[ GeocodeService ]
 })
