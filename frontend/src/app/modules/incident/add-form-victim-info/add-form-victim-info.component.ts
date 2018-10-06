@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GeocodeService } from '../geocode.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Race } from '../race';
@@ -15,6 +15,9 @@ export class AddFormVictimInfoComponent implements OnInit {
 
   @Input()
   olng:number = -76.516484;
+
+  @Output()
+  victimInfo = new EventEmitter();
 
   lat:number;
   lng:number;
@@ -92,5 +95,9 @@ export class AddFormVictimInfoComponent implements OnInit {
       idx = ac.types.indexOf('postal_code');//Codigo Postal
       if (idx > -1) grp.get('zip').setValue(ac.long_name);
     }
+  }
+
+  private next($event) {
+    this.victimInfo.emit({victimInfo: this.victimInfoForm.value});
   }
 }
