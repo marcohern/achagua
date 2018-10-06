@@ -2,9 +2,9 @@
 
 return [
     'host'   => 'localhost',
-    'user'   => 'admin',
-    'pwd'    => 'system',
-    'schema' => 'achuaga'
+    'user'   => 'root',
+    'pwd'    => '',
+    'schema' => 'achagua'
 ];
 
 ?>

@@ -1,27 +1,20 @@
 <?php
 
-$db = (object) require_once('./config/db.php');
+$db = null;
 
-$mysqli = new mysqli($db->host, $db->user, $db->pwd, $db->schema);
-if ($mysqli->connect_error) {
-    die("(".$mysqli->connect_errno.") ".$mysqli->connect_error);
-}
+include_once('lib/countries.php');
+include_once('lib/states.php');
+include_once('lib/cities.php');
 
-$records = $mysqli->query("SELECT * FROM states", MYSQLI_USE_RESULT);
+$db = (object) require_once('config/db.php');
 
-if (!$records) {
-    die("Error querying: ".$mysqli->error);
-}
+$mysqli = db_connect($db);
 
-$result = [];
-foreach ($records as $r) {
-    $ar = (object) $r;
-    $result[] = $ar;
-}
-
-$records->close();
+$states = states_browse($mysqli, null, "Ma%");
+$cities = cities_browse($mysqli, 47);
 
 $mysqli->close();
 
-echo json_encode($result);
+echo json_encode(['states'=>$states,'cities'=>$cities]);
+
 ?>
