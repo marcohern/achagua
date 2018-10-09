@@ -14,17 +14,17 @@
     <label>Tipo de Fecha</label>
     <select class="form-control" formControlName="date_type" [(ngModel)]="date_type">
       <option value="">-- Selecciona --</option>
-      <option value="A">Año (YYYY)</option>
-      <option value="M">Mes (YYYY/MM)</option>
-      <option value="D">Dia (YYYY/MM/DD)</option>
-      <option value="R">Rango (YYYY/MM/DD - YYYY/MM/DD)</option>
+      <option value="year">Año (YYYY)</option>
+      <option value="month">Mes (YYYY/MM)</option>
+      <option value="date">Dia (YYYY/MM/DD)</option>
+      <option value="range">Rango (YYYY/MM/DD - YYYY/MM/DD)</option>
     </select>
   </div>
-  <div class="col-md-4" *ngIf="date_type == 'A'">
+  <div class="col-md-4" *ngIf="date_type == 'year'">
     <label>Año</label>
     <input type="number" class="form-control" formControlName="date_year">
   </div>
-  <div class="col-md-4" *ngIf="date_type == 'M'">
+  <div class="col-md-4" *ngIf="date_type == 'month'">
     <div class="row">
       <div class="col-md-6">
         <label>Año</label>
@@ -36,11 +36,11 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4" *ngIf="date_type == 'D'">
+  <div class="col-md-4" *ngIf="date_type == 'date'">
     <label>Dia (Fecha Exacta)</label>
     <input type="text" class="form-control" formControlName="date_single" bsDatepicker>
   </div>
-  <div class="col-md-4" *ngIf="date_type == 'R'">
+  <div class="col-md-4" *ngIf="date_type == 'range'">
     <label>Rango de Fechas</label>
     <input type="text" placeholder="" class="form-control" formControlName="date_range" bsDaterangepicker>
   </div>
