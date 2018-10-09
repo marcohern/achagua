@@ -1,6 +1,19 @@
 <?php
 
 class Runner {
+
+    private static $remove = '/^\/backend/';
+    private static $extract = '/^'
+        .'(('
+            .'\/(?<controller>[^\/]*)('
+                .'(?<query>\/[^?]*)('
+                    .'\?(?<params>.*)'
+                .')?'
+            .')?'
+        .'))?'
+    .'/';
+    private static $getid = '/(\/(?<id>\w+))/';
+
     private $method;
     private $input;
     private $params;
@@ -8,27 +21,23 @@ class Runner {
     private $id;
     private $query;
 
+    private $rel;
+    private $full;
+    private $pos;
+
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
-        $q = preg_replace('/^\/backend/','', $_ENV['REQUEST_URI']);
+        $q = preg_replace(self::$remove,'', $_ENV['REQUEST_URI']);
         $this->input = $q;
         $m = [];
-        preg_match_all('/^'
-            .'(('
-                .'\/(?<controller>[^\/]*)('
-                    .'(?<query>\/[^?]*)('
-                        .'\?(?<params>.*)'
-                    .')?'
-                .')?'
-            .'))?'
-        .'/',$q,$m);
+        preg_match_all(self::$extract,$q,$m);
         $this->controller = $m['controller'][0];
         $this->query = $m['query'][0];
         $this->params = $m['params'][0];
         $this->anchor = $m['anchor'][0];
 
         $m = [];
-        preg_match_all('/(\/(?<id>\w+))/',$this->query,$m);
+        preg_match_all(self::$getid,$this->query,$m);
         $this->id = $m['id'][0];
     }
 
