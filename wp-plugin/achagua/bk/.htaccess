@@ -1,10 +1,10 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteOptions inherit
-RewriteBase /backend/
+RewriteBase /wp-content/plugins/achagua/bk/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /backend/index.php [L]
+RewriteRule . /wp-content/plugins/achagua/bk/index.php [L]
 
 </IfModule>

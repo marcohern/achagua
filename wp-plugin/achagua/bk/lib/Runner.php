@@ -2,7 +2,7 @@
 
 class Runner {
 
-    private static $remove = '/^\/backend/';
+    private static $remove = '/^\/wp-content\/plugins\/achagua\/bk/';
     private static $extract = '/^'
         .'(('
             .'\/(?<controller>[^\/]*)('
@@ -28,6 +28,7 @@ class Runner {
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $q = preg_replace(self::$remove,'', $_ENV['REQUEST_URI']);
+        $this->rel = $ex;
         $this->input = $q;
         $m = [];
         preg_match_all(self::$extract,$q,$m);
