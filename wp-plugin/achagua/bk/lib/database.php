@@ -1,6 +1,7 @@
 <?php
 
 function db_connect($db) {
+    //echo json_encode(['db'=>$db,'msg'=>'Arrived', 'dbs' => [$db->host, $db->user, $db->pwd, $db->schema]]);exit(0);
     $mysqli = new mysqli($db->host, $db->user, $db->pwd, $db->schema);
     if ($mysqli->connect_error) {
         die("(".$mysqli->connect_errno.") ".$mysqli->connect_error);
@@ -25,6 +26,12 @@ function db_query($mysqli, $sql) {
     }
     $records->close();
     return $result;
+}
+
+function db_first($mysqli, $sql) {
+    $result = db_query($mysqli, $sql);
+    if (count($result) > 0) return $result[0];
+    else error("Error, records found: $sql",'db');
 }
 
 function db_execute($mysqli, $sql) {
