@@ -16,7 +16,7 @@ function db_connect($db) {
 function db_query($mysqli, $sql) {
     $records = $mysqli->query($sql, MYSQLI_USE_RESULT);
     if (!$records) {
-        die("Error querying: ".$mysqli->error);
+        error("Error querying: ".$mysqli->error,'db');
     }
 
     $result = [];
@@ -37,6 +37,6 @@ function db_first($mysqli, $sql) {
 function db_execute($mysqli, $sql) {
     $records = $mysqli->query($sql, MYSQLI_USE_RESULT);
     if (!$records) {
-        die("Error querying: ".$mysqli->error);
+        error("Error querying: ".$mysqli->error,'db');
     }
 }
