@@ -14,3 +14,9 @@ function states_browse($mysqli, $country_id = null, $name = null) {
     }
     return db_query($mysqli, $sql);
 }
+
+
+function states_get($mysqli, $state_id) {
+    $sql = "SELECT * FROM states WHERE id = $id";
+    return db_first($mysqli, $sql);
+}

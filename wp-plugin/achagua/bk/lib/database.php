@@ -31,7 +31,7 @@ function db_query($mysqli, $sql) {
 function db_first($mysqli, $sql) {
     $result = db_query($mysqli, $sql);
     if (count($result) > 0) return $result[0];
-    else error("Error, records found: $sql",'db');
+    else err_not_found("No records found: $sql",'db');
 }
 
 function db_execute($mysqli, $sql) {
