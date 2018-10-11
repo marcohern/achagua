@@ -15,12 +15,13 @@ class Runner {
             .')?'
         .'))?'
     .'/';
-    private static $getid = '/(\/(?<id>\w+))/';
+    private static $getid = '/((\/(?<action>[a-zA-Z_]\w+))?\/(?<id>\w+))/';
 
     private $method;
     private $input;
     private $params;
     private $controller;
+    private $action;
     private $id;
     private $query;
 
@@ -40,7 +41,8 @@ class Runner {
 
         $m = [];
         preg_match_all(self::$getid,$this->query,$m);
-        if (count($m['id'])) $this->id = $m['id'][0];
+        if (count($m['id'    ])) $this->id     = $m['id'    ][0];
+        if (count($m['action'])) $this->action = $m['action'][0];
     }
 
     public function run() {
@@ -60,26 +62,31 @@ class Runner {
         switch($this->method) {
             case 'POST':
                 $data = (object)['data' => 123];
-                $result = $ctrl->post($data);
+                if (method_exists($ctrl, 'post')) $result = $ctrl->post($data);
+                else err_not_found("Method {$this->method} not available",'http');
                 $call = "\$ctrl->post(".json_encode($data).")";
                 break;
             case 'PUT':
                 $data = (object)['data' => 123];
-                $result = $ctrl->put($this->id, $data);
+                if (method_exists($ctrl, 'put')) $result = $ctrl->put($this->id, $data);
+                else err_not_found("Method {$this->method} not available",'http');
                 $call = "\$ctrl->put({$this->id},".json_encode($data).")";
                 break;
             case 'DELETE':
-                $result = $ctrl->delete($this->id);
+                if (method_exists($ctrl, 'delete')) $result = $ctrl->delete($this->id);
+                else err_not_found("Method {$this->method} not available",'http');
                 $call = "\$ctrl->delete({$this->id})";
                 break;
             case 'GET':
             default:
                 if (empty($this->id)) {
-                    $result = $ctrl->browse();
+                    if (method_exists($ctrl, 'browse')) $result = $ctrl->browse();
+                    else err_not_found("Method {$this->method} not available",'http');
                     $call = "\$ctrl->browse()";
                 }
                 else {
-                    $result = $ctrl->get($this->id);
+                    if (method_exists($ctrl, 'get')) $result = $ctrl->get($this->id);
+                    else err_not_found("Method {$this->method} not available",'http');
                     $call = "\$ctrl->get({$this->id})";
                 }
                 break;
