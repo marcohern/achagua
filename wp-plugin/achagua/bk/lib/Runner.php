@@ -38,11 +38,16 @@ class Runner {
         $this->controller = $m['controller'][0];
         $this->query = $m['query'][0];
         $this->params = $m['params'][0];
+        $this->action = null;
 
         $m = [];
         preg_match_all(self::$getid,$this->query,$m);
         if (count($m['id'    ])) $this->id     = $m['id'    ][0];
         if (count($m['action'])) $this->action = $m['action'][0];
+
+        if (empty($this->action)) {
+            $this->action = strtolower($this->method);
+        }
     }
 
     public function run() {
