@@ -6,9 +6,9 @@ $br = 0;
 define('APP_ROOT',dirname(__FILE__));
 
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    define('DS','\\');
+    define('DS',"\\");
 } else {
-    define('DS','/');
+    define('DS',"/");
 }
 
 $file = APP_ROOT.DS.'build.txt';

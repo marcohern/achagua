@@ -19,15 +19,4 @@ class StatesController extends Controller {
     public function get($id) {
         return states_get($this->db, $id);
     }
-
-    public function post($data) {
-
-    }
-
-    public function put($id, $data) {
-    }
-
-    public function delete($id) {
-
-    }
 }

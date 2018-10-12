@@ -19,15 +19,4 @@ class CountriesController extends Controller {
     public function get($id) {
         return countries_get($this->db, $id);
     }
-
-    public function post($data) {
-
-    }
-
-    public function put($id, $data) {
-    }
-
-    public function delete($id) {
-
-    }
 }
