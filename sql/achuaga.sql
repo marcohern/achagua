@@ -1,6 +1,16 @@
 -- 
--- BUILD
+-- REBUILD
 -- 
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+-- Drop all the existing Foreign Key Constraints
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+
+ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_city_id;
+
+ALTER TABLE cities DROP FOREIGN KEY FK_cities_state_id;
+
+ALTER TABLE states DROP FOREIGN KEY FK_states_country_id;
 
 
 DROP TABLE IF EXISTS cities;
@@ -18,6 +28,25 @@ CREATE TABLE countries (
     id   INT          NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
     code CHAR(2)      NOT NULL UNIQUE
+);
+
+
+DROP TABLE IF EXISTS incidents;
+
+CREATE TABLE incidents (
+    id         INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    vbg        VARCHAR(16)   NOT NULL DEFAULT '',
+    event_date DATETIME      NOT NULL,
+    lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    state_id   INT           NOT NULL,
+    city_id    INT           NOT NULL,
+    justice    MEDIUMTEXT    NOT NULL,
+    comments   MEDIUMTEXT    NOT NULL,
+    created_by INT           NOT NULL,
+    created    DATETIME      NOT NULL,
+    updated_by INT               NULL,
+    updated    DATETIME          NULL
 );
 
 
@@ -1197,6 +1226,16 @@ ALTER TABLE cities
 ADD CONSTRAINT FK_cities_state_id
     FOREIGN KEY (state_id)
     REFERENCES states(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+;
+
+
+
+ALTER TABLE incidents
+ADD CONSTRAINT FK_incidents_city_id
+    FOREIGN KEY (city_id)
+    REFERENCES cities(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ;
