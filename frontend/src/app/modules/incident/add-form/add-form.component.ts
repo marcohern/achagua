@@ -12,22 +12,27 @@ export class AddFormComponent implements OnInit {
 
   constructor(private is:IncidentsService) { }
 
-  onSaving($incident) {
+  onSaving($event) {
 
-    console.log("onSaving", $incident);
+    console.log("onSaving", $event);
+    var $incident = $event.value;
 
     var inc:Incident = {
       vbg: $incident.vbg,
-      event_date: new Date($incident.year,1,1),
+      event_date: '' + $incident.year + '-01-01',
       lat: 0,
       lng: 0,
       country_id: 57,
-      state_id: $incident.state_id,
-      city_id: $incident.city_id,
+      state_id: parseInt($incident.state),
+      city_id: parseInt($incident.city),
       justice: $incident.justice
     };
 
-    this.is.create(inc);
+    this.is.create(inc).subscribe(result => {
+      console.log(result);
+    }, error => {
+      console.error(error);
+    });
   }
 
   ngOnInit() {

@@ -60,7 +60,7 @@ export class AddFormSimpleInfoComponent implements OnInit {
       //country: this.fb.control(''),
       state: this.fb.control('', [Validators.required]),
       city: this.fb.control('',[Validators.required]),
-      justice: this.fb.control(false,[Validators.required]),
+      justice: this.fb.control(null,[Validators.required]),
     });
 
     var now = new Date();

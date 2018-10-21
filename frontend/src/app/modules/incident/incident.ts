@@ -1,7 +1,7 @@
 export class Incident {
     id?:number;
     vbg:string = '';
-    event_date:Date;
+    event_date:string;
     lat:number = 0;
     lng:number = 0;
     country_id:number;

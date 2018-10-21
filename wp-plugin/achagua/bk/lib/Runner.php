@@ -110,6 +110,7 @@ class Runner {
         header("Content-Type: application/json");
         $cc = ucwords(strtolower($this->controller), "_-").'Controller';
         $cf = "/controllers/$cc.php";
+        $data = (object)json_decode(file_get_contents("php://input"));
         echo json_encode([
             'method' => $this->method,
             'input' => $this->input,
@@ -117,6 +118,7 @@ class Runner {
             'controllerClass' => $cc,
             'controllerFile' => $cf,
             'query' => $this->query,
+            'data' => $data,
             'params' => $this->params,
             'id' => $this->id,
             'get' => $_GET
