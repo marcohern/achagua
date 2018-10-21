@@ -19,10 +19,10 @@ function achagua_shortcode_base() {
 }
 
 function achuaga_shortcode_scripts() {
-?>    
+?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.4bc5fa6174b3e834cea6.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.c96c0aefdc328ba23db6.js"></script>
 <?php
 }
 

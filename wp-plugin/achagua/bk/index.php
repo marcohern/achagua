@@ -12,5 +12,5 @@ req('/lib/error.php');
 req('/lib/Runner.php');
 
 $runner = new Runner();
-//$runner->run();
-$runner->json();
+$runner->run();
+//$runner->json();
