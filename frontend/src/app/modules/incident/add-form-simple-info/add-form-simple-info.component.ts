@@ -79,7 +79,6 @@ export class AddFormSimpleInfoComponent implements OnInit {
         state.cities.push(city);
       }
     }
-    console.log("Cities and States mapped");
 
     this.selectStates = states;
     this.selectCities = [];

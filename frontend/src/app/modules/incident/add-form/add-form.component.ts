@@ -15,10 +15,6 @@ export class AddFormComponent implements OnInit {
     console.log("onSaving", $event);
   }
 
-  onSaved() {
-    console.log("onSaved");
-  }
-
   ngOnInit() {
     
   }
