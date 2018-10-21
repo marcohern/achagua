@@ -12,7 +12,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { environment } from '../../../environments/environment';
 import { AddFormVictimInfoComponent } from './add-form-victim-info/add-form-victim-info.component';
 import { AddFormIncidentInfoComponent } from './add-form-incident-info/add-form-incident-info.component';
-import { AddFormPerpsInfoComponent } from './add-form-perps-info/add-form-perps-info.component'
+import { AddFormPerpsInfoComponent } from './add-form-perps-info/add-form-perps-info.component';
+import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simple-info.component'
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { AddFormPerpsInfoComponent } from './add-form-perps-info/add-form-perps-
       apiKey: environment.apikey
     })
   ],
-  declarations: [AddFormComponent, MapComponent, AddFormVictimInfoComponent, AddFormIncidentInfoComponent, AddFormPerpsInfoComponent],
+  declarations: [AddFormComponent, MapComponent, AddFormVictimInfoComponent, AddFormIncidentInfoComponent, AddFormPerpsInfoComponent, AddFormSimpleInfoComponent],
   exports:[ AddFormComponent, MapComponent ],
   providers:[ GeocodeService ]
 })

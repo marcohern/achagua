@@ -1,0 +1,38 @@
+import { State } from './state';
+
+export var states:State[] = [
+    {id:5,name:'Antioquia',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:8,name:'Atlántico',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:11,name:'Bogotá D.C.',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:13,name:'Bolívar',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:15,name:'Boyacá',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:17,name:'Caldas',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:18,name:'Caquetá',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:19,name:'Cauca',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:20,name:'Cesar',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:23,name:'Córdoba',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:25,name:'Cundinamarca',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:27,name:'Chocó',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:41,name:'Huila',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:44,name:'La Guajira',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:47,name:'Magdalena',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:50,name:'Meta',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:52,name:'Nariño',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:54,name:'Norte de Santander',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:63,name:'Quindío',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:66,name:'Risaralda',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:68,name:'Santander',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:70,name:'Sucre',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:73,name:'Tolima',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:76,name:'Valle del Cauca',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:81,name:'Arauca',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:85,name:'Casanare',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:86,name:'Putumayo',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:88,name:'San Andrés, Providencia y Santa Catalina',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:91,name:'Amazonas',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:94,name:'Guainía',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:95,name:'Guaviare',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:97,name:'Vaupés',country_id:57,lat:0.0, lng:0.0, zoom:0.0},
+    {id:99,name:'Vichada',country_id:57,lat:0.0, lng:0.0, zoom:0.0}
+];
+

@@ -4,6 +4,9 @@ DROP TABLE IF EXISTS cities;
 CREATE TABLE cities (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
-    state_id INT NOT NULL
+    state_id INT NOT NULL,
+    lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    zoom       DECIMAL(12,9) NOT NULL DEFAULT 0.0
 );
 

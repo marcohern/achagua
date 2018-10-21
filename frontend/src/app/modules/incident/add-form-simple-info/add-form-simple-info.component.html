@@ -1,0 +1,60 @@
+<div [formGroup]="simpleForm">
+  <div class="row">
+    <div class="col-md-6">
+      <label>Tipo de Violencia de Tipo Genero</label>
+      <select class="form-control" formControlName="vbg">
+        <option value="VS">Violencia doméstica o violencia sexual</option>
+        <option value="PI">Violencia doméstica o violencia de pareja íntima</option>
+        <option value="FS">Trabajo sexual forzado / trata de personas</option>
+        <option value="DR">Violaciones de los derechos reproductivos</option>
+        <option value="NS">Niños y niñas solados</option>
+        <option value="DD">Violencia contra las defensoras de los derechos humanos</option>
+      </select>
+    </div>
+      <div class="col-md-6">
+        <label>Año</label>
+        <select class="form-control" formControlName="year">
+            <option value="">-- Año --</option>
+            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label>País</label>
+      <select class="form-control" formControlName="country">
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Departamento</label>
+      <select class="form-control" formControlName="state" (change)="onDeptoChanged()">
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Ciudad</label>
+      <select class="form-control" formControlName="city">
+      </select>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <label>Hubo Justicia?</label>
+    &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="true"  [(ngModel)]="justice"> <label class="b">Si</label>
+    &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="false" [(ngModel)]="justice"> <label class="b">No</label>
+    </div>
+    <div class="col-md-6">
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+      
+    </div>
+  </div>
+</div>

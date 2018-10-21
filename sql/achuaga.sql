@@ -18,7 +18,10 @@ DROP TABLE IF EXISTS cities;
 CREATE TABLE cities (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
-    state_id INT NOT NULL
+    state_id INT NOT NULL,
+    lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    zoom       DECIMAL(12,9) NOT NULL DEFAULT 0.0
 );
 
 
@@ -27,7 +30,10 @@ DROP TABLE IF EXISTS countries;
 CREATE TABLE countries (
     id   INT          NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
-    code CHAR(2)      NOT NULL UNIQUE
+    code CHAR(2)      NOT NULL UNIQUE,
+    lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    zoom       DECIMAL(12,9) NOT NULL DEFAULT 0.0
 );
 
 
@@ -39,13 +45,11 @@ CREATE TABLE incidents (
     event_date DATETIME      NOT NULL,
     lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
     lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    country_id INT           NOT NULL,
     state_id   INT           NOT NULL,
     city_id    INT           NOT NULL,
-    justice    MEDIUMTEXT    NOT NULL,
-    comments   MEDIUMTEXT    NOT NULL,
-    created_by INT           NOT NULL,
+    justice    TINYINT       NOT NULL,
     created    DATETIME      NOT NULL,
-    updated_by INT               NULL,
     updated    DATETIME          NULL
 );
 
@@ -53,9 +57,12 @@ CREATE TABLE incidents (
 DROP TABLE IF EXISTS states;
 
 CREATE TABLE states (
-    id INT NOT NULL PRIMARY KEY,
-    name VARCHAR(128) NOT NULL,
-    country_id INT NOT NULL
+    id         INT           NOT NULL PRIMARY KEY,
+    name       VARCHAR(128)  NOT NULL,
+    country_id INT           NOT NULL,
+    lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    zoom       DECIMAL(12,9) NOT NULL DEFAULT 0.0
 );
 
 INSERT INTO cities (id, name, state_id) VALUES

@@ -7,9 +7,10 @@ CREATE TABLE incidents (
     event_date DATETIME      NOT NULL,
     lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
     lng        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
+    country_id INT           NOT NULL,
     state_id   INT           NOT NULL,
     city_id    INT           NOT NULL,
-    justice    MEDIUMTEXT    NOT NULL,
+    justice    TINYINT       NOT NULL,
     created    DATETIME      NOT NULL,
     updated    DATETIME          NULL
 );
