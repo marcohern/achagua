@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+
+import { Country } from '../country';
+import { State } from '../state';
+import { City } from '../city';
+
+import { countries } from '../countries';
+import { states } from '../states';
+import { cities } from '../cities';
 
 @Component({
   selector: 'app-add-form-simple-info',
@@ -11,27 +19,75 @@ export class AddFormSimpleInfoComponent implements OnInit {
   date_type:string = '';
   years:number[] = [];
 
+  selectStates:State[];
+  selectCities:City[];
+  
+
   simpleForm:FormGroup;
 
   constructor(private fb:FormBuilder) { 
     
   }
 
+  @Output()
+  onSaving = new EventEmitter();
+
+  getState(stateId:number) {
+    for(let state of states) {
+      if (state.id == stateId) {
+        return state;
+      }
+    }
+    return null;
+  }
+
   onDeptoChanged() {
-    var depto = this.simpleForm.get('state');
-    console.log("onDeptoChanged",depto);
+    var stateId = this.simpleForm.get('state');
+    if (stateId.value=='') {
+      this.selectCities = [];
+      return;
+    }
+    var state = this.getState(stateId.value);
+    this.selectCities = state.cities;
+    console.log("onDeptoChanged",stateId.value);
   }
 
   ngOnInit() {
-    var now = new Date();
-    for (let i=0;i<=101;i++) {
-      this.years.push(now.getFullYear() + i - 1);
-    }
 
     this.simpleForm = this.fb.group({
-      vbg: this.fb.control(''),
-      year: this.fb.control(''),
+      vbg: this.fb.control('',[Validators.required]),
+      year: this.fb.control('',[Validators.required]),
+      //country: this.fb.control(''),
+      state: this.fb.control('', [Validators.required]),
+      city: this.fb.control('',[Validators.required]),
+      justice: this.fb.control('',[Validators.required]),
+    });
 
+    var now = new Date();
+    var current = now.getFullYear();
+    var start = current - 30;
+    for (let i=0;i<=131;i++) {
+      this.years.push(start+i);
+    }
+    this.simpleForm.get('year').setValue(current);
+
+    for (let city of cities) {
+      if (city.state == null) {
+        var state = this.getState(city.state_id);
+        city.state = state;
+        if (state.cities==null) state.cities = [];
+        state.cities.push(city);
+      }
+    }
+    console.log("Cities and States mapped");
+
+    this.selectStates = states;
+    this.selectCities = [];
+  }
+
+  send($event) {
+    this.onSaving.emit({
+      value: this.simpleForm.value
     });
   }
 

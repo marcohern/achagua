@@ -1,9 +1,7 @@
 <div class="container">
-  <form [formGroup]="incidentForm">
+  <form>
     <h3>Informacion de la Victima</h3>
-    <app-add-form-simple-info></app-add-form-simple-info>
+    <app-add-form-simple-info (onSaving)="onSaving($event)"></app-add-form-simple-info>
     <hr>
-    
-    <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>
