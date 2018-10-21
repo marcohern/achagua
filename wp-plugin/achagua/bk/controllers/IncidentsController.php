@@ -1,5 +1,8 @@
 <?php
 
+req('/controllers/Controller.php');
+req('/lib/incidents.php');
+
 class IncidentsController extends Controller {
     public function beforeFilter() {
         parent::beforeFilter();
@@ -14,18 +17,18 @@ class IncidentsController extends Controller {
     }
 
     public function get($id) {
-        return incidents_browse($this->db, $id);
+        return incidents_get($this->db, $id);
     }
 
     public function post($data) {
-        return incidents_create($data);
+        return incidents_create($this->db, $data);
     }
 
     public function put($id, $data) {
-        return incidents_update($id, $data);
+        return incidents_update($this->db, $id, $data);
     }
 
     public function delete($id) {
-        return incidents_delete($id);
+        return incidents_delete($this->db, $id);
     }
 }

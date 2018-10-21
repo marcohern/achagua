@@ -64,15 +64,16 @@ class Runner {
         $result = null;
         $ctrl->beforeFilter();
         $call = '';
+        $data = json_decode(file_get_contents("php://input"));
         switch($this->method) {
             case 'POST':
-                $data = (object)['data' => 123];
+                //$data = (object)['data' => 123];
                 if (method_exists($ctrl, 'post')) $result = $ctrl->post($data);
                 else err_not_found("Method {$this->method} not available",'http');
                 $call = "\$ctrl->post(".json_encode($data).")";
                 break;
             case 'PUT':
-                $data = (object)['data' => 123];
+                //$data = (object)['data' => 123];
                 if (method_exists($ctrl, 'put')) $result = $ctrl->put($this->id, $data);
                 else err_not_found("Method {$this->method} not available",'http');
                 $call = "\$ctrl->put({$this->id},".json_encode($data).")";

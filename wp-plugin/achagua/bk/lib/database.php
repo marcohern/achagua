@@ -39,4 +39,5 @@ function db_execute($mysqli, $sql) {
     if (!$records) {
         error("Error querying: ".$mysqli->error,'db');
     }
+    return $records;
 }
