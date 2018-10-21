@@ -11,6 +11,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { environment } from '../../../environments/environment';
 import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simple-info.component'
+import { IncidentsService } from './incidents.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,6 @@ import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simp
   ],
   declarations: [AddFormComponent, MapComponent, AddFormSimpleInfoComponent],
   exports:[ AddFormComponent, MapComponent ],
-  providers:[ GeocodeService ]
+  providers:[ GeocodeService, IncidentsService ]
 })
 export class IncidentModule { }

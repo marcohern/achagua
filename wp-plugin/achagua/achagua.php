@@ -7,7 +7,7 @@
 Plugin Name: Achagua Form
 Plugin URI: https://github.com/marcohern/achagua
 Description: A form for inserting incidents
-Version: 1.0.11
+Version: 1.0.13
 Author: Marco Hernandez
 Author URI: https://marcohern.com
 License: GPLv2 or later
