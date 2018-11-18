@@ -21,6 +21,10 @@ class IncidentsController extends Controller {
     }
 
     public function post($data) {
+        $errors = incidents_validate($data);
+        if (count($errors)>0) {
+            return err_bad_request('Validation failed.','validate');
+        }
         return incidents_create($this->db, $data);
     }
 

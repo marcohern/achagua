@@ -2,6 +2,7 @@
 
 req("/controllers/Controller.php");
 req("/lib/database.php");
+req("/lib/header.php");
 
 class Runner {
 
@@ -101,13 +102,13 @@ class Runner {
         $ctrl->afterFilter();
         $db->close();
 
-        header("Content-Type: application/json");
+        incidents_header();
         //echo json_encode(['r'=>$result,'call' => $call]);//exit(0);
         echo json_encode($result);//exit(0);
     }
 
     public function json() {
-        header("Content-Type: application/json");
+        incidents_header();
         $cc = ucwords(strtolower($this->controller), "_-").'Controller';
         $cf = "/controllers/$cc.php";
         $data = (object)json_decode(file_get_contents("php://input"));

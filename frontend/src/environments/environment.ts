@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apikey: 'AIzaSyBV-6ds73oQP_OTbVylTpvhz3rY6RHpOF8',
-  apiroot: '/wp-content/plugins/achagua/bk'
+  apiroot: 'https://achagua.marcohern.com/wp-content/plugins/achagua/bk'
 };
 
 /*

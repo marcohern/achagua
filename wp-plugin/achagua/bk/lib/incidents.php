@@ -51,3 +51,8 @@ function incidents_delete($mysqli, $id) {
     $result = db_execute($mysqli, $sql);
     return ['success' => $result ];
 }
+
+function incidents_validate($data) {
+    $errors = [];
+    return $errors;
+}

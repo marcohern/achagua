@@ -8,6 +8,7 @@ import { City } from '../city';
 import { countries } from '../countries';
 import { states } from '../states';
 import { cities } from '../cities';
+import { IncidentsService } from '../incidents.service';
 
 @Component({
   selector: 'app-add-form-simple-info',
