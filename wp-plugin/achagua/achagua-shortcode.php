@@ -22,7 +22,7 @@ function achuaga_shortcode_scripts() {
 ?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.ca90d11c743cc688c1de.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.d7fe4d4acf8fa5fadfd2.js"></script>
 <?php
 }
 
@@ -31,7 +31,7 @@ function achagua_shortcode_func( $atts ){
     wp_enqueue_style('achagua-bootstrap','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
     wp_enqueue_style('achagua-bs-datepicker','https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css');
 
-    wp_enqueue_style('achagua-css','/wp-content/plugins/achagua/app/styles.34c57ab7888ec1573f9c.css');
+    wp_enqueue_style('achagua-css','/wp-content/plugins/achagua/app/styles.a474c4b2064489e33e1b.css');
     
     add_action('wp_footer', 'achuaga_shortcode_scripts');
 	return "<app-root></app-root>";//require(ACHAGUA_PLUGIN_DIR.'tpl.php');
