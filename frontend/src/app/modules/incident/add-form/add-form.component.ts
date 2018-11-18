@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Incident } from '../incident';
 import { IncidentsService } from '../incidents.service';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { ModalComponent } from '../modal/modal.component';
 
 
 @Component({
@@ -10,7 +12,9 @@ import { IncidentsService } from '../incidents.service';
 })
 export class AddFormComponent implements OnInit {
 
-  constructor(private is:IncidentsService) { }
+  modalRef:BsModalRef;
+
+  constructor(private is:IncidentsService, private bs:BsModalService) { }
 
   onSaving($event) {
 
@@ -30,6 +34,18 @@ export class AddFormComponent implements OnInit {
 
     this.is.create(inc).subscribe(result => {
       console.log(result);
+
+      const initialState = {
+        list: [
+          "Este dialogo confirma que se ha registrado el incidente satisfactoriamente.",
+          "Puede cerrar este dialogo registrar otro incidente nuevamente.",
+          "Identidad del registro: " + result.id,
+      ],
+        title:"Incidente guardado # " + result.id
+      };
+      
+      this.modalRef = this.bs.show(ModalComponent, {initialState});
+      this.modalRef.content.closeBtnName = 'Cerrar';
     }, error => {
       console.error(error);
     });

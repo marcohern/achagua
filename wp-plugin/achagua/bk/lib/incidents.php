@@ -25,7 +25,9 @@ function incidents_create($mysqli, $data) {
     $justice = ($data->justice) ? 1 : 0;
     $sql .= "($vbg,$event_date,$lat,$lng,$country_id,$state_id,$city_id,$justice,NOW(), NULL)";
     $result = db_execute($mysqli, $sql);
-    return ['success' => $result ];
+    $sql2 = "SELECT LAST_INSERT_ID() AS id ";
+    $id = db_first($mysqli, $sql2)->id;
+    return ['success' => $result, 'id' => 0+$id ];
 }
 
 function incidents_update($mysqli, $id, $data) {
@@ -43,7 +45,8 @@ function incidents_update($mysqli, $id, $data) {
          ." country_id = $country_id, state_id = $state_id, city_id = $city_id,"
          ."justice = $justice, updated = NOW() WHERE id = $id";
     $result = db_execute($mysqli, $sql);
-    return ['success' => $result ];
+    
+    return ['success' => $result];
 }
 
 function incidents_delete($mysqli, $id) {

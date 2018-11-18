@@ -89,6 +89,15 @@ export class AddFormSimpleInfoComponent implements OnInit {
     this.onSaving.emit({
       value: this.simpleForm.value
     });
+    this.simpleForm.setValue({
+      vbg: '',
+      year: '',
+      //country: this.fb.control(''),
+      state: '',
+      city: '',
+      justice: '',
+    });
+    
   }
 
 }

@@ -8,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { GeocodeService } from './geocode.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 import { environment } from '../../../environments/environment';
 import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simple-info.component'
 import { IncidentsService } from './incidents.service';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   imports: [
@@ -19,13 +21,15 @@ import { IncidentsService } from './incidents.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalModule,
     BsDatepickerModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.apikey
     })
   ],
-  declarations: [AddFormComponent, MapComponent, AddFormSimpleInfoComponent],
+  declarations: [AddFormComponent, MapComponent, AddFormSimpleInfoComponent, ModalComponent],
   exports:[ AddFormComponent, MapComponent ],
-  providers:[ GeocodeService, IncidentsService ]
+  providers:[ GeocodeService, IncidentsService, BsModalService ],
+  entryComponents: [ModalComponent]
 })
 export class IncidentModule { }
