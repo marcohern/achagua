@@ -54,4 +54,4 @@
   </div>
 </div>
 
-<button type="button" class="btn btm-lg btn-primary" (click)="send($event)" [disabled]="!simpleForm.valid">Guardar</button>
+<button type="button" class="btn btm-lg btn-primary" (click)="send($event)" [disabled]="!simpleForm.valid && !submitDisabled">Guardar</button>

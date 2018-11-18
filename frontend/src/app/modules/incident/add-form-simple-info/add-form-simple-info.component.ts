@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { Country } from '../country';
@@ -22,6 +22,9 @@ export class AddFormSimpleInfoComponent implements OnInit {
 
   selectStates:State[];
   selectCities:City[];
+
+  @Input()
+  submitDisabled:boolean = false;
   
 
   simpleForm:FormGroup;
@@ -66,8 +69,8 @@ export class AddFormSimpleInfoComponent implements OnInit {
 
     var now = new Date();
     var current = now.getFullYear();
-    var start = current - 30;
-    for (let i=0;i<=131;i++) {
+    var start = current;
+    for (let i=0;i>=-100;i--) {
       this.years.push(start+i);
     }
     this.simpleForm.get('year').setValue(current);

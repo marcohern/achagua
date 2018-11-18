@@ -13,6 +13,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class AddFormComponent implements OnInit {
 
   modalRef:BsModalRef;
+  submitDisabled:boolean = false;
 
   constructor(private is:IncidentsService, private bs:BsModalService) { }
 
@@ -31,7 +32,7 @@ export class AddFormComponent implements OnInit {
       city_id: parseInt($incident.city),
       justice: $incident.justice
     };
-
+    this.submitDisabled = true;
     this.is.create(inc).subscribe(result => {
       console.log(result);
 
@@ -46,8 +47,10 @@ export class AddFormComponent implements OnInit {
       
       this.modalRef = this.bs.show(ModalComponent, {initialState});
       this.modalRef.content.closeBtnName = 'Cerrar';
+      this.submitDisabled = false;
     }, error => {
       console.error(error);
+      this.submitDisabled = false;
     });
   }
 
