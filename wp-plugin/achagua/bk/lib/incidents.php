@@ -30,6 +30,28 @@ function incidents_create($mysqli, $data) {
     return ['success' => $result, 'id' => 0+$id ];
 }
 
+function incidents_bulk($mysqli, $records) {
+    $sql = "INSERT INTO incidents (vbg, event_date, lat, lng, country_id, state_id, city_id, justice, created, updated) VALUES ";
+    $i=0;
+    foreach ($records as $data) {
+        if ($i>0) { $sql .= ","; }
+        $vbg = "'".addslashes($data->vbg)."'";
+        $event_date = "'{$data->event_date}'";
+        $lat = $data->lat;
+        $lng = $data->lng;
+        $country_id = $data->country_id;
+        $state_id = $data->state_id;
+        $city_id = $data->city_id;
+        $justice = ($data->justice) ? 1 : 0;
+        $sql .= "($vbg,$event_date,$lat,$lng,$country_id,$state_id,$city_id,$justice,NOW(), NULL)";
+        $i++;
+    }
+    $result = db_execute($mysqli, $sql);
+    $sql2 = "SELECT LAST_INSERT_ID() AS id ";
+    $id = db_first($mysqli, $sql2)->id;
+    return ['success' => $result, 'id' => 0+$id,'amount' => $i ];
+}
+
 function incidents_update($mysqli, $id, $data) {
     $sql = "UPDATE incidents";
     $vbg = "'".addslashes($data->vbg)."'";
