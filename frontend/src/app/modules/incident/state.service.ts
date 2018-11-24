@@ -38,4 +38,13 @@ export class StateService {
     }
     return null;
   }
+
+  getCityFromState(state:State, cityId:number) {
+    for (let city of state.cities) {
+      if (city.id == cityId) {
+        return city;
+      }
+    }
+    return null;
+  }
 }

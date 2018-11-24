@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <div class="form-group">
         <label for="type"></label>
         <select class="form-control" id="type">
@@ -15,8 +15,8 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-xs-3">
-        <div class="form-groyp">
+      <div class="col-3">
+        <div class="form-group">
           <label for="state">Departamento</label>
           <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
             <option [ngValue]="null"></option>
@@ -24,23 +24,51 @@
           </select>
         </div>
       </div>
-      <div class="col-xs-3">
-        <label for="city">Ciudad</label>
-        <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
-          <option [ngValue]="null"></option>
-          <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
-        </select>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="city">Ciudad</label>
+          <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
+          </select>
+        </div>
       </div>
-      <div class="col-xs-3"></div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="city">Año</label>
+          <select class="form-control" [(ngModel)]="selectedYear" (change)="onYearChanged()">
+            <option [ngValue]="0"></option>
+            <option *ngFor="let year of selectYears" [ngValue]="year">{{year}}</option>
+          </select>
+        </div>
+      </div>
   </div>
-  <hr>
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-    <agm-marker *ngFor="let m of stateMarkers" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" draggable="false" iconUrl="assets/map-marker-red.png"></agm-marker>
-    <agm-marker *ngFor="let c of cityMarkers" [latitude]="c.lat" [longitude]="c.lng" draggable="false" iconUrl="assets/map-marker-blue.png"></agm-marker>
-  </agm-map>
-  <div>
-    Icons made by <a href="https://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>
-    from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+  <div class="row">
+    <div class="col-sm-8">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-marker *ngFor="let m of stateMarkers"
+          #stateMarker
+          [latitude]="m.lat" [longitude]="m.lng"
+          (markerClick)="onClickStateMarker($event, stateMarker)"
+          draggable="false" iconUrl="assets/map-marker-red.png"
+          [attr.state]="m.state.id">
+        </agm-marker>
+        <agm-marker *ngFor="let c of cityMarkers"
+          #cityMarker
+          [latitude]="c.lat" [longitude]="c.lng"
+          (markerClick)="onClickCityMarker($event, cityMarker)"
+          draggable="false" iconUrl="assets/map-marker-blue.png"
+          [attr.city]="c.city.id">
+        </agm-marker>
+      </agm-map>
+      <div>
+        Icons made by <a href="https://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>
+        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      Charts
+    </div>
   </div>
 </div>
