@@ -3,6 +3,7 @@ import { State } from '../state';
 import { City } from '../city';
 import { StateService } from '../state.service';
 import { AgmMarker, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
+import { IncidentsService } from '../incidents.service';
 
 @Component({
   selector: 'incident-map',
@@ -21,6 +22,23 @@ export class MapComponent implements OnInit {
   amount:number = 12;
   zoom:number = 5.8;
 
+  stateCountLabels:string[] = [];
+  stateCountIncidents:any[] = [];
+  stateCountOptions:any = {
+    responsive: true
+  };
+  public stateCountColors:Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  stateCountDisplay:boolean = false;
+
   coZoom = 5.8;
   dpZoom = 8;
   ctZoom = 10;
@@ -31,14 +49,15 @@ export class MapComponent implements OnInit {
 
   selectedState:State;
   selectedCity:City;
+  selectedYear:number;
 
   stateMarkers:any[] = [];
   cityMarkers:any[] = [];
 
   
-  constructor(private ss:StateService) { }
+  constructor(private ss:StateService, private is:IncidentsService) { }
 
-  private focusStateMarker(state:State) {
+  public focusStateMarker(state:State) {
     this.zoom = this.dpZoom;
     this.lat = this.selectedState.lat;
     this.lng = this.selectedState.lng;
@@ -49,17 +68,17 @@ export class MapComponent implements OnInit {
     }
   }
 
-  private focusCityMarker(city:City) {
+  public focusCityMarker(city:City) {
     console.log(city);
   }
 
-  private focusReset() {
+  public focusReset() {
     this.zoom = this.coZoom;
     this.lat = this.clat;
     this.lng = this.clng;
   }
 
-  private onDeptoChanged() {
+  public onDeptoChanged() {
     console.log(this.selectedState);
     if (this.selectedState == null) {
       this.cityMarkers = [];
@@ -70,20 +89,32 @@ export class MapComponent implements OnInit {
     }
   }
 
-  private onCityChanged() {
+  public onCityChanged() {
     this.focusCityMarker(this.selectedCity);
   }
 
-  private onClickStateMarker($event:AgmMarker, marker) {
+  public onYearChanged() {
+    console.log(this.selectedYear);
+  }
+
+  public onClickStateMarker($event:AgmMarker, marker) {
     var stateId = parseInt(marker.getAttribute('state'));
     this.selectedState = this.ss.getState(stateId);
     this.focusStateMarker(this.selectedState);
   }
 
-  private onClickCityMarker($event:AgmMarker, marker) {
+  public onClickCityMarker($event:AgmMarker, marker) {
     var cityId = parseInt(marker.getAttribute('city'));
     this.selectedCity = this.ss.getCityFromState(this.selectedState, cityId);
     this.focusCityMarker(this.selectedCity);
+  }
+
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
   }
 
   ngOnInit() {
@@ -103,5 +134,27 @@ export class MapComponent implements OnInit {
     for (var i=begin;i>=end;i--) {
       this.selectYears.push(i);
     }
+
+    this.stateCountLabels = [];
+    this.stateCountIncidents = [
+      {data:[], label:'Incidentes'}
+    ];
+
+    this.is.stateCount().subscribe(result => {
+      
+      var lb = [];
+      var vl = [
+        {data:[], label:'Incidentes por Depto'}
+      ];
+      console.log(result);
+      for (var i=0;i<result.length;i++) {
+        lb[i] = result[i].state;
+        vl[0].data[i] = parseInt(result[i].incidents);
+      }
+      this.stateCountLabels = lb;
+      this.stateCountIncidents = vl;
+      this.stateCountDisplay = true;
+      console.log(this.stateCountLabels,this.stateCountIncidents);
+    });
   }
 }

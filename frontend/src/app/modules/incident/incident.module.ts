@@ -9,12 +9,15 @@ import { AgmCoreModule } from '@agm/core';
 import { GeocodeService } from './geocode.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { ChartsModule } from 'ng2-charts';
 
 import { environment } from '../../../environments/environment';
 import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simple-info.component'
-import { IncidentsService } from './incidents.service';
 import { ModalComponent } from './modal/modal.component';
+
+import { IncidentsService } from './incidents.service';
 import { StateService } from './state.service';
+
 
 @NgModule({
   imports: [
@@ -23,6 +26,7 @@ import { StateService } from './state.service';
     FormsModule,
     ReactiveFormsModule,
     ModalModule,
+    ChartsModule,
     BsDatepickerModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.apikey

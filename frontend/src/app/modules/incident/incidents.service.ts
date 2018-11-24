@@ -28,4 +28,12 @@ export class IncidentsService {
   public create(incident:Incident):Observable<any> {
     return this.http.post(this.url(), incident);
   }
+
+  public stateCount():Observable<any> {
+    return this.http.get(this.url() + '/state_count');
+  }
+
+  public stateCountByYear(year:number):Observable<any> {
+    return this.http.get(this.url() + '/state_count_by_year/' + year);
+  }
 }
