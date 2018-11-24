@@ -16,7 +16,7 @@ class Runner {
             .')?'
         .'))?'
     .'/';
-    private static $getid = '/((\/(?<action>[a-zA-Z_]\w+))?\/(?<id>\w+))/';
+    private static $getid = '/\/(?<action>\w+)(\/(?<id>\w+)?(\/(?<p0>\w+)?)?)?/';
 
     private $method;
     private $input;
@@ -24,6 +24,7 @@ class Runner {
     private $controller;
     private $action;
     private $id;
+    private $p0;
     private $query;
 
     private $rel;
@@ -44,6 +45,7 @@ class Runner {
         $m = [];
         preg_match_all(self::$getid,$this->query,$m);
         if (count($m['id'    ])) $this->id     = $m['id'    ][0];
+        if (count($m['p0'    ])) $this->p0     = $m['p0'    ][0];
         if (count($m['action'])) $this->action = $m['action'][0];
 
         if (empty($this->action)) {
@@ -67,34 +69,48 @@ class Runner {
         $call = '';
         $data = json_decode(file_get_contents("php://input"));
         $action = $this->action;
+        $before = ['action' => $action, 'id' => $this->id,'p0'=>$this->p0];
+        if (!empty($action)) {
+            if (!method_exists($ctrl, $action)) {
+                $this->p0 = $this->id;
+                $this->id = $action;
+                $action = strtolower($this->method);
+            }
+            if (!method_exists($ctrl, $action)) err_not_found("Method {$action} not available",'http');
+        }
+        $after = ['action' => $action, 'id' => $this->id,'p0'=>$this->p0];
+
+        $ctrl->setP0($this->p0);
+        $ctrl->setParams((object) $_GET);
+
+        //echo json_encode(['before'=>$before,'after' => $after]);exit(0);
+
         switch($this->method) {
             case 'POST':
-                //$data = (object)['data' => 123];
-                if (method_exists($ctrl, $action)) $result = $ctrl->$action($data);
-                else err_not_found("Method {$this->method} not available",'http');
+                $result = $ctrl->$action($data);
                 $call = "\$ctrl->$action(".json_encode($data).")";
                 break;
             case 'PUT':
-                //$data = (object)['data' => 123];
-                if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id, $data);
-                else err_not_found("Method {$this->method} not available",'http');
+                $result = $ctrl->$action($this->id, $data);
                 $call = "\$ctrl->$action({$this->id},".json_encode($data).")";
                 break;
             case 'DELETE':
-                if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id);
-                else err_not_found("Method {$this->method} not available",'http');
+                $result = $ctrl->$action($this->id);
                 $call = "\$ctrl->$action({$this->id})";
                 break;
             case 'GET':
             default:
                 if (empty($this->id)) {
-                    if (method_exists($ctrl, $action)) $result = $ctrl->$action();
-                    else err_not_found("Method {$this->method} not available",'http');
-                    $call = "\$ctrl->$action()";
+                    if ($this->action == 'get') {
+                        $result = $ctrl->browse();
+                        $call = "\$ctrl->browse()";
+                    } else {
+                        $result = $ctrl->$action();
+                        $call = "\$ctrl->$action()";
+                    }
                 }
                 else {
-                    if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id);
-                    else err_not_found("Method {$this->method} not available",'http');
+                    $result = $ctrl->$action($this->id);
                     $call = "\$ctrl->$action({$this->id})";
                 }
                 break;

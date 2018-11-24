@@ -5,7 +5,7 @@ include_once('database.php');
 
 function incidents_browse($mysqli, $limit=10, $offset=0) {
     $sql = "SELECT * FROM incidents";
-    $sql.= " LIMIT $limit, $offset";
+    $sql.= " LIMIT $offset, $limit";
     return db_query($mysqli, $sql);
 }
 

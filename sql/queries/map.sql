@@ -19,9 +19,10 @@ GROUP BY sid, state
 -- EXPLAIN
 SELECT YEAR(i.event_date) AS year, COUNT(*) AS incidents
 FROM incidents i
-INNER JOIN states s ON s.id = i.state_id
-WHERE s.id = 47
+WHERE i.state_id = 47
 GROUP BY year
+ORDER BY year DESC
+LIMIT 10
 ;
 
 -- STATE DETAILS, INCIDENTS
@@ -62,6 +63,19 @@ FROM incidents i
 INNER JOIN cities c ON c.id = i.city_id
 INNER JOIN states s ON s.id = c.state_id
 WHERE c.id = 47001
+GROUP BY year
+-- 	sid, state,
+--  cid, city
+-- 	lat, lng
+;
+
+-- CITY DETAILS, INCIDENTS
+-- EXPLAIN
+SELECT YEAR(i.event_date) as year, COUNT(*) AS incidents
+FROM incidents i
+INNER JOIN cities c ON c.id = i.city_id
+INNER JOIN states s ON s.id = c.state_id
+WHERE i.city_id = 47001
 GROUP BY year
 -- 	sid, state,
 --  cid, city
