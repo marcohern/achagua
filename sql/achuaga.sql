@@ -6,6 +6,8 @@
 -- Drop all the existing Foreign Key Constraints
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
+ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_country_id;
+ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_state_id;
 ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_city_id;
 
 ALTER TABLE cities DROP FOREIGN KEY FK_cities_state_id;
@@ -54,7 +56,9 @@ CREATE TABLE incidents (
     city_id    INT           NOT NULL,
     justice    TINYINT       NOT NULL,
     created    DATETIME      NOT NULL,
-    updated    DATETIME          NULL
+    updated    DATETIME          NULL,
+
+    INDEX IX_incidents_year_state_city (event_date, state_id, city_id)
 );
 
 
@@ -1248,6 +1252,23 @@ ADD CONSTRAINT FK_incidents_city_id
     ON UPDATE CASCADE
 ;
 
+
+
+ALTER TABLE incidents
+ADD CONSTRAINT FK_incidents_state_id
+    FOREIGN KEY (state_id)
+    REFERENCES states(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+;
+
+ALTER TABLE incidents
+ADD CONSTRAINT FK_incidents_country_id
+    FOREIGN KEY (country_id)
+    REFERENCES countries(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+;
 
 ALTER TABLE states
 ADD CONSTRAINT FK_states_country_id

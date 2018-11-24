@@ -16,6 +16,8 @@ CREATE TABLE incidents (
     city_id    INT           NOT NULL,
     justice    TINYINT       NOT NULL,
     created    DATETIME      NOT NULL,
-    updated    DATETIME          NULL
+    updated    DATETIME          NULL,
+
+    INDEX IX_incidents_year_state_city (event_date, state_id, city_id)
 );
 

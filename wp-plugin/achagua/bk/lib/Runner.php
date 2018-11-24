@@ -66,35 +66,36 @@ class Runner {
         $ctrl->beforeFilter();
         $call = '';
         $data = json_decode(file_get_contents("php://input"));
+        $action = $this->action;
         switch($this->method) {
             case 'POST':
                 //$data = (object)['data' => 123];
-                if (method_exists($ctrl, 'post')) $result = $ctrl->post($data);
+                if (method_exists($ctrl, $action)) $result = $ctrl->$action($data);
                 else err_not_found("Method {$this->method} not available",'http');
-                $call = "\$ctrl->post(".json_encode($data).")";
+                $call = "\$ctrl->$action(".json_encode($data).")";
                 break;
             case 'PUT':
                 //$data = (object)['data' => 123];
-                if (method_exists($ctrl, 'put')) $result = $ctrl->put($this->id, $data);
+                if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id, $data);
                 else err_not_found("Method {$this->method} not available",'http');
-                $call = "\$ctrl->put({$this->id},".json_encode($data).")";
+                $call = "\$ctrl->$action({$this->id},".json_encode($data).")";
                 break;
             case 'DELETE':
-                if (method_exists($ctrl, 'delete')) $result = $ctrl->delete($this->id);
+                if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id);
                 else err_not_found("Method {$this->method} not available",'http');
-                $call = "\$ctrl->delete({$this->id})";
+                $call = "\$ctrl->$action({$this->id})";
                 break;
             case 'GET':
             default:
                 if (empty($this->id)) {
-                    if (method_exists($ctrl, 'browse')) $result = $ctrl->browse();
+                    if (method_exists($ctrl, $action)) $result = $ctrl->$action();
                     else err_not_found("Method {$this->method} not available",'http');
-                    $call = "\$ctrl->browse()";
+                    $call = "\$ctrl->$action()";
                 }
                 else {
-                    if (method_exists($ctrl, 'get')) $result = $ctrl->get($this->id);
+                    if (method_exists($ctrl, $action)) $result = $ctrl->$action($this->id);
                     else err_not_found("Method {$this->method} not available",'http');
-                    $call = "\$ctrl->get({$this->id})";
+                    $call = "\$ctrl->$action({$this->id})";
                 }
                 break;
             
@@ -118,6 +119,7 @@ class Runner {
             'controller' => $this->controller,
             'controllerClass' => $cc,
             'controllerFile' => $cf,
+            'action' => $this->action,
             'query' => $this->query,
             'data' => $data,
             'params' => $this->params,
