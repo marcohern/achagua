@@ -1,5 +1,46 @@
 <div class="container">
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
-    <agm-circle *ngFor="let c of circles" [latitude]="c.lat" [longitude]="c.lng" [radius]="c.radius" fillColor="#FF0000" [fillOpacity]="c.opacity"></agm-circle>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="type"></label>
+        <select class="form-control" id="type">
+          <option>Deptos</option>
+          <option>Deptos por Año</option>
+          <option>Año por Depto</option>
+          <option>Ciudad por Depto</option>
+          <option>Ciudad por Depto/Año</option>
+          <option>Año por Ciudad</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-xs-3">
+        <div class="form-groyp">
+          <label for="state">Departamento</label>
+          <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let state of selectStates" [ngValue]="state">{{state.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <label for="city">Ciudad</label>
+        <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-3"></div>
+  </div>
+  <hr>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker *ngFor="let m of stateMarkers" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" draggable="false" iconUrl="assets/map-marker-red.png"></agm-marker>
+    <agm-marker *ngFor="let c of cityMarkers" [latitude]="c.lat" [longitude]="c.lng" draggable="false" iconUrl="assets/map-marker-blue.png"></agm-marker>
   </agm-map>
+  <div>
+    Icons made by <a href="https://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>
+    from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+  </div>
 </div>

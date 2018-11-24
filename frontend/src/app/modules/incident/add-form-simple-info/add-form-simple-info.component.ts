@@ -6,9 +6,8 @@ import { State } from '../state';
 import { City } from '../city';
 
 import { countries } from '../countries';
-import { states } from '../states';
-import { cities } from '../cities';
 import { IncidentsService } from '../incidents.service';
+import { StateService } from '../state.service';
 
 @Component({
   selector: 'app-add-form-simple-info',
@@ -29,21 +28,12 @@ export class AddFormSimpleInfoComponent implements OnInit {
 
   simpleForm:FormGroup;
 
-  constructor(private fb:FormBuilder) { 
+  constructor(private fb:FormBuilder, private ss:StateService) { 
     
   }
 
   @Output()
   onSaving = new EventEmitter();
-
-  getState(stateId:number) {
-    for(let state of states) {
-      if (state.id == stateId) {
-        return state;
-      }
-    }
-    return null;
-  }
 
   onDeptoChanged() {
     var stateId = this.simpleForm.get('state');
@@ -51,7 +41,7 @@ export class AddFormSimpleInfoComponent implements OnInit {
       this.selectCities = [];
       return;
     }
-    var state = this.getState(stateId.value);
+    var state = this.ss.getState(stateId.value);
     this.selectCities = state.cities;
     console.log("onDeptoChanged",stateId.value);
   }
@@ -75,16 +65,7 @@ export class AddFormSimpleInfoComponent implements OnInit {
     }
     this.simpleForm.get('year').setValue(current);
 
-    for (let city of cities) {
-      if (city.state == null) {
-        var state = this.getState(city.state_id);
-        city.state = state;
-        if (state.cities==null) state.cities = [];
-        state.cities.push(city);
-      }
-    }
-
-    this.selectStates = states;
+    this.selectStates = this.ss.getStates();
     this.selectCities = [];
   }
 

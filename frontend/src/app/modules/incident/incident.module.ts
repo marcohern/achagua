@@ -14,6 +14,7 @@ import { environment } from '../../../environments/environment';
 import { AddFormSimpleInfoComponent } from './add-form-simple-info/add-form-simple-info.component'
 import { IncidentsService } from './incidents.service';
 import { ModalComponent } from './modal/modal.component';
+import { StateService } from './state.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { ModalComponent } from './modal/modal.component';
   ],
   declarations: [AddFormComponent, MapComponent, AddFormSimpleInfoComponent, ModalComponent],
   exports:[ AddFormComponent, MapComponent ],
-  providers:[ GeocodeService, IncidentsService, BsModalService ],
+  providers:[ GeocodeService, IncidentsService, BsModalService, StateService ],
   entryComponents: [ModalComponent]
 })
 export class IncidentModule { }

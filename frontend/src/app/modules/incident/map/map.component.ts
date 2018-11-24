@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { State } from '../state';
+import { City } from '../city';
+import { StateService } from '../state.service';
+import { AgmMarker } from '@agm/core';
 
 @Component({
   selector: 'incident-map',
@@ -8,34 +12,63 @@ import { Component, OnInit } from '@angular/core';
 export class MapComponent implements OnInit {
 
   
-  lat: number = 3.441816;
-  lng: number = -76.516484;
+  clat: number = 4.701027;
+  clng: number = -73.783902;
+  lat:number;
+  lng:number;
   defRadius: number = 1000;
   defOpacity:number = 0.3;
-  amount:number = 20;
+  amount:number = 12;
+  zoom:number = 5.8;
 
-  circles:any[] = [];
+  coZoom = 5.8;
+  dpZoom = 8;
+  ctZoom = 10;
+
+  selectStates:State[] = [];
+  selectCities:City[] = [];
+
+  selectedState:State;
+  selectedCity:City;
+
+  stateMarkers:any[] = [];
+  cityMarkers:any[] = [];
   
-  constructor() { }
+  constructor(private ss:StateService) { }
 
-  private rnd(range:number) {
-    var half = range/2;
-    return half*(Math.random() - 0.5);
+  private onDeptoChanged() {
+    console.log(this.selectedState);
+    if (this.selectedState == null) {
+      this.cityMarkers = [];
+      this.zoom = this.coZoom;
+      this.lat = this.clat;
+      this.lng = this.clng;
+      return;
+    }
+    this.zoom = this.dpZoom;
+    this.lat = this.selectedState.lat;
+    this.lng = this.selectedState.lng;
+
+    this.selectCities = this.selectedState.cities;
+    this.cityMarkers = [];
+    for(let city of this.selectCities) {
+      this.cityMarkers.push({lat:city.lat, lng:city.lng});
+    }
+  }
+
+  private onCityChanged() {
+    console.log(this.selectedCity);
   }
 
   ngOnInit() {
-    var locRadiusCoor = 0.25;
-    var circRadiusMt = 2000;
-    var opacityRange = 0.6;
-    this.circles = [];
-    for (let i =0; i<this.amount;i++) {
-      var lat = this.lat + this.rnd(locRadiusCoor);
-      var lng = this.lng + this.rnd(locRadiusCoor);
-      var radius = this.defRadius + this.rnd(circRadiusMt);
-      var opacity = this.defOpacity + this.rnd(opacityRange);
-      this.circles.push({
-        lat: lat, lng:lng, radius:radius, opacity:opacity
-      });
+
+    this.lat = this.clat;
+    this.lng = this.clng;
+    this.selectStates = this.ss.getStates();
+    this.selectCities = [];
+
+    for(let state of this.selectStates) {
+      this.stateMarkers.push({lat:state.lat, lng:state.lng});
     }
   }
 

@@ -11,30 +11,29 @@ function incidents_browse($mysqli, $limit=10, $offset=0) {
 
 function incidents_year_count_by_city($mysqli, $city_id) {
     $cid = 0 + $city_id;
-    $sql = "SELECT YEAR(i.event_date) AS year, "
-          ."COUNT(*) AS incidents "
-          ."FROM incidents i "
-          ."INNER JOIN cities c ON c.id = i.city_id "
-          ."INNER JOIN states s ON s.id = c.state_id "
-          ."WHERE c.id = $cid "
-          ."GROUP BY year "
-          ."ORDER BY year DESC "
-          ."LIMIT 10";
+    $sql = "SELECT YEAR(i.event_date) AS year, 
+COUNT(*) AS incidents 
+FROM incidents i 
+INNER JOIN cities c ON c.id = i.city_id 
+INNER JOIN states s ON s.id = c.state_id 
+WHERE c.id = $cid 
+GROUP BY year 
+ORDER BY year DESC LIMIT 10";
     return db_query($mysqli, $sql);
 }
 
 function incidents_city_count_by_state_year($mysqli, $state_id, $year) {
     $sid = 0 + $state_id;
     $yr = 0 + $year;
-    $sql = "SELECT YEAR(i.event_date) AS year, "
-          ."i.city_id AS cid, c.name AS city, "
-          ."i.lat AS lat, i.lng AS lng, "
-          ."COUNT(*) AS incidents "
-          ."FROM incidents i "
-          ."INNER JOIN cities c ON c.id = i.city_id "
-          ."INNER JOIN states s ON s.id = c.state_id "
-          ."WHERE i.state_id = $sid AND i.event_date = '$yr-01-01' "
-          ."GROUP BY year, cid, city, lat, lng";
+    $sql = "SELECT YEAR(i.event_date) AS year, 
+i.city_id AS cid, c.name AS city, 
+i.lat AS lat, i.lng AS lng, 
+COUNT(*) AS incidents 
+FROM incidents i 
+INNER JOIN cities c ON c.id = i.city_id 
+INNER JOIN states s ON s.id = c.state_id 
+WHERE i.state_id = $sid AND i.event_date = '$yr-01-01' 
+GROUP BY year, cid, city, lat, lng";
     return db_query($mysqli, $sql);
 }
 
