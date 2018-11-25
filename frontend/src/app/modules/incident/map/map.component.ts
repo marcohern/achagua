@@ -4,6 +4,7 @@ import { City } from '../city';
 import { StateService } from '../state.service';
 import { AgmMarker, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { IncidentsService } from '../incidents.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'incident-map',
@@ -12,7 +13,7 @@ import { IncidentsService } from '../incidents.service';
 })
 export class MapComponent implements OnInit {
 
-  
+  approot:string = '';
   clat: number = 4.701027;
   clng: number = -73.783902;
   lat:number;
@@ -153,7 +154,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.approot = environment.maproot;
     this.lat = this.clat;
     this.lng = this.clng;
     this.selectStates = this.ss.getStates();

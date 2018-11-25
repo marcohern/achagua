@@ -26,14 +26,14 @@
           #stateMarker
           [latitude]="m.lat" [longitude]="m.lng"
           (markerClick)="onClickStateMarker($event, stateMarker)"
-          draggable="false" iconUrl="assets/map-marker-red.png"
+          draggable="false" [iconUrl]="approot + '/assets/map-marker-red.png'"
           [attr.state]="m.state.id">
         </agm-marker>
         <agm-marker *ngFor="let c of cityMarkers"
           #cityMarker
           [latitude]="c.lat" [longitude]="c.lng"
           (markerClick)="onClickCityMarker($event, cityMarker)"
-          draggable="false" iconUrl="assets/map-marker-blue.png"
+          draggable="false" [iconUrl]="approot + '/assets/map-marker-blue.png'"
           [attr.city]="c.city.id">
         </agm-marker>
       </agm-map>

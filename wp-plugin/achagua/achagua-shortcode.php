@@ -43,7 +43,7 @@ function achuaga_map_shortcode_scripts() {
 ?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.20bd5734e807dccba71e.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.25cb9ea83aa2b020be01.js"></script>
 <?php
 }
 
