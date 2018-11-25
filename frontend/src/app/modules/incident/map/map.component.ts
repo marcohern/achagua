@@ -42,9 +42,11 @@ export class MapComponent implements OnInit {
 
   displayGeneral:boolean = true;
   displayState:boolean = false;
+  displayCity:boolean = false;
   selectedStateIncidents:any = null;
   selectedStateCities:any[] = [];
   selectedStateYears:any[] = [];
+  selectedCityYears:any[] = [];
 
   
   constructor(private ss:StateService, private is:IncidentsService) { }
@@ -59,23 +61,12 @@ export class MapComponent implements OnInit {
       this.cityMarkers.push({lat:city.lat, lng:city.lng, city});
     }
 
-    this.displayGeneral = false;
-    this.displayState = true;
-    this.selectedStateIncidents = this.ss.getStateIncidentCount(this.stateCount, state.id);
-    console.log(this.selectedStateIncidents);
-    this.selectedStateCities = [];
-    this.is.cityCountByState(state.id).subscribe(result => {
-      this.selectedStateCities = result;
-    });
-
-    this.selectedStateYears = [];
-    this.is.yearCountByState(state.id).subscribe(result => {
-      this.selectedStateYears = result;
-    });
+    this.getStateDetailsCount(state);
   }
 
   public focusCityMarker(city:City) {
     console.log(city);
+    this.getCityDetailsCount(city);
   }
 
   public focusReset() {
@@ -85,6 +76,7 @@ export class MapComponent implements OnInit {
 
     this.displayGeneral = true;
     this.displayState = false;
+    this.displayCity = false;
   }
 
   public onDeptoChanged() {
@@ -99,7 +91,11 @@ export class MapComponent implements OnInit {
   }
 
   public onCityChanged() {
-    this.focusCityMarker(this.selectedCity);
+    if (this.selectedCity == null) {
+      this.displayCity = false;
+    } else {
+      this.focusCityMarker(this.selectedCity);
+    }
   }
 
   public onYearChanged() {
@@ -116,6 +112,44 @@ export class MapComponent implements OnInit {
     var cityId = parseInt(marker.getAttribute('city'));
     this.selectedCity = this.ss.getCityFromState(this.selectedState, cityId);
     this.focusCityMarker(this.selectedCity);
+  }
+
+  public getStateCount() {
+    this.stateCount = [];
+    this.is.stateCount().subscribe(result => {
+      var total = 0;
+      for (let record of result) {
+        total += parseInt(record.incidents);
+      }
+      this.stateCount = result;
+      this.totalCount = total;
+    });
+  }
+
+  public getStateDetailsCount(state:State) {
+    this.displayGeneral = false;
+    this.displayState = true;
+    this.displayCity = false;
+    this.selectedStateIncidents = this.ss.getStateIncidentCount(this.stateCount, state.id);
+    console.log(this.selectedStateIncidents);
+    this.selectedStateCities = [];
+    this.is.cityCountByState(state.id).subscribe(result => {
+      this.selectedStateCities = result;
+    });
+
+    this.selectedStateYears = [];
+    this.is.yearCountByState(state.id).subscribe(result => {
+      this.selectedStateYears = result;
+    });
+  }
+
+  public getCityDetailsCount(city:City) {
+    this.displayCity = false;
+    this.selectedCityYears = [];
+    this.is.yearCountByCity(city.id).subscribe(result => {
+      this.selectedCityYears = result;
+      this.displayCity = true;
+    });
   }
 
   ngOnInit() {
@@ -136,13 +170,6 @@ export class MapComponent implements OnInit {
       this.selectYears.push(i);
     }
 
-    this.is.stateCount().subscribe(result => {
-      var total = 0;
-      for (let record of result) {
-        total += parseInt(record.incidents);
-      }
-      this.stateCount = result;
-      this.totalCount = total;
-    });
+    this.getStateCount();
   }
 }

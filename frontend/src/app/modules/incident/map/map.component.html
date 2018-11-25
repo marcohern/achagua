@@ -1,22 +1,6 @@
-
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <div class="form-group">
-        <label for="type"></label>
-        <select class="form-control" id="type">
-          <option>Deptos</option>
-          <option>Deptos por Año</option>
-          <option>Año por Depto</option>
-          <option>Ciudad por Depto</option>
-          <option>Ciudad por Depto/Año</option>
-          <option>Año por Ciudad</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-3">
+      <div class="col-6">
         <div class="form-group">
           <label for="state">Departamento</label>
           <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
@@ -25,21 +9,12 @@
           </select>
         </div>
       </div>
-      <div class="col-3">
+      <div class="col-6">
         <div class="form-group">
           <label for="city">Ciudad</label>
           <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
             <option [ngValue]="null"></option>
             <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="form-group">
-          <label for="city">Año</label>
-          <select class="form-control" [(ngModel)]="selectedYear" (change)="onYearChanged()">
-            <option [ngValue]="0"></option>
-            <option *ngFor="let year of selectYears" [ngValue]="year">{{year}}</option>
           </select>
         </div>
       </div>
@@ -82,28 +57,40 @@
         </div>
       </div>
       <div class="jumbotron" *ngIf="displayState">
-          <p class="h5">{{selectedState.name}}</p>
-          <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
-          <hr>
-          <small>Incidentes por Ciudad</small>
-          <div class="row" *ngFor="let record of selectedStateCities">
-            <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-              <small><strong>{{record.city}}</strong></small>
+        <div *ngIf="displayCity">
+            <small>Detalles de Incidentes de</small>
+            <p class="h5">{{selectedCity.name}}</p>
+            <div class="row" *ngFor="let record of selectedCityYears">
+              <div class="col-7">
+                <small><strong>{{record.year}}</strong></small>
+              </div>
+              <div class="col-5">
+                  <small>{{record.incidents}}</small>
+              </div>
             </div>
-            <div class="col-5">
-                <small>{{record.incidents}}</small>
-            </div>
+        </div>
+        <p class="h5">{{selectedState.name}}</p>
+        <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
+        <hr>
+        <small>Incidentes por Ciudad</small>
+        <div class="row" *ngFor="let record of selectedStateCities">
+          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+            <small><strong>{{record.city}}</strong></small>
           </div>
-          <hr>
-          <small>Incidentes de {{selectedState.name}} por año</small>
-          <div class="row" *ngFor="let record of selectedStateYears">
-            <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-              <small><strong>{{record.year}}</strong></small>
-            </div>
-            <div class="col-5">
-                <small>{{record.incidents}}</small>
-            </div>
+          <div class="col-5">
+              <small>{{record.incidents}}</small>
           </div>
+        </div>
+        <hr>
+        <small>Incidentes de {{selectedState.name}} por año</small>
+        <div class="row" *ngFor="let record of selectedStateYears">
+          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+            <small><strong>{{record.year}}</strong></small>
+          </div>
+          <div class="col-5">
+              <small>{{record.incidents}}</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -44,4 +44,8 @@ export class IncidentsService {
   public yearCountByState(stateId:number) : Observable<any> {
     return this.http.get(this.url() + '/year_count_by_state/' + stateId);
   }
+
+  public yearCountByCity(cityId:number) : Observable<any> {
+    return this.http.get(this.url() + '/year_count_by_city/' + cityId);
+  }
 }
