@@ -22,23 +22,6 @@ export class MapComponent implements OnInit {
   amount:number = 12;
   zoom:number = 5.8;
 
-  stateCountLabels:string[] = [];
-  stateCountIncidents:any[] = [];
-  stateCountOptions:any = {
-    responsive: true
-  };
-  public stateCountColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  stateCountDisplay:boolean = false;
-
   coZoom = 5.8;
   dpZoom = 8;
   ctZoom = 10;
@@ -54,6 +37,15 @@ export class MapComponent implements OnInit {
   stateMarkers:any[] = [];
   cityMarkers:any[] = [];
 
+  totalCount = 0;
+  stateCount = [];
+
+  displayGeneral:boolean = true;
+  displayState:boolean = false;
+  selectedStateIncidents:any = null;
+  selectedStateCities:any[] = [];
+  selectedStateYears:any[] = [];
+
   
   constructor(private ss:StateService, private is:IncidentsService) { }
 
@@ -66,6 +58,20 @@ export class MapComponent implements OnInit {
     for(let city of this.selectCities) {
       this.cityMarkers.push({lat:city.lat, lng:city.lng, city});
     }
+
+    this.displayGeneral = false;
+    this.displayState = true;
+    this.selectedStateIncidents = this.ss.getStateIncidentCount(this.stateCount, state.id);
+    console.log(this.selectedStateIncidents);
+    this.selectedStateCities = [];
+    this.is.cityCountByState(state.id).subscribe(result => {
+      this.selectedStateCities = result;
+    });
+
+    this.selectedStateYears = [];
+    this.is.yearCountByState(state.id).subscribe(result => {
+      this.selectedStateYears = result;
+    });
   }
 
   public focusCityMarker(city:City) {
@@ -76,6 +82,9 @@ export class MapComponent implements OnInit {
     this.zoom = this.coZoom;
     this.lat = this.clat;
     this.lng = this.clng;
+
+    this.displayGeneral = true;
+    this.displayState = false;
   }
 
   public onDeptoChanged() {
@@ -109,14 +118,6 @@ export class MapComponent implements OnInit {
     this.focusCityMarker(this.selectedCity);
   }
 
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
   ngOnInit() {
 
     this.lat = this.clat;
@@ -135,26 +136,13 @@ export class MapComponent implements OnInit {
       this.selectYears.push(i);
     }
 
-    this.stateCountLabels = [];
-    this.stateCountIncidents = [
-      {data:[], label:'Incidentes'}
-    ];
-
     this.is.stateCount().subscribe(result => {
-      
-      var lb = [];
-      var vl = [
-        {data:[], label:'Incidentes por Depto'}
-      ];
-      console.log(result);
-      for (var i=0;i<result.length;i++) {
-        lb[i] = result[i].state;
-        vl[0].data[i] = parseInt(result[i].incidents);
+      var total = 0;
+      for (let record of result) {
+        total += parseInt(record.incidents);
       }
-      this.stateCountLabels = lb;
-      this.stateCountIncidents = vl;
-      this.stateCountDisplay = true;
-      console.log(this.stateCountLabels,this.stateCountIncidents);
+      this.stateCount = result;
+      this.totalCount = total;
     });
   }
 }

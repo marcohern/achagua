@@ -39,6 +39,15 @@ export class StateService {
     return null;
   }
 
+  getStateIncidentCount(stateCount:any[], stateId:number) {
+    for (let record of stateCount) {
+      if (record.sid == stateId) {
+        return record;
+      }
+    }
+    return null;
+  }
+
   getCityFromState(state:State, cityId:number) {
     for (let city of state.cities) {
       if (city.id == cityId) {

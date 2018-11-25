@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -44,23 +45,7 @@
       </div>
   </div>
   <div class="row">
-    <div class="col-sm-12">
-      <div style="width:100%;height:400px">
-        <canvas baseChart width="200" height="100" *ngIf="stateCountDisplay"
-                  [datasets]="stateCountIncidents"
-                  [labels]="stateCountLabels"
-                  [options]="stateCountOptions"
-                  [colors]="stateCountColors"
-                  [legend]="true"
-                  [chartType]="'line'"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)">
-        </canvas>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-8">
+    <div class="col-md-8">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
         <agm-marker *ngFor="let m of stateMarkers"
           #stateMarker
@@ -81,6 +66,44 @@
         Icons made by <a href="https://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>
         from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="jumbotron" *ngIf="displayGeneral">
+        <p>Total incidentes registrados hasta ahora</p>
+        <p class="h4">{{totalCount}} Incidentes</p>
+        <div class="row" *ngFor="let record of stateCount">
+          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+            <small><strong>{{record.state}}</strong></small>
+          </div>
+          <div class="col-5">
+              <small>{{record.incidents}}</small>
+          </div>
+        </div>
+      </div>
+      <div class="jumbotron" *ngIf="displayState">
+          <p class="h5">{{selectedState.name}}</p>
+          <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
+          <hr>
+          <small>Incidentes por Ciudad</small>
+          <div class="row" *ngFor="let record of selectedStateCities">
+            <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+              <small><strong>{{record.city}}</strong></small>
+            </div>
+            <div class="col-5">
+                <small>{{record.incidents}}</small>
+            </div>
+          </div>
+          <hr>
+          <small>Incidentes de {{selectedState.name}} por año</small>
+          <div class="row" *ngFor="let record of selectedStateYears">
+            <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+              <small><strong>{{record.year}}</strong></small>
+            </div>
+            <div class="col-5">
+                <small>{{record.incidents}}</small>
+            </div>
+          </div>
       </div>
     </div>
   </div>
