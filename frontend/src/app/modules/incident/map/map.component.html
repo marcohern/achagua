@@ -45,7 +45,7 @@
     </div>
     <div class="col-md-4">
       <div class="jumbotron" *ngIf="displayGeneral">
-        <p>Total incidentes registrados hasta ahora</p>
+        <p>Total de casos de VBG registrados</p>
         <p class="h4">{{totalCount}} Incidentes</p>
         <div class="row" *ngFor="let record of stateCount">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
@@ -72,7 +72,7 @@
         <p class="h5">{{selectedState.name}}</p>
         <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
         <hr>
-        <small>Incidentes por Ciudad</small>
+        <small>Casos VBG por Ciudad</small>
         <div class="row" *ngFor="let record of selectedStateCities">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <small><strong>{{record.city}}</strong></small>
@@ -82,7 +82,7 @@
           </div>
         </div>
         <hr>
-        <small>Incidentes de {{selectedState.name}} por año</small>
+        <small>Casos VBG de {{selectedState.name}} por año</small>
         <div class="row" *ngFor="let record of selectedStateYears">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <small><strong>{{record.year}}</strong></small>
