@@ -22,7 +22,7 @@ function achuaga_shortcode_scripts() {
 ?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/app/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.d7fe4d4acf8fa5fadfd2.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/app/main.6c4957d8ccb582c79fcf.js"></script>
 <?php
 }
 
@@ -43,7 +43,7 @@ function achuaga_map_shortcode_scripts() {
 ?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.5eebff04aa8a32ee592c.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.e238b91ac33f99fc8490.js"></script>
 <?php
 }
 
@@ -54,7 +54,7 @@ function achagua_map_shortcode_func($attrs) {
     wp_enqueue_style('achagua-css','/wp-content/plugins/achagua/map/styles.a474c4b2064489e33e1b.css');
     
     add_action('wp_footer', 'achuaga_map_shortcode_scripts');
-	return "<app-root></app-root>";
+	return "<br><br><br><br><br><br><br><br><app-root></app-root>";
 }
 
 add_action('wp_head','achagua_shortcode_base' );

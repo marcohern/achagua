@@ -4,6 +4,7 @@ import { City } from '../city';
 import { StateService } from '../state.service';
 import { AgmMarker, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { IncidentsService } from '../incidents.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'incident-map',
@@ -150,6 +151,10 @@ export class MapComponent implements OnInit {
       this.selectedCityYears = result;
       this.displayCity = true;
     });
+  }
+
+  public assets(uri:string) {
+    return environment.apiroot + '/assets' + uri;
   }
 
   ngOnInit() {

@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apikey: 'AIzaSyBV-6ds73oQP_OTbVylTpvhz3rY6RHpOF8',
-  apiroot: 'https://achagua.marcohern.com/wp-content/plugins/achagua/bk',
-  maproot: 'https://achagua.marcohern.com/wp-content/plugins/achagua/map'
+  apikey: 'AIzaSyAZbinXJb7apyMZehc6JZ0EUXRoQd3SpYc',
+  apiroot: 'https://www.vigiaafro.org/wp-content/plugins/achagua/bk',
+  maproot: 'https://www.vigiaafro.org/wp-content/plugins/achagua/map'
 };
 
 /*

@@ -27,7 +27,7 @@ $dlng = 0;
 $cities = cities_browse($my);
 $cities_count = count($cities);
 
-$n = 2000;
+$n = 500;
 $r = 500;
 
 echo "Begin\n";
