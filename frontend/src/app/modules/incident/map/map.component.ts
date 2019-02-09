@@ -153,6 +153,10 @@ export class MapComponent implements OnInit {
     });
   }
 
+  public assets(uri:string) {
+    return environment.apiroot + '/assets' + uri;
+  }
+
   ngOnInit() {
     this.approot = environment.maproot;
     this.lat = this.clat;

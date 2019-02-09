@@ -1,5 +1,5 @@
 @echo off
-del .\wp-plugin\achagua\app\*.* /Q
+del .\wp-plugin\achagua\map\*.* /Q
 copy frontend\dist\achagua\*.js .\wp-plugin\achagua\map
 copy frontend\dist\achagua\*.css .\wp-plugin\achagua\map
 copy frontend\dist\achagua\*.ico .\wp-plugin\achagua\map

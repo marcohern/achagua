@@ -26,14 +26,14 @@
           #stateMarker
           [latitude]="m.lat" [longitude]="m.lng"
           (markerClick)="onClickStateMarker($event, stateMarker)"
-          draggable="false" [iconUrl]="approot + '/assets/map-marker-red.png'"
+          draggable="false" [iconUrl]="assets('/map-marker-red.png')"
           [attr.state]="m.state.id">
         </agm-marker>
         <agm-marker *ngFor="let c of cityMarkers"
           #cityMarker
           [latitude]="c.lat" [longitude]="c.lng"
           (markerClick)="onClickCityMarker($event, cityMarker)"
-          draggable="false" [iconUrl]="approot + '/assets/map-marker-blue.png'"
+          draggable="false" [iconUrl]="assets('/map-marker-blue.png')"
           [attr.city]="c.city.id">
         </agm-marker>
       </agm-map>
@@ -45,7 +45,7 @@
     </div>
     <div class="col-md-4">
       <div class="jumbotron" *ngIf="displayGeneral">
-        <p>Total incidentes registrados hasta ahora</p>
+        <p>Total de casos de VBG registrados</p>
         <p class="h4">{{totalCount}} Incidentes</p>
         <div class="row" *ngFor="let record of stateCount">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
@@ -72,7 +72,7 @@
         <p class="h5">{{selectedState.name}}</p>
         <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
         <hr>
-        <small>Incidentes por Ciudad</small>
+        <small>Casos VBG por Ciudad</small>
         <div class="row" *ngFor="let record of selectedStateCities">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <small><strong>{{record.city}}</strong></small>
@@ -82,7 +82,7 @@
           </div>
         </div>
         <hr>
-        <small>Incidentes de {{selectedState.name}} por año</small>
+        <small>Casos VBG de {{selectedState.name}} por año</small>
         <div class="row" *ngFor="let record of selectedStateYears">
           <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <small><strong>{{record.year}}</strong></small>

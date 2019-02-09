@@ -1,11 +1,11 @@
 -- YEAR, INCIDENTS
 -- EXPLAIN
-SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, COUNT(*) AS incidents
-FROM incidents i
-INNER JOIN states s ON s.id = i.state_id
+SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
+COUNT(i.id) AS incidents
+FROM states s
+LEFT JOIN incidents i ON s.id = i.state_id
 WHERE i.event_date = '2004-01-01'
-GROUP BY sid, state
-;
+GROUP BY sid, state;
 
 -- STATE, INCIDENTS
 -- EXPLAIN
