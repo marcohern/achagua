@@ -1,13 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Country } from '../country';
 import { State } from '../state';
 import { City } from '../city';
 
-import { countries } from '../countries';
-import { IncidentsService } from '../incidents.service';
 import { StateService } from '../state.service';
+import { ViolenceType } from '../violence-type';
+import { violenceTypes } from '../violence-types';
 
 @Component({
   selector: 'app-add-form-simple-info',
@@ -21,6 +20,8 @@ export class AddFormSimpleInfoComponent implements OnInit {
 
   selectStates:State[];
   selectCities:City[];
+  types:ViolenceType[] = violenceTypes;
+  vbgError:string;
 
   @Input()
   submitDisabled:boolean = false;
@@ -49,9 +50,9 @@ export class AddFormSimpleInfoComponent implements OnInit {
   ngOnInit() {
 
     this.simpleForm = this.fb.group({
-      vbg: this.fb.control('',[Validators.required]),
+      vbg: this.fb.array([false,false,false,false,false,false,false,false,false,false]),
       year: this.fb.control('',[Validators.required]),
-      //country: this.fb.control(''),
+      
       state: this.fb.control('', [Validators.required]),
       city: this.fb.control('',[Validators.required]),
       justice: this.fb.control(null,[Validators.required]),
@@ -70,11 +71,40 @@ export class AddFormSimpleInfoComponent implements OnInit {
   }
 
   send($event) {
+    this.vbgError = '';
+    var value = this.simpleForm.value;
+    
+    var vbg:string = '';
+    for (let i in value.vbg) {
+      var chk = value.vbg[i];
+      if (chk) {
+        if (parseInt(i) > 0) vbg += ",";
+        vbg += this.types[i].code;
+      }
+    }
+
+    if (vbg == '') {
+      this.vbgError = 'Debe seleccionar al menos un tipo de Violencia';
+      return;
+    }
+    var trueValue = {
+      vbg: vbg,
+      event_date: value.event_date,
+      //lat: value.lat,
+      //lng: value.lng,
+      //country: value.country,
+      city: value.city,
+      state: value.state,
+      justice: value.justice
+    };
+    console.log(value,trueValue);
+    
+
     this.onSaving.emit({
-      value: this.simpleForm.value
+      value: trueValue
     });
     this.simpleForm.setValue({
-      vbg: '',
+      vbg: [false,false,false,false,false,false,false,false,false,false],
       year: '',
       //country: this.fb.control(''),
       state: '',

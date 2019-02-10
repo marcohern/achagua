@@ -2,6 +2,18 @@
 
 include_once('database.php');
 
+$incident_types = [
+    "VIOLENCIA_PSICOLOGICA",
+    "VIOLENCIA_SEXUAL",
+    "VIOLENCIA_PATRIMONIAL_ECONOMICA",
+    "PAREJA_SIMBOLICA",
+    "ACOSO_HOSTIGAMIENTO",
+    "VIOLENCIA_DOMESTICA",
+    "VIOLENCIA_LABORAL",
+    "VIOLENCIA_OBSTETRICA",
+    "VIOLENCIA_MEDIATICA",
+    "VIOLENCIA_INSTITUCIONAL",
+];
 
 function incidents_browse($mysqli, $limit=10, $offset=0) {
     $sql = "SELECT * FROM incidents";
@@ -103,7 +115,9 @@ function incidents_get($mysqli, $id) {
 }
 
 function incidents_create($mysqli, $data) {
+    
     $sql = "INSERT INTO incidents (vbg, event_date, lat, lng, country_id, state_id, city_id, justice, created, updated) VALUES ";
+    
     $vbg = "'".addslashes($data->vbg)."'";
     $event_date = "'{$data->event_date}'";
     $lat = $data->lat;

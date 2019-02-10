@@ -1,55 +1,62 @@
 <div [formGroup]="simpleForm">
-  <div class="row">
-    <div class="col-md-6">
-      <label>Tipo de Violencia de Tipo Genero</label>
-      <select class="form-control" formControlName="vbg">
-        <option value="VIOLENCIA_SEXUAL">Violencia doméstica o violencia sexual</option>
-        <option value="PAREJA_INTIMA">Violencia doméstica o violencia de pareja íntima</option>
-        <option value="TRAB_SEX_FORZADO">Trabajo sexual forzado / trata de personas</option>
-        <option value="VIOLENCIA_DERECHOS_REP">Violaciones de los derechos reproductivos</option>
-        <option value="INFANTES_SOLDADOS">Niños y niñas soldados</option>
-        <option value="VIOLENCIA_CONTRA_DEFENSORES_DH">Violencia contra las defensoras de los derechos humanos</option>
-      </select>
-    </div>
-      <div class="col-md-6">
-        <label>Año</label>
-        <select class="form-control" formControlName="year">
-            <option value="">-- Año --</option>
-            <option *ngFor="let year of years" [value]="year">{{year}}</option>
-        </select>
+  <div formArrayName="vbg">
+    <label>*Tipo de Violencia de Tipo Genero</label>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let type of types; let i = index">
+        <div class="form-check" >
+          <input class="form-check-input" type="checkbox" [formControlName]="i">
+          <label class="form-check-label">{{type.name}}</label>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <small class="error">{{vbgError}}</small>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <label>*Año</label>
+      <select class="form-control" formControlName="year">
+          <option value="">-- Año --</option>
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+      </select>
+      <small>Año es Obligatorio</small>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-md-4">
-      <label>País</label>
+      <label>*País</label>
       <select class="form-control" readonly>
         <option value="57">Colombia</option>
       </select>
     </div>
     <div class="col-md-4">
-      <label>Departamento</label>
+      <label>*Departamento</label>
       <select class="form-control" formControlName="state" (change)="onDeptoChanged()">
         <option [value]="0"></option>
         <option *ngFor="let state of selectStates" [value]="state.id">{{state.name}}</option>
       </select>
+      <small>Departamento es Obligatorio</small>
     </div>
     <div class="col-md-4">
-      <label>Ciudad</label>
+      <label>*Ciudad</label>
       <select class="form-control" formControlName="city">
         <option *ngFor="let city of selectCities" [value]="city.id">{{city.name}}</option>
       </select>
+      <small>Ciudad es Obligatorio</small>
     </div>
   </div>
   <hr>
   <div class="row">
     <div class="col-md-6">
-      <label>Hubo Justicia?</label>
-    &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="true" > <label class="b">Si</label>
-    &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="false"> <label class="b">No</label>
-    </div>
-    <div class="col-md-6">
-      
+      <label>*Hubo Justicia?</label>
+      &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="true" > <label class="b">Si</label>
+      &nbsp;<input type="radio" formControlName="justice" name="justice" [value]="false"> <label class="b">No</label>
+      <br><small>Debe seleccionar Si o No</small><br><br>
     </div>
   </div>
 </div>
