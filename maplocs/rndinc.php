@@ -33,7 +33,7 @@ $cities = cities_browse($my);
 $cities_count = count($cities);
 
 $n = 500;
-$r = 500;
+$r = 40;
 
 echo "Begin\n";
 

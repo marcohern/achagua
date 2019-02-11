@@ -49,50 +49,154 @@
       <div class="jumbotron" *ngIf="displayGeneral">
         <p>Total de casos de VBG registrados</p>
         <p class="h4">{{totalCount}} Incidentes</p>
-        <div class="row" *ngFor="let record of stateCount">
-          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-            <small><strong>{{record.state}}</strong></small>
-          </div>
-          <div class="col-5">
-              <small>{{record.incidents}}</small>
-          </div>
-        </div>
+        <table class="table">
+          <tr>
+            <th>Depto.</th>
+            <th>Incidentes</th>
+
+            <th>PSI</th>
+            <th>SEX</th>
+            <th>PEC</th>
+            <th>SIM</th>
+            <th>ACO</th>
+            <th>DOM</th>
+            <th>LAB</th>
+            <th>OBS</th>
+            <th>MED</th>
+            <th>INS</th>
+
+            <th>Just.</th>
+          </tr>
+          <tr *ngFor="let record of stateCount">
+            <td><strong>{{record.state}}</strong></td>
+            <td>{{record.incidents}}</td>
+            <td>{{record.v_ps}}</td>
+            <td>{{record.v_sx}}</td>
+            <td>{{record.v_pe}}</td>
+            <td>{{record.v_si}}</td>
+            <td>{{record.v_ah}}</td>
+            <td>{{record.v_do}}</td>
+            <td>{{record.v_lb}}</td>
+            <td>{{record.v_ob}}</td>
+            <td>{{record.v_me}}</td>
+            <td>{{record.v_in}}</td>
+            <td>{{record.justice}}</td>
+          </tr>
+        </table>
       </div>
       <div class="jumbotron" *ngIf="displayState">
         <div *ngIf="displayCity">
           <small>Detalles de Incidentes de</small>
           <p class="h5">{{selectedCity.name}}</p>
-          <div class="row" *ngFor="let record of selectedCityYears">
-            <div class="col-7">
-              <small><strong>{{record.year}}</strong></small>
-            </div>
-            <div class="col-5">
-                <small>{{record.incidents}}</small>
-            </div>
-          </div>
+          <table class="table">
+            <tr>
+              <th>Depto.</th>
+              <th>Incidentes</th>
+  
+              <th>PSI</th>
+              <th>SEX</th>
+              <th>PEC</th>
+              <th>SIM</th>
+              <th>ACO</th>
+              <th>DOM</th>
+              <th>LAB</th>
+              <th>OBS</th>
+              <th>MED</th>
+              <th>INS</th>
+  
+              <th>Just.</th>
+            </tr>
+            <tr *ngFor="let record of selectedCityYears">
+              <td><strong>{{record.state}}</strong></td>
+              <td>{{record.incidents}}</td>
+              <td>{{record.v_ps}}</td>
+              <td>{{record.v_sx}}</td>
+              <td>{{record.v_pe}}</td>
+              <td>{{record.v_si}}</td>
+              <td>{{record.v_ah}}</td>
+              <td>{{record.v_do}}</td>
+              <td>{{record.v_lb}}</td>
+              <td>{{record.v_ob}}</td>
+              <td>{{record.v_me}}</td>
+              <td>{{record.v_in}}</td>
+              <td>{{record.justice}}</td>
+            </tr>
+          </table>
         </div>
         <p class="h5">{{selectedState.name}}</p>
         <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>
         <hr>
         <small>Casos VBG por Ciudad</small>
-        <div class="row" *ngFor="let record of selectedStateCities">
-          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-            <small><strong>{{record.city}}</strong></small>
-          </div>
-          <div class="col-5">
-              <small>{{record.incidents}}</small>
-          </div>
-        </div>
+        <table class="table">
+          <tr>
+            <th>Depto.</th>
+            <th>Incidentes</th>
+
+            <th>PSI</th>
+            <th>SEX</th>
+            <th>PEC</th>
+            <th>SIM</th>
+            <th>ACO</th>
+            <th>DOM</th>
+            <th>LAB</th>
+            <th>OBS</th>
+            <th>MED</th>
+            <th>INS</th>
+
+            <th>Just.</th>
+          </tr>
+          <tr *ngFor="let record of selectedStateCities">
+            <td><strong>{{record.state}}</strong></td>
+            <td>{{record.incidents}}</td>
+            <td>{{record.v_ps}}</td>
+            <td>{{record.v_sx}}</td>
+            <td>{{record.v_pe}}</td>
+            <td>{{record.v_si}}</td>
+            <td>{{record.v_ah}}</td>
+            <td>{{record.v_do}}</td>
+            <td>{{record.v_lb}}</td>
+            <td>{{record.v_ob}}</td>
+            <td>{{record.v_me}}</td>
+            <td>{{record.v_in}}</td>
+            <td>{{record.justice}}</td>
+          </tr>
+        </table>
         <hr>
         <small>Casos VBG de {{selectedState.name}} por año</small>
-        <div class="row" *ngFor="let record of selectedStateYears">
-          <div class="col-7" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-            <small><strong>{{record.year}}</strong></small>
-          </div>
-          <div class="col-5">
-              <small>{{record.incidents}}</small>
-          </div>
-        </div>
+        <table class="table">
+          <tr>
+            <th>Depto.</th>
+            <th>Incidentes</th>
+
+            <th>PSI</th>
+            <th>SEX</th>
+            <th>PEC</th>
+            <th>SIM</th>
+            <th>ACO</th>
+            <th>DOM</th>
+            <th>LAB</th>
+            <th>OBS</th>
+            <th>MED</th>
+            <th>INS</th>
+
+            <th>Just.</th>
+          </tr>
+          <tr *ngFor="let record of selectedStateYears">
+            <td><strong>{{record.state}}</strong></td>
+            <td>{{record.incidents}}</td>
+            <td>{{record.v_ps}}</td>
+            <td>{{record.v_sx}}</td>
+            <td>{{record.v_pe}}</td>
+            <td>{{record.v_si}}</td>
+            <td>{{record.v_ah}}</td>
+            <td>{{record.v_do}}</td>
+            <td>{{record.v_lb}}</td>
+            <td>{{record.v_ob}}</td>
+            <td>{{record.v_me}}</td>
+            <td>{{record.v_in}}</td>
+            <td>{{record.justice}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
