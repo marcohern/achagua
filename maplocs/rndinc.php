@@ -2,6 +2,8 @@
 
 ini_set('display_errors', '1');
 require_once('../wp-plugin/achagua/bk/constants.php');
+req('/lib/header.php');
+req('/lib/error.php');
 req('/lib/database.php');
 req('/lib/states.php');
 req('/lib/cities.php');
@@ -12,10 +14,13 @@ $my = db_connect($db);
 
 
 $types = [
-    'VIOLENCIA_SEXUAL' , 'PAREJA_INTIMA',
-    'TRAB_SEX_FORZADO' , 'VIOLENCIA_DERECHOS_REP',
-    'INFANTES_SOLDADOS', 'VIOLENCIA_CONTRA_DEFENSORES_DH'
+    'VIOLENCIA_PSICOLOGICA'          , 'VIOLENCIA_SEXUAL'       ,
+    'VIOLENCIA_PATRIMONIAL_ECONOMICA', 'VIOLENCIA_SIMBOLICA'    ,
+    'ACOSO_HOSTIGAMIENTO'            , 'VIOLENCIA_DOMESTICA'    ,
+    'VIOLENCIA_LABORAL'              , 'VIOLENCIA_OBSTETRICA'   ,
+    'VIOLENCIA_MEDIATICA'            , 'VIOLENCIA_INSTITUCIONAL'
 ];
+
 $types_count = count($types);
 
 $ystart = 1994;
@@ -54,6 +59,9 @@ for ($i=0;$i<$r;$i++) {
         $incidents[] = $inc;
     }
     $res = incidents_bulk($my, $incidents);
+    foreach ($incidents as $incident) {
+        incident_inc($my, $incident);
+    }
     $id=$res['id'];
     $am=$res['amount'];
     echo "($id,$am),";

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <div class="col-6">
+      <div class="col-4">
         <div class="form-group">
           <label for="state">Departamento</label>
           <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
@@ -9,7 +9,7 @@
           </select>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <div class="form-group">
           <label for="city">Ciudad</label>
           <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
@@ -20,7 +20,7 @@
       </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
         <agm-marker *ngFor="let m of stateMarkers"
           #stateMarker
@@ -43,7 +43,9 @@
         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
       </div>
     </div>
-    <div class="col-md-4">
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <div class="jumbotron" *ngIf="displayGeneral">
         <p>Total de casos de VBG registrados</p>
         <p class="h4">{{totalCount}} Incidentes</p>
@@ -58,16 +60,16 @@
       </div>
       <div class="jumbotron" *ngIf="displayState">
         <div *ngIf="displayCity">
-            <small>Detalles de Incidentes de</small>
-            <p class="h5">{{selectedCity.name}}</p>
-            <div class="row" *ngFor="let record of selectedCityYears">
-              <div class="col-7">
-                <small><strong>{{record.year}}</strong></small>
-              </div>
-              <div class="col-5">
-                  <small>{{record.incidents}}</small>
-              </div>
+          <small>Detalles de Incidentes de</small>
+          <p class="h5">{{selectedCity.name}}</p>
+          <div class="row" *ngFor="let record of selectedCityYears">
+            <div class="col-7">
+              <small><strong>{{record.year}}</strong></small>
             </div>
+            <div class="col-5">
+                <small>{{record.incidents}}</small>
+            </div>
+          </div>
         </div>
         <p class="h5">{{selectedState.name}}</p>
         <p class="h4" *ngIf="selectedStateIncidents != null">{{selectedStateIncidents.incidents}} Incidentes</p>

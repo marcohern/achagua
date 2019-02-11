@@ -25,6 +25,7 @@ class IncidentsController extends Controller {
         if (count($errors)>0) {
             return err_bad_request('Validation failed.','validate');
         }
+        incident_inc($this->db, $data);
         return incidents_create($this->db, $data);
     }
 
