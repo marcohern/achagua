@@ -65,7 +65,7 @@
             <th>MED</th>
             <th>INS</th>
 
-            <th>Just.</th>
+            <th>Denuncia</th>
           </tr>
           <tr *ngFor="let record of stateCount">
             <td><strong>{{record.state}}</strong></td>
@@ -90,7 +90,7 @@
           <p class="h5">{{selectedCity.name}}</p>
           <table class="table">
             <tr>
-              <th>Depto.</th>
+              <th>Ciudad</th>
               <th>Incidentes</th>
   
               <th>PSI</th>
@@ -104,10 +104,10 @@
               <th>MED</th>
               <th>INS</th>
   
-              <th>Just.</th>
+              <th>Denuncia</th>
             </tr>
             <tr *ngFor="let record of selectedCityYears">
-              <td><strong>{{record.state}}</strong></td>
+              <td><strong>{{record.year}}</strong></td>
               <td>{{record.incidents}}</td>
               <td>{{record.v_ps}}</td>
               <td>{{record.v_sx}}</td>
@@ -129,7 +129,7 @@
         <small>Casos VBG por Ciudad</small>
         <table class="table">
           <tr>
-            <th>Depto.</th>
+            <th>Ciudad</th>
             <th>Incidentes</th>
 
             <th>PSI</th>
@@ -143,10 +143,10 @@
             <th>MED</th>
             <th>INS</th>
 
-            <th>Just.</th>
+            <th>Denuncia</th>
           </tr>
           <tr *ngFor="let record of selectedStateCities">
-            <td><strong>{{record.state}}</strong></td>
+            <td><strong>{{record.city}}</strong></td>
             <td>{{record.incidents}}</td>
             <td>{{record.v_ps}}</td>
             <td>{{record.v_sx}}</td>
@@ -165,7 +165,7 @@
         <small>Casos VBG de {{selectedState.name}} por año</small>
         <table class="table">
           <tr>
-            <th>Depto.</th>
+            <th>Año</th>
             <th>Incidentes</th>
 
             <th>PSI</th>
@@ -179,10 +179,10 @@
             <th>MED</th>
             <th>INS</th>
 
-            <th>Just.</th>
+            <th>Denuncia</th>
           </tr>
           <tr *ngFor="let record of selectedStateYears">
-            <td><strong>{{record.state}}</strong></td>
+            <td><strong>{{record.year}}</strong></td>
             <td>{{record.incidents}}</td>
             <td>{{record.v_ps}}</td>
             <td>{{record.v_sx}}</td>
