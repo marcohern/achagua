@@ -75,11 +75,13 @@ export class AddFormSimpleInfoComponent implements OnInit {
     var value = this.simpleForm.value;
     
     var vbg:string = '';
+    var j = 0;
     for (let i in value.vbg) {
       var chk = value.vbg[i];
       if (chk) {
-        if (parseInt(i) > 0) vbg += ",";
+        if (j > 0) vbg += ",";
         vbg += this.types[i].code;
+        j++;
       }
     }
 
@@ -89,7 +91,7 @@ export class AddFormSimpleInfoComponent implements OnInit {
     }
     var trueValue = {
       vbg: vbg,
-      event_date: value.event_date,
+      year: value.year,
       //lat: value.lat,
       //lng: value.lng,
       //country: value.country,

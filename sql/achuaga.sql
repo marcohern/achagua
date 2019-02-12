@@ -74,6 +74,7 @@ CREATE TABLE incidents_summary(
     city_id    INT           NOT NULL,
 
     amount     INT           NOT NULL DEFAULT 0,
+    mult       INT           NOT NULL DEFAULT 0,
     
     violencia_psicologica   INT           NOT NULL DEFAULT 0,
     violencia_sexual        INT           NOT NULL DEFAULT 0,

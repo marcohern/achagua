@@ -53,6 +53,7 @@
           <tr>
             <th>Depto.</th>
             <th>Incidentes</th>
+            <th>Mult</th>
 
             <th>PSI</th>
             <th>SEX</th>
@@ -70,6 +71,7 @@
           <tr *ngFor="let record of stateCount">
             <td><strong>{{record.state}}</strong></td>
             <td>{{record.incidents}}</td>
+            <td>{{record.mult}}</td>
             <td>{{record.v_ps}}</td>
             <td>{{record.v_sx}}</td>
             <td>{{record.v_pe}}</td>
@@ -92,6 +94,7 @@
             <tr>
               <th>Ciudad</th>
               <th>Incidentes</th>
+              <th>Mult</th>
   
               <th>PSI</th>
               <th>SEX</th>
@@ -109,6 +112,7 @@
             <tr *ngFor="let record of selectedCityYears">
               <td><strong>{{record.year}}</strong></td>
               <td>{{record.incidents}}</td>
+              <td>{{record.mult}}</td>
               <td>{{record.v_ps}}</td>
               <td>{{record.v_sx}}</td>
               <td>{{record.v_pe}}</td>
@@ -131,6 +135,7 @@
           <tr>
             <th>Ciudad</th>
             <th>Incidentes</th>
+            <th>Mult</th>
 
             <th>PSI</th>
             <th>SEX</th>
@@ -148,6 +153,7 @@
           <tr *ngFor="let record of selectedStateCities">
             <td><strong>{{record.city}}</strong></td>
             <td>{{record.incidents}}</td>
+            <td>{{record.mult}}</td>
             <td>{{record.v_ps}}</td>
             <td>{{record.v_sx}}</td>
             <td>{{record.v_pe}}</td>
@@ -167,6 +173,7 @@
           <tr>
             <th>Año</th>
             <th>Incidentes</th>
+            <th>Mult</th>
 
             <th>PSI</th>
             <th>SEX</th>
@@ -184,6 +191,7 @@
           <tr *ngFor="let record of selectedStateYears">
             <td><strong>{{record.year}}</strong></td>
             <td>{{record.incidents}}</td>
+            <td>{{record.mult}}</td>
             <td>{{record.v_ps}}</td>
             <td>{{record.v_sx}}</td>
             <td>{{record.v_pe}}</td>

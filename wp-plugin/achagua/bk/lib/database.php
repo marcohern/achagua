@@ -37,7 +37,7 @@ function db_first($mysqli, $sql) {
 function db_execute($mysqli, $sql) {
     $records = $mysqli->query($sql, MYSQLI_USE_RESULT);
     if (!$records) {
-        error("Error querying: ".$mysqli->error,'db');
+        error("Error querying: ".$mysqli->error." --- $sql",'db');
     }
     return $records;
 }

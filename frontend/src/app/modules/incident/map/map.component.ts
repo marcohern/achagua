@@ -115,6 +115,22 @@ export class MapComponent implements OnInit {
     this.focusCityMarker(this.selectedCity);
   }
 
+  public sumVTypes(record) {
+    var sum 
+      = parseInt(record.v_ps) + parseInt(record.v_sx)
+      + parseInt(record.v_pe) + parseInt(record.v_si)
+      + parseInt(record.v_ah) + parseInt(record.v_do)
+      + parseInt(record.v_lb) + parseInt(record.v_ob)
+      + parseInt(record.v_me) + parseInt(record.v_in);
+    return sum;
+  }
+
+  public appendMult(record) {
+    var incidents = parseInt(record.incidents);
+    record.mult = "NO";
+    if (this.sumVTypes(record) > incidents) record.mult = "SI";
+  }
+
   public getStateCount() {
     this.stateCount = [];
     this.is.stateCount().subscribe(result => {

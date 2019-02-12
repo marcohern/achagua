@@ -24,7 +24,7 @@ function incidents_browse($mysqli, $limit=10, $offset=0) {
 function incidents_year_count_by_city($mysqli, $city_id) {
     $cid = 0 + $city_id;
     $sql = "SELECT YEAR(i.event_date) AS year, 
-SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
 SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
 SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
 SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -42,7 +42,7 @@ function incidents_city_count_by_state_year($mysqli, $state_id, $year) {
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year,
 	i.city_id AS cid, c.name AS city,
-SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
 SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
 SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
 SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -57,7 +57,7 @@ GROUP BY year, cid, city";
 function incidents_city_count_by_state($mysqli, $state_id) {
     $sid = 0 + $state_id;
     $sql = "SELECT i.city_id AS cid, c.name AS city,
-    SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
     SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
     SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
     SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -72,7 +72,7 @@ GROUP BY cid, city";
 function incidents_year_count_by_state($mysqli, $state_id) {
     $sid = 0 + $state_id;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
-    SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
     SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
     SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
     SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -86,7 +86,7 @@ GROUP BY year";
 function incidents_state_count_by_year($mysqli, $year) {
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
-SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
 SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
 SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
 SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -100,7 +100,7 @@ ORDER BY year DESC";
 
 function incidents_state_count($mysqli) {
     $sql = "SELECT i.state_id AS sid, s.name AS state, 
-    SUM(i.amount) AS incidents, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
     SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
     SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
     SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
@@ -178,13 +178,16 @@ function incidents_bulk($mysqli, $records) {
 
 function incident_inc($mysqli, $incident)  {
     $types = explode(',',$incident->vbg);
+    $mult = 0;
+    if (count($types) > 1) $mult = 1;
     $sql = "UPDATE incidents_summary SET ";
     foreach ($types as $type) {
         $column = strtolower($type);
         $sql .= "$column = $column + 1, ";
     }
     if ($incident->justice) $sql .= "justice = justice + 1, ";
-    $sql .= "amount = amount + 1 "
+    $sql .= "amount = amount + 1, "
+        ."mult = mult + $mult "
         ."WHERE event_date = '{$incident->event_date}' "
         ."AND state_id = {$incident->state_id} "
         ."AND city_id = {$incident->city_id}";
