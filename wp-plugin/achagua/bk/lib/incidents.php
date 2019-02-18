@@ -21,7 +21,59 @@ function incidents_browse($mysqli, $limit=10, $offset=0) {
     return db_query($mysqli, $sql);
 }
 
-function incidents_year_count_by_city($mysqli, $city_id) {
+function incident_get_sql_filter($i, $filter) {
+    return ($i>0) ?
+        "AND $filter " :
+        "WHERE $filter ";
+}
+
+function incident_get_filters($st=0, $year=null, $vbg=null, $justice=null) {
+    $i=$st;
+    $sql = '';
+    if (!empty($year   )) $sql .= incident_get_sql_filter(++$i, "YEAR(i.event_date) = $year");
+    if (!empty($vbg    )) {
+        switch($vbg) {
+            case "VIOLENCIA_PSICOLOGICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_ps > 0");
+                break;
+            case "VIOLENCIA_SEXUAL":
+                $sql .= incident_get_sql_filter(++$i, "i.v_sx > 0");
+                break;
+            case "VIOLENCIA_PATRIMONIAL_ECONOMICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_pe > 0");
+                break;
+            case "PAREJA_SIMBOLICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_si > 0");
+                break;
+            case "ACOSO_HOSTIGAMIENTO":
+                $sql .= incident_get_sql_filter(++$i, "i.v_ah > 0");
+                break;
+            case "VIOLENCIA_DOMESTICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_do > 0");
+                break;
+            case "VIOLENCIA_LABORAL":
+                $sql .= incident_get_sql_filter(++$i, "i.v_lb > 0");
+                break;
+            case "VIOLENCIA_OBSTETRICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_ob > 0");
+                break;
+            case "VIOLENCIA_MEDIATICA":
+                $sql .= incident_get_sql_filter(++$i, "i.v_me > 0");
+                break;
+            case "VIOLENCIA_INSTITUCIONAL":
+                $sql .= incident_get_sql_filter(++$i, "i.v_in > 0");
+                break;
+            default:
+                break;
+        }
+    }
+    if (!empty($justice)) {
+        $sql .= incident_get_sql_filter(++$i, "i.justice > 0");
+    }
+    return $sql;
+}
+
+function incidents_year_count_by_city($mysqli, $city_id, $year=null, $vbg=null, $justice=null) {
     $cid = 0 + $city_id;
     $sql = "SELECT YEAR(i.event_date) AS year, 
 SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
@@ -31,13 +83,14 @@ SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
 FROM incidents_summary i 
 INNER JOIN cities c ON c.id = i.city_id 
 INNER JOIN states s ON s.id = c.state_id 
-WHERE c.id = $cid 
-GROUP BY year 
-ORDER BY year ASC";
+WHERE c.id = $cid ";
+$sql .= incident_get_filters(1, $year, $vbg, $justice);
+$sql .= "GROUP BY year ORDER BY year ASC";
+    
     return db_query($mysqli, $sql);
 }
 
-function incidents_city_count_by_state_year($mysqli, $state_id, $year) {
+function incidents_city_count_by_state_year($mysqli, $state_id, $year, $vbg=null, $justice=null) {
     $sid = 0 + $state_id;
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year,
@@ -49,12 +102,13 @@ SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
 FROM incidents_summary i 
 INNER JOIN cities c ON c.id = i.city_id 
 INNER JOIN states s ON s.id = c.state_id 
-WHERE i.state_id = $sid AND i.event_date = '$yr-01-01' 
-GROUP BY year, cid, city";
+WHERE i.state_id = $sid AND i.event_date = '$yr-01-01' ";
+$sql .= incident_get_filters(2, null, $vbg, $justice);
+$sql .= "GROUP BY year, cid, city";
     return db_query($mysqli, $sql);
 }
 
-function incidents_city_count_by_state($mysqli, $state_id) {
+function incidents_city_count_by_state($mysqli, $state_id, $year=null, $vbg=null, $justice=null) {
     $sid = 0 + $state_id;
     $sql = "SELECT i.city_id AS cid, c.name AS city,
     SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
@@ -64,12 +118,13 @@ function incidents_city_count_by_state($mysqli, $state_id) {
 FROM incidents_summary i
 INNER JOIN cities c ON c.id = i.city_id
 INNER JOIN states s ON s.id = c.state_id
-WHERE i.state_id = $sid
-GROUP BY cid, city";
+WHERE i.state_id = $sid ";
+$sql .= incident_get_filters(1, $year, $vbg, $justice);
+$sql .= "GROUP BY cid, city";
     return db_query($mysqli, $sql);
 }
 
-function incidents_year_count_by_state($mysqli, $state_id) {
+function incidents_year_count_by_state($mysqli, $state_id, $year=null, $vbg=null, $justice=null) {
     $sid = 0 + $state_id;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
     SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
@@ -78,12 +133,13 @@ function incidents_year_count_by_state($mysqli, $state_id) {
     SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
 FROM incidents_summary i
 INNER JOIN states s ON s.id = i.state_id
-WHERE s.id = $sid
-GROUP BY year";
+WHERE s.id = $sid ";
+$sql .= incident_get_filters(1, $year, $vbg, $justice);
+$sql .= "GROUP BY year";
     return db_query($mysqli, $sql);
 }
 
-function incidents_state_count_by_year($mysqli, $year) {
+function incidents_state_count_by_year($mysqli, $year, $vbg=null, $justice=null) {
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
 SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
@@ -92,22 +148,23 @@ SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.viol
 SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
 FROM incidents_summary i
 INNER JOIN states s ON s.id = i.state_id
-WHERE i.event_date = '$yr-01-01'
-GROUP BY year, sid, state
-ORDER BY year DESC";
+WHERE i.event_date = '$yr-01-01' ";
+$sql .= incident_get_filters(1, null, $vbg, $justice);
+$sql .= "GROUP BY year, sid, state ORDER BY year DESC";
     return db_query($mysqli, $sql);
 }
 
-function incidents_state_count($mysqli) {
+function incidents_state_count($mysqli, $year=null, $vbg=null, $justice=null) {
     $sql = "SELECT i.state_id AS sid, s.name AS state, 
     SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
     SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-    SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-    SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
-    
+    SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob,
+    SUM(i.violencia_mediatica) AS v_me, SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
     FROM states s
-    LEFT JOIN incidents_summary i ON s.id = i.state_id
-    GROUP BY sid, state";
+    LEFT JOIN incidents_summary i ON s.id = i.state_id ";
+
+    $sql .= incident_get_filters(0, $year, $vbg, $justice);
+    $sql .= "GROUP BY sid, state";
     return db_query($mysqli, $sql);
 }
 

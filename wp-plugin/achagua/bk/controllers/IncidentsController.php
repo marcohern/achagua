@@ -38,7 +38,8 @@ class IncidentsController extends Controller {
     }
 
     public function state_count() {
-        return incidents_state_count($this->db);
+        $year = (isset($this->params->year)) ? $this->params->year : null;
+        return incidents_state_count($this->db, $year);
     }
 
     public function state_count_by_year($year) {
@@ -46,21 +47,24 @@ class IncidentsController extends Controller {
     }
 
     public function year_count_by_state($state_id) {
-        return incidents_year_count_by_state($this->db, $state_id);
+        $year = (isset($this->params->year)) ? $this->params->year : null;
+        return incidents_year_count_by_state($this->db, $state_id, $year);
     }
 
     public function city_count_by_state($state_id) {
+        $year = (isset($this->params->year)) ? $this->params->year : null;
         return incidents_city_count_by_state($this->db, $state_id);
     }
 
     public function city_count_by_state_year($state_id) {
-        echo json_encode(['state' => $state_id, 'p0'=>$this->p0,'params'=>$this->params]);
+        //echo json_encode(['state' => $state_id, 'p0'=>$this->p0,'params'=>$this->params]);
         $year = 2004;
         if (!empty($this->p0)) $year = 0+$this->p0;
         return incidents_city_count_by_state_year($this->db, $state_id, $year);
     }
 
     public function year_count_by_city($city_id) {
-        return incidents_year_count_by_city($this->db, $city_id);
+        $year = (isset($this->params->year)) ? $this->params->year : null;
+        return incidents_year_count_by_city($this->db, $city_id, $year);
     }
 }
