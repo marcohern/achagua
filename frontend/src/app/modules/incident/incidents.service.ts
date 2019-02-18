@@ -29,23 +29,31 @@ export class IncidentsService {
     return this.http.post(this.url(), incident);
   }
 
-  public stateCount():Observable<any> {
-    return this.http.get(this.url() + '/state_count');
+  public stateCount(year:number = null):Observable<any> {
+    var params = '';
+    if (year) params += "?year="+year;
+    return this.http.get(this.url() + '/state_count' + params);
   }
 
   public stateCountByYear(year:number):Observable<any> {
     return this.http.get(this.url() + '/state_count_by_year/' + year);
   }
 
-  public cityCountByState(stateId:number) : Observable<any> {
-    return this.http.get(this.url() + '/city_count_by_state/' + stateId);
+  public cityCountByState(stateId:number, year:number=null) : Observable<any> {
+    var params = '';
+    if (year) params += "?year="+year;
+    return this.http.get(this.url() + '/city_count_by_state/' + stateId + params);
   }
 
-  public yearCountByState(stateId:number) : Observable<any> {
-    return this.http.get(this.url() + '/year_count_by_state/' + stateId);
+  public yearCountByState(stateId:number, year:number = null) : Observable<any> {
+    var params = '';
+    if (year) params += "?year="+year;
+    return this.http.get(this.url() + '/year_count_by_state/' + stateId + params);
   }
 
-  public yearCountByCity(cityId:number) : Observable<any> {
-    return this.http.get(this.url() + '/year_count_by_city/' + cityId);
+  public yearCountByCity(cityId:number, year:number = null) : Observable<any> {
+    var params = '';
+    if (year) params += "?year="+year;
+    return this.http.get(this.url() + '/year_count_by_city/' + cityId + params);
   }
 }

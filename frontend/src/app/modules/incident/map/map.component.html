@@ -1,23 +1,32 @@
 <div class="container">
   <div class="row">
-      <div class="col-4">
-        <div class="form-group">
-          <label for="state">Departamento</label>
-          <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let state of selectStates" [ngValue]="state">{{state.name}}</option>
-          </select>
-        </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="state">Departamento</label>
+        <select class="form-control" [(ngModel)]="selectedState" (change)="onDeptoChanged()">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let state of selectStates" [ngValue]="state">{{state.name}}</option>
+        </select>
       </div>
-      <div class="col-4">
-        <div class="form-group">
-          <label for="city">Ciudad</label>
-          <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
-          </select>
-        </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="city">Ciudad</label>
+        <select class="form-control" [(ngModel)]="selectedCity" (change)="onCityChanged()">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let city of selectCities" [ngValue]="city">{{city.name}}</option>
+        </select>
       </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="year">Año</label>
+        <select class="form-control" [(ngModel)]="selectedYear" (change)="onYearChanged()">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let year of selectYears" [ngValue]="year">{{year}}</option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-12">

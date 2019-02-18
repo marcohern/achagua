@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
 
   selectedState:State;
   selectedCity:City;
-  selectedYear:number;
+  selectedYear:number = null;
 
   stateMarkers:any[] = [];
   cityMarkers:any[] = [];
@@ -48,6 +48,7 @@ export class MapComponent implements OnInit {
   selectedStateCities:any[] = [];
   selectedStateYears:any[] = [];
   selectedCityYears:any[] = [];
+  mode:string = '';
 
   
   constructor(private ss:StateService, private is:IncidentsService) { }
@@ -83,24 +84,31 @@ export class MapComponent implements OnInit {
   public onDeptoChanged() {
     console.log(this.selectedState);
     if (this.selectedState == null) {
+      this.mode = '';
       this.cityMarkers = [];
       this.selectCities = [];
       this.focusReset();
     } else {
+      this.mode = 'state';
       this.focusStateMarker(this.selectedState);
     }
   }
 
   public onCityChanged() {
     if (this.selectedCity == null) {
+      this.mode = 'state';
       this.displayCity = false;
     } else {
+      this.mode = 'city';
       this.focusCityMarker(this.selectedCity);
     }
   }
 
   public onYearChanged() {
     console.log(this.selectedYear);
+    if (this.mode=='state') this.focusStateMarker(this.selectedState);
+    else if (this.mode=='city') this.focusCityMarker(this.selectedCity);
+    else this.getStateCount();
   }
 
   public onClickStateMarker($event:AgmMarker, marker) {
@@ -133,7 +141,7 @@ export class MapComponent implements OnInit {
 
   public getStateCount() {
     this.stateCount = [];
-    this.is.stateCount().subscribe(result => {
+    this.is.stateCount(this.selectedYear).subscribe(result => {
       var total = 0;
       for (let record of result) {
         total += parseInt(record.incidents);
@@ -150,12 +158,12 @@ export class MapComponent implements OnInit {
     this.selectedStateIncidents = this.ss.getStateIncidentCount(this.stateCount, state.id);
     console.log(this.selectedStateIncidents);
     this.selectedStateCities = [];
-    this.is.cityCountByState(state.id).subscribe(result => {
+    this.is.cityCountByState(state.id, this.selectedYear).subscribe(result => {
       this.selectedStateCities = result;
     });
 
     this.selectedStateYears = [];
-    this.is.yearCountByState(state.id).subscribe(result => {
+    this.is.yearCountByState(state.id, this.selectedYear).subscribe(result => {
       this.selectedStateYears = result;
     });
   }
@@ -163,7 +171,7 @@ export class MapComponent implements OnInit {
   public getCityDetailsCount(city:City) {
     this.displayCity = false;
     this.selectedCityYears = [];
-    this.is.yearCountByCity(city.id).subscribe(result => {
+    this.is.yearCountByCity(city.id, this.selectedYear).subscribe(result => {
       this.selectedCityYears = result;
       this.displayCity = true;
     });
