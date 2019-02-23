@@ -76,10 +76,10 @@ function incident_get_filters($st=0, $year=null, $vbg=null, $justice=null) {
 function incidents_year_count_by_city($mysqli, $city_id, $year=null, $vbg=null, $justice=null) {
     $cid = 0 + $city_id;
     $sql = "SELECT YEAR(i.event_date) AS year, 
-SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
 FROM incidents_summary i 
 INNER JOIN cities c ON c.id = i.city_id 
 INNER JOIN states s ON s.id = c.state_id 
@@ -95,10 +95,10 @@ function incidents_city_count_by_state_year($mysqli, $state_id, $year, $vbg=null
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year,
 	i.city_id AS cid, c.name AS city,
-SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
 FROM incidents_summary i 
 INNER JOIN cities c ON c.id = i.city_id 
 INNER JOIN states s ON s.id = c.state_id 
@@ -111,10 +111,10 @@ $sql .= "GROUP BY year, cid, city";
 function incidents_city_count_by_state($mysqli, $state_id, $year=null, $vbg=null, $justice=null) {
     $sid = 0 + $state_id;
     $sql = "SELECT i.city_id AS cid, c.name AS city,
-    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-    SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-    SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-    SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
 FROM incidents_summary i
 INNER JOIN cities c ON c.id = i.city_id
 INNER JOIN states s ON s.id = c.state_id
@@ -127,10 +127,10 @@ $sql .= "GROUP BY cid, city";
 function incidents_year_count_by_state($mysqli, $state_id, $year=null, $vbg=null, $justice=null) {
     $sid = 0 + $state_id;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
-    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-    SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-    SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-    SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
 FROM incidents_summary i
 INNER JOIN states s ON s.id = i.state_id
 WHERE s.id = $sid ";
@@ -142,10 +142,10 @@ $sql .= "GROUP BY year";
 function incidents_state_count_by_year($mysqli, $year, $vbg=null, $justice=null) {
     $yr = 0 + $year;
     $sql = "SELECT YEAR(i.event_date) AS year, i.state_id AS sid, s.name AS state, 
-SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob, SUM(i.violencia_mediatica) AS v_me,
-SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
 FROM incidents_summary i
 INNER JOIN states s ON s.id = i.state_id
 WHERE i.event_date = '$yr-01-01' ";
@@ -156,10 +156,10 @@ $sql .= "GROUP BY year, sid, state ORDER BY year DESC";
 
 function incidents_state_count($mysqli, $year=null, $vbg=null, $justice=null) {
     $sql = "SELECT i.state_id AS sid, s.name AS state, 
-    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, SUM(i.violencia_psicologica) AS v_ps, SUM(i.violencia_sexual) AS v_sx, 
-    SUM(i.violencia_patrimonial_economica) AS v_pe, SUM(i.violencia_simbolica) AS v_si, SUM(i.acoso_hostigamiento) AS v_ah,
-    SUM(i.violencia_domestica) AS v_do, SUM(i.violencia_laboral) AS v_lb, SUM(i.violencia_obstetrica) AS v_ob,
-    SUM(i.violencia_mediatica) AS v_me, SUM(i.violencia_institucional) AS v_in, SUM(i.justice) AS justice
+    SUM(i.amount) AS incidents, SUM(i.mult) AS mult, 
+SUM(i.v_psicoemocional) AS v_ps, SUM(i.v_sexual) AS v_sx, SUM(i.v_fisica) AS v_fs,
+SUM(i.v_economica) AS v_ec, SUM(i.v_patrimonial) AS v_pt, SUM(i.v_multiple) AS v_mu,
+SUM(i.v_feminicidio) AS v_fm, SUM(i.justice) AS justice
     FROM states s
     LEFT JOIN incidents_summary i ON s.id = i.state_id ";
 

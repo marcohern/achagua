@@ -43,7 +43,7 @@ function achuaga_map_shortcode_scripts() {
 ?>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/runtime.a66f828dca56eeb90e02.js"></script>
     <script type="text/javascript" src="/wp-content/plugins/achagua/map/polyfills.2f4a59095805af02bd79.js"></script>
-    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.d9f39ca4eabac2d4efa8.js"></script>
+    <script type="text/javascript" src="/wp-content/plugins/achagua/map/main.70d358b2d955e985f152.js"></script>
 <?php
 }
 
@@ -54,7 +54,7 @@ function achagua_map_shortcode_func($attrs) {
     wp_enqueue_style('achagua-css','/wp-content/plugins/achagua/map/styles.a3ae54a2ce220a99b47f.css');
     
     add_action('wp_footer', 'achuaga_map_shortcode_scripts');
-	return "<br><br><br><br><br><br><br><br><app-root></app-root>";
+	return "<app-root></app-root>";
 }
 
 add_action('wp_head','achagua_shortcode_base' );

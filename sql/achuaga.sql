@@ -44,11 +44,10 @@ DROP TABLE IF EXISTS incidents;
 CREATE TABLE incidents (
     id         INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
     vbg        SET(
-        'VIOLENCIA_PSICOLOGICA'          , 'VIOLENCIA_SEXUAL'       ,
-        'VIOLENCIA_PATRIMONIAL_ECONOMICA', 'VIOLENCIA_SIMBOLICA'    ,
-        'ACOSO_HOSTIGAMIENTO'            , 'VIOLENCIA_DOMESTICA'    ,
-        'VIOLENCIA_LABORAL'              , 'VIOLENCIA_OBSTETRICA'   ,
-        'VIOLENCIA_MEDIATICA'            , 'VIOLENCIA_INSTITUCIONAL'
+        'PSICOEMOCIONAL', 'SEXUAL'   ,
+        'FISICA'        , 'ECONOMICA',
+        'PATRIMONIAL'   , 'MULTIPLE' ,
+        'FEMINICIDIO'
     )   NOT NULL,
     event_date DATETIME      NOT NULL,
     lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,
@@ -76,16 +75,13 @@ CREATE TABLE incidents_summary(
     amount     INT           NOT NULL DEFAULT 0,
     mult       INT           NOT NULL DEFAULT 0,
     
-    violencia_psicologica   INT           NOT NULL DEFAULT 0,
-    violencia_sexual        INT           NOT NULL DEFAULT 0,
-    violencia_patrimonial_economica INT   NOT NULL DEFAULT 0,
-    violencia_simbolica     INT           NOT NULL DEFAULT 0,
-    acoso_hostigamiento     INT           NOT NULL DEFAULT 0,
-    violencia_domestica     INT           NOT NULL DEFAULT 0,
-    violencia_laboral       INT           NOT NULL DEFAULT 0,
-    violencia_obstetrica    INT           NOT NULL DEFAULT 0,
-    violencia_mediatica     INT           NOT NULL DEFAULT 0,
-    violencia_institucional INT           NOT NULL DEFAULT 0,
+    v_psicoemocional INT     NOT NULL DEFAULT 0,
+    v_sexual         INT     NOT NULL DEFAULT 0,
+    v_fisica         INT     NOT NULL DEFAULT 0,
+    v_economica      INT     NOT NULL DEFAULT 0,
+    v_patrimonial    INT     NOT NULL DEFAULT 0,
+    v_multiple       INT     NOT NULL DEFAULT 0,
+    v_feminicidio    INT     NOT NULL DEFAULT 0,
 
     justice    INT           NOT NULL DEFAULT 0,
 

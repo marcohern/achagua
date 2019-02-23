@@ -13,6 +13,7 @@ return [
     'pwd'    => '8#9Ae&czTBQt',
     'schema' => 'securiz4_achagua'
 ];
+
 /*
 return [
     'host'   => 'localhost',
