@@ -8,10 +8,10 @@ return [
 ];
 */
 return [
-    'host'   => 'siteground322.com',
-    'user'   => 'securiz4_achagua',
-    'pwd'    => '8#9Ae&czTBQt',
-    'schema' => 'securiz4_achagua'
+    'host'   => '37.60.251.164',
+    'user'   => 'webmetra_achagua',
+    'pwd'    => ']qmkn=EssNW_',
+    'schema' => 'webmetra_achagua'
 ];
 /*
 return [
