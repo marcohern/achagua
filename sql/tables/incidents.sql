@@ -4,11 +4,10 @@ DROP TABLE IF EXISTS incidents;
 CREATE TABLE incidents (
     id         INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
     vbg        SET(
-        'VIOLENCIA_PSICOLOGICA'          , 'VIOLENCIA_SEXUAL'       ,
-        'VIOLENCIA_PATRIMONIAL_ECONOMICA', 'VIOLENCIA_SIMBOLICA'    ,
-        'ACOSO_HOSTIGAMIENTO'            , 'VIOLENCIA_DOMESTICA'    ,
-        'VIOLENCIA_LABORAL'              , 'VIOLENCIA_OBSTETRICA'   ,
-        'VIOLENCIA_MEDIATICA'            , 'VIOLENCIA_INSTITUCIONAL'
+        'PSICOEMOCIONAL', 'SEXUAL'   ,
+        'FISICA'        , 'ECONOMICA',
+        'PATRIMONIAL'   , 'MULTIPLE' ,
+        'FEMINICIDIO'
     )   NOT NULL,
     event_date DATETIME      NOT NULL,
     lat        DECIMAL(12,9) NOT NULL DEFAULT 0.0,

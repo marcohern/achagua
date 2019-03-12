@@ -14,11 +14,10 @@ $my = db_connect($db);
 
 
 $types = [
-    'VIOLENCIA_PSICOLOGICA'          , 'VIOLENCIA_SEXUAL'       ,
-    'VIOLENCIA_PATRIMONIAL_ECONOMICA', 'VIOLENCIA_SIMBOLICA'    ,
-    'ACOSO_HOSTIGAMIENTO'            , 'VIOLENCIA_DOMESTICA'    ,
-    'VIOLENCIA_LABORAL'              , 'VIOLENCIA_OBSTETRICA'   ,
-    'VIOLENCIA_MEDIATICA'            , 'VIOLENCIA_INSTITUCIONAL'
+    'PSICOEMOCIONAL', 'SEXUAL'   ,
+    'FISICA'        , 'ECONOMICA',
+    'PATRIMONIAL'   , 'MULTIPLE' ,
+    'FEMINICIDIO'
 ];
 
 $types_count = count($types);
