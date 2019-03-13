@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apikey: 'AIzaSyAZbinXJb7apyMZehc6JZ0EUXRoQd3SpYc',
-  apiroot: 'https://www.vigiaafro.org/wp-content/plugins/achagua/bk',
-  maproot: 'https://www.vigiaafro.org/wp-content/plugins/achagua/map'
+  apiroot: 'https://vigiaafro.org/wp-content/plugins/achagua/bk',
+  maproot: 'https://vigiaafro.org/wp-content/plugins/achagua/map'
 };
 
 /*

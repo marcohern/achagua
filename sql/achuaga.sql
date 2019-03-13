@@ -1,18 +1,6 @@
 -- 
--- REBUILD
+-- BUILD
 -- 
-
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
--- Drop all the existing Foreign Key Constraints
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-
-ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_country_id;
-ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_state_id;
-ALTER TABLE incidents DROP FOREIGN KEY FK_incidents_city_id;
-
-ALTER TABLE cities DROP FOREIGN KEY FK_cities_state_id;
-
-ALTER TABLE states DROP FOREIGN KEY FK_states_country_id;
 
 
 DROP TABLE IF EXISTS cities;
@@ -1226,6 +1214,233 @@ INSERT INTO cities (id, name, state_id, lat, lng) VALUES
 (99773,'Cumaribo',99,4.444497,-69.798685);INSERT INTO countries (id, name, code) VALUES
 (57,'Colombia','CO');
 
+
+INSERT INTO incidents (vbg, event_date,  country_id, state_id, city_id, justice, created) VALUES
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2017-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2017-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2017-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('FISICA','2016-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('SEXUAL','2016-01-01',57,76,76109,0, NOW()),
+('FISICA','2017-01-01',57,76,76109,0, NOW()),
+('FISICA','2018-01-01',57,76,76109,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,76,76109,0, NOW()),
+('FISICA','2012-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2018-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2017-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('PATRIMONIAL','2014-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','1998-01-01',57,76,76109,0, NOW()),
+('SEXUAL','2014-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2015-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2015-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2008-01-01',57,76,76109,0, NOW()),
+('FISICA','2016-01-01',57,76,76109,0, NOW()),
+('FISICA','2018-01-01',57,76,76109,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,76,76109,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,76,76109,0, NOW()),
+('MULTIPLE','2019-01-01',57,76,76109,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2016-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2018-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2012-01-01',57,52,52835,0, NOW()),
+('PSICOEMOCIONAL','2018-01-01',57,52,52835,0, NOW()),
+('PSICOEMOCIONAL','2013-01-01',57,52,52835,0, NOW()),
+('FISICA','2012-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2016-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2015-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2017-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2015-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2013-01-01',57,52,52835,0, NOW()),
+('PSICOEMOCIONAL','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2011-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('PATRIMONIAL','2018-01-01',57,52,52835,0, NOW()),
+('FISICA','2018-01-01',57,52,52835,0, NOW()),
+('PATRIMONIAL','2018-01-01',57,52,52835,0, NOW()),
+('PATRIMONIAL','2018-01-01',57,52,52835,0, NOW()),
+('PSICOEMOCIONAL','2018-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2019-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2019-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2019-01-01',57,52,52835,0, NOW()),
+('PSICOEMOCIONAL','2019-01-01',57,52,52835,0, NOW()),
+('FISICA','2019-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,52,52835,0, NOW()),
+('FEMINICIDIO','2016-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2017-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2017-01-01',57,52,52835,0, NOW()),
+('SEXUAL','2009-01-01',57,52,52835,0, NOW()),
+('MULTIPLE','2015-01-01',57,19,19110,0, NOW()),
+('PSICOEMOCIONAL','2015-01-01',57,19,19142,0, NOW()),
+('PSICOEMOCIONAL','2017-01-01',57,19,19110,0, NOW()),
+('FISICA','2018-01-01',57,19,19780,0, NOW()),
+('PSICOEMOCIONAL','2003-01-01',57,19,19698,0, NOW()),
+('FEMINICIDIO','2017-01-01',57,19,19845,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,19,19573,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,19,19698,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,19,19110,0, NOW()),
+('PSICOEMOCIONAL','2001-01-01',57,19,19698,0, NOW()),
+('PSICOEMOCIONAL','2002-01-01',57,19,19698,0, NOW()),
+('ECONOMICA','2015-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2018-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2018-01-01',57,19,19110,0, NOW()),
+('FISICA','2000-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2010-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2018-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2018-01-01',57,19,19110,0, NOW()),
+('FISICA','2017-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2013-01-01',57,19,19110,0, NOW()),
+('PSICOEMOCIONAL','2015-01-01',57,19,19142,0, NOW()),
+('PSICOEMOCIONAL','2014-01-01',57,19,19142,0, NOW()),
+('MULTIPLE','2002-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2002-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2000-01-01',57,19,19110,0, NOW()),
+('SEXUAL','2001-01-01',57,19,19698,0, NOW()),
+('SEXUAL','2016-01-01',57,19,19698,0, NOW()),
+('SEXUAL','1998-01-01',57,19,19110,0, NOW()),
+('SEXUAL','2002-01-01',57,19,19110,0, NOW()),
+('MULTIPLE','2017-01-01',57,19,19110,0, NOW()),
+('SEXUAL','2001-01-01',57,19,19698,0, NOW()),
+('PSICOEMOCIONAL','2015-01-01',57,19,19698,0, NOW()),
+('PSICOEMOCIONAL','2018-01-01',57,19,19845,0, NOW()),
+('PSICOEMOCIONAL','2018-01-01',57,13,13442,0, NOW()),
+('FEMINICIDIO','2017-01-01',57,13,13442,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,13,13001,0, NOW()),
+('FEMINICIDIO','1999-01-01',57,13,13442,0, NOW()),
+('FEMINICIDIO','2016-01-01',57,13,13001,0, NOW()),
+('FEMINICIDIO','2016-01-01',57,13,13001,0, NOW()),
+('SEXUAL','2016-01-01',57,13,13001,0, NOW()),
+('PSICOEMOCIONAL','2013-01-01',57,13,13001,0, NOW()),
+('FEMINICIDIO','2016-01-01',57,13,13001,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,13,13442,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,13,13430,0, NOW()),
+('FEMINICIDIO','2018-01-01',57,5,5088,0, NOW());
+
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2016-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2016-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2017-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2012-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_patrimonial = v_patrimonial + 1 WHERE event_date = '2014-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '1998-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2014-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2015-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2015-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2008-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2016-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 76 AND city_id = 76109;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2016-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2012-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2013-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2012-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2016-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2015-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2015-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2013-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2011-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_patrimonial = v_patrimonial + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_patrimonial = v_patrimonial + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_patrimonial = v_patrimonial + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2019-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2019-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2019-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2019-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2016-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2017-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2009-01-01' AND state_id = 52 AND city_id = 52835;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2015-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2015-01-01' AND state_id = 19 AND city_id = 19142;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2017-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19780;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2003-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2017-01-01' AND state_id = 19 AND city_id = 19845;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19573;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2001-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2002-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_economica = v_economica + 1 WHERE event_date = '2015-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2000-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2010-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_fisica = v_fisica + 1 WHERE event_date = '2017-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2013-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2015-01-01' AND state_id = 19 AND city_id = 19142;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2014-01-01' AND state_id = 19 AND city_id = 19142;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2002-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2002-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2000-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2001-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2016-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '1998-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2002-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_multiple = v_multiple + 1 WHERE event_date = '2017-01-01' AND state_id = 19 AND city_id = 19110;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2001-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2015-01-01' AND state_id = 19 AND city_id = 19698;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2018-01-01' AND state_id = 19 AND city_id = 19845;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2018-01-01' AND state_id = 13 AND city_id = 13442;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2017-01-01' AND state_id = 13 AND city_id = 13442;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '1999-01-01' AND state_id = 13 AND city_id = 13442;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2016-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2016-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_sexual = v_sexual + 1 WHERE event_date = '2016-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_psicoemocional = v_psicoemocional + 1 WHERE event_date = '2013-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2016-01-01' AND state_id = 13 AND city_id = 13001;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 13 AND city_id = 13442;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 13 AND city_id = 13430;
+UPDATE incidents_summary SET amount = amount + 1, v_feminicidio = v_feminicidio + 1 WHERE event_date = '2018-01-01' AND state_id = 5 AND city_id = 5088;
 INSERT INTO states (id, name, country_id, lat, lng) VALUES
 (5,'Antioquia',57,7.1986064,-75.3412179),
 (8,'Atlántico',57,10.6966159,-74.8741045),

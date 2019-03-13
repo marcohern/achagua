@@ -33,7 +33,8 @@ class Runner {
 
     public function __construct() {
         $this->method = strtoupper($_SERVER['REQUEST_METHOD']);
-        $q = preg_replace(self::$remove,'', $_ENV['REQUEST_URI']);
+        $q = preg_replace(self::$remove,'', $_SERVER['REQUEST_URI']);
+        //echo json_encode(['method'=>$this->method,'q' => $q]);exit(0);
         $this->input = $q;
         $m = [];
         preg_match_all(self::$extract,$q,$m);
@@ -120,7 +121,7 @@ class Runner {
         $db->close();
 
         incidents_header();
-        //echo json_encode(['r'=>$result,'call' => $call]);//exit(0);
+        //echo json_encode(['r'=>$result,'call' => $call]);exit(0);
         echo json_encode($result);//exit(0);
     }
 
